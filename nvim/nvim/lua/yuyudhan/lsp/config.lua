@@ -1,0 +1,23 @@
+-- nvim/nvim/lua/yuyudhan/lsp/config.lua
+--
+---- LSP setup
+--local nvim_lsp = require('lspconfig')
+--
+---- Define a list of LSP servers to set up
+--local servers = { 'pyright', 'tsserver', 'rust_analyzer' }
+--
+--for _, lsp in ipairs(servers) do
+--    nvim_lsp[lsp].setup {
+--        on_attach = function(client, bufnr)
+--            -- Enable completion triggered by <c-x><c-o>
+--            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+--            -- Additional on_attach configurations can be added here
+--        end,
+--        flags = {
+--            debounce_text_changes = 150,
+--        },
+--        -- Additional LSP server configurations can be added here
+--    }
+--end
+--
+
