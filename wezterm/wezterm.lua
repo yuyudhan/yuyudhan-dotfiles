@@ -7,11 +7,12 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Color scheme
-config.color_scheme = "Batman"
+-- config.color_scheme = "Batman"
+config.color_scheme = 'Chalk (dark) (terminal.sexy)'
 
 -- Font settings
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
-config.font_size = 19
+config.font_size = 12
 
 -- Tab bar settings
 config.enable_tab_bar = true
@@ -51,7 +52,6 @@ config.keys = {
     { key = "-", mods = "CTRL", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } },
 
     -- Pane closing
-    { key = "x", mods = "CTRL", action = wezterm.action.CloseCurrentPane { confirm = true } },
     { key = "w", mods = "CTRL", action = wezterm.action.CloseCurrentPane { confirm = true } }, -- Added Ctrl+w
 }
 

@@ -19,6 +19,9 @@ alias ll="eza --icons -lh"
 # Compact and human-readable file sizes
 alias cat='bat'
 
+# Use nvim instead of vim.
+# alias vim='nvim'
+
 # -------------------------------------------------------------------
 # Navigation
 # -------------------------------------------------------------------
@@ -78,15 +81,15 @@ alias grep='grep --color=auto'
 # -------------------------------------------------------------------
 
 alias printfiles='find . \
-  -type d \( \
+    -type d \( \
     -name .git -o \
     -name node_modules -o \
     -name dist -o \
     -name build -o \
     -name .cache -o \
     -name tmp \
-  \) -prune -o \
-  -type f \( \
+    \) -prune -o \
+    -type f \( \
     -name "*.swp" -o \
     -name "*.log" -o \
     -name "*.tmp" -o \
@@ -95,8 +98,8 @@ alias printfiles='find . \
     -name "*.DS_Store" -o \
     -name "*.pyc" -o \
     -name "*.class" \
-  \) -prune -o \
-  -exec sh -c '\''echo "=== {} ==="; cat "{}"'\'' \;'
+    \) -prune -o \
+    -exec sh -c '\''echo "=== {} ==="; cat "{}"'\'' \;'
 
 # -------------------------------------------------------------------
 # Path Management
