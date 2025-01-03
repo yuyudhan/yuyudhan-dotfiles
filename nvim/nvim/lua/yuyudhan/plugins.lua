@@ -48,6 +48,10 @@ return require('packer').startup(function(use)
     -- Which-Key
     use 'folke/which-key.nvim'
 
+    use 'karb94/neoscroll.nvim'
+
+    use 'numToStr/Comment.nvim'
+
     -- Lazygit
     use 'kdheepak/lazygit.nvim'
     use {

@@ -1,4 +1,4 @@
--- nvim/nvim/lua/yuyudhan/keymaps.lua
+-- nvim/nvim/lua/yuyudhan/ eymaps.lua
 
 -- Set Space as the leader key
 vim.g.mapleader = " "
@@ -13,11 +13,12 @@ keymap('n', '<leader>q', ':q<CR>', opts)
 keymap('n', '<leader>x', ':bdelete<CR>', opts)
 
 -- Nvim-Tree
-keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<leader>e', ':NvfimTreeToggle<CR>', opts)
 
 -- Fuzzy finder using fzf
 keymap('n', '<C-p>', ':Files<CR>', opts)
 keymap('n', '<leader>pp', ':Files<CR>', opts)
+keymap('n', '<leader>ff', ':Files<CR>', opts)
 keymap('n', '<leader>b', ':Buffers<CR>', opts)
 keymap('n', '<leader>r', ':Rg<CR>', opts)
 
@@ -31,7 +32,7 @@ keymap('n', '<leader>wl', '<C-w>l', opts)
 keymap('v', '<C-c>', '"+y', opts)
 
 -- Open Lazygit in a floating window
-keymap('n', '<leader>gg', ':LazyGit<CR>', opts)
+keymap('n', '<leader>lg', ':LazyGit<CR>', opts)
 
 -- Reload the nvim configurations
 keymap('n', '<leader>rr', ':lua require("yuyudhan.reload").reload_config()<CR>', opts)
