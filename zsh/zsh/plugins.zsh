@@ -1,24 +1,48 @@
 # zsh/zsh/plugins.zsh
 
-# Enable Zsh plugins and enhancements
+# -------------------------------------------------------------------
+# Plugin Manager: Zinit (https://github.com/zdharma-continuum/zinit)
+# -------------------------------------------------------------------
 
-# Autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
-if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Load Zinit if not already installed
+if [[ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.zsh" ]]; then
+  echo "Installing Zinit plugin manager..."
+  mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/zinit" && \
+  git clone https://github.com/zdharma-continuum/zinit.git "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/bin"
 fi
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/bin/zinit.zsh"
 
-# Syntax highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
-if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+# -------------------------------------------------------------------
+# Plugins and Enhancements
+# -------------------------------------------------------------------
 
-# Powerlevel10k prompt (https://github.com/romkatv/powerlevel10k)
-if [ -f /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme ]; then
-  source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-fi
+# Autosuggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# Syntax highlighting
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Powerlevel10k prompt
+zinit light romkatv/powerlevel10k
 
 # Vim-tmux navigator integration
-if [ -f "/opt/homebrew/share/vim-tmux-navigator/tmux-navigator.zsh" ]; then
-  source "/opt/homebrew/share/vim-tmux-navigator/tmux-navigator.zsh"
-fi
+zinit light christoomey/vim-tmux-navigator
+
+# Zsh vi-mode for enhanced Vim-like behavior
+zinit light jeffreytse/zsh-vi-mode
+
+
+# -------------------------------------------------------------------
+# Additional Configurations
+# -------------------------------------------------------------------
+
+# Enable Vi-mode in Zsh
+bindkey -v
+
+# Enable clipboard copy/paste in visual mode
+bindkey -M vicmd 'y' copy-selection-and-send-to-clipboard # Copy selection
+bindkey -M vicmd 'p' bracketed-paste                     # Paste content
+
+# Make sure syntax highlighting loads after other plugins
+zinit light zsh-users/zsh-syntax-highlighting
 
