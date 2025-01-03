@@ -20,3 +20,6 @@ require('yuyudhan.macros')
 require('yuyudhan.plugin-config')
 require('yuyudhan.reload')
 
+-- Load the custom theme
+require('yuyudhan.theme')
+
