@@ -109,6 +109,29 @@ alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
+# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+#s = ['layout sticky tiling', 'mode main']
+# FIXME: These are conflicting with above one.
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+# ########################################################################
+# Move node to monitor in specific directions
+ctrl-alt-shift-h = 'move-node-to-monitor left'
+ctrl-alt-shift-l = 'move-node-to-monitor right'
+ctrl-alt-shift-j = 'move-node-to-monitor down'
+ctrl-alt-shift-k = 'move-node-to-monitor up'
+
+# Focus monitor in specific directions
+ctrl-alt-h = 'focus-monitor left'
+ctrl-alt-l = 'focus-monitor right'
+ctrl-alt-j = 'focus-monitor down'
+ctrl-alt-k = 'focus-monitor up'
+
+
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -100'
 alt-shift-equal = 'resize smart +100'
@@ -181,19 +204,6 @@ alt-shift-z = 'move-node-to-workspace Z'
 
 
 # ########################################################################
-# Move node to monitor in specific directions
-ctrl-alt-shift-h = 'move-node-to-monitor left'
-ctrl-alt-shift-l = 'move-node-to-monitor right'
-ctrl-alt-shift-j = 'move-node-to-monitor down'
-ctrl-alt-shift-k = 'move-node-to-monitor up'
-
-# Focus monitor in specific directions
-ctrl-alt-h = 'focus-monitor left'
-ctrl-alt-l = 'focus-monitor right'
-ctrl-alt-j = 'focus-monitor down'
-ctrl-alt-k = 'focus-monitor up'
-
-# ########################################################################
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -210,14 +220,6 @@ esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
-
-# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-#s = ['layout sticky tiling', 'mode main']
-
-alt-shift-h = ['join-with left', 'mode main']
-alt-shift-j = ['join-with down', 'mode main']
-alt-shift-k = ['join-with up', 'mode main']
-alt-shift-l = ['join-with right', 'mode main']
 
 down = 'volume down'
 up = 'volume up'

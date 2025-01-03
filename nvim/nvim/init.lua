@@ -1,5 +1,7 @@
 -- nvim/nvim/lua/yuyudhan/init.lua
 
+vim.opt.termguicolors = true
+
 -- Load general settings
 require('yuyudhan.config')
 
