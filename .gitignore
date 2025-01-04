@@ -3,3 +3,43 @@ plugged
 .DS_Store
 .netrwhist
 
+# Ignore Lazy.nvim plugin directory
+/lazy/
+
+# If you have set a custom plugin install path, add it here
+# /lua/plugins/
+
+# Ignore Neovim cache directories
+/.cache/
+/cache/
+
+# Ignore Undo files
+*.un~
+
+# Ignore Swap files
+*.swp
+*.swo
+*.swn
+
+# Ignore Backup files
+*.bak
+*.tmp
+
+# Ignore Session files
+Session.vim
+
+# Ignore specific Lazy.nvim lock files (if any)
+/lazy-lock.json
+/lazy-lock.yaml
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore temporary directories
+/tmp/
+temp/
+

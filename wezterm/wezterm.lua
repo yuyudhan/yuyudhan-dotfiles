@@ -52,7 +52,8 @@ config.keys = {
     { key = "-", mods = "CTRL", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } },
 
     -- Pane closing
-    { key = "w", mods = "CTRL", action = wezterm.action.CloseCurrentPane { confirm = true } }, -- Added Ctrl+w
+    -- { key = "w", mods = "CTRL", action = wezterm.action.CloseCurrentPane { confirm = true } }, -- Added Ctrl+w
+    { key = "X", mods = "CTRL", action = wezterm.action.CloseCurrentPane { confirm = true } }, -- Added Ctrl+w
 }
 
 -- Return the finalized configuration

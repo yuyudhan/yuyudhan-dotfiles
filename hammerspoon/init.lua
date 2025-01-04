@@ -11,12 +11,12 @@ log.i("Loading Hammerspoon configuration")
 -- if not success_monitor then
 --     log.e("Error loading monitor_movement.lua: " .. err_monitor)
 -- end
--- 
--- -- Require space_movement module
--- local success_space, err_space = pcall(require, "space_movement")
--- if not success_space then
---     log.e("Error loading space_movement.lua: " .. err_space)
--- end
+
+-- Require space_movement module
+local success_space, err_space = pcall(require, "space_movement")
+if not success_space then
+    log.e("Error loading space_movement.lua: " .. err_space)
+end
 
 -- Require hammerspoon module
 local success_hs, err_hs = pcall(require, "hammerspoon")

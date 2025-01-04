@@ -5,6 +5,21 @@ Option k => App On the north
 Option l => App On the east 
 
 
+### Snap the currently focussed window to some part of the screen, of the same current monitor.
+Option + shift + h => On the east (Snap the window to left half of screen)
+Option + shift + j => On the south(Snap the window to bottom half of screen)
+Option + shift + k => On the north(Snap the window to top half of screen)
+Option + shift + l => On the east (Snap the window to right half of screen)
+
+Option + shift + q => Snap On the top left quadrant.
+Option + shift + w => Snap On the bottom left quadrant.
+Option + shift + e => Snap On the bottom right quadrant.
+Option + shift + r => Snap On the top right quadrant.
+
+Option + shift + m => Toggle currently focussed winow full screen or back to what it was
+
+
+
 ### Move the focus to workspace on left or right of current space on the current monitor.
 Ctrl + option + h => Move focus to workspace On the west on current monitor
 Ctrl + Option + l => Move focus to workspace On the east on current monitor 
@@ -30,17 +45,6 @@ Ctrl + Option + shift + 6 => Move the currently focussed app to worspace number 
 Ctrl + Option + shift + 7 => Move the currently focussed app to worspace number 7 on current monitor
 Ctrl + Option + shift + 8 => Move the currently focussed app to worspace number 8 on current monitor
 
-
-### Snap the currently focussed window to some part of the screen, of the same current monitor.
-Option + shift + h => On the east (Snap the window to left half of screen)
-Option + shift + j => On the south(Snap the window to bottom half of screen)
-Option + shift + k => On the north(Snap the window to top half of screen)
-Option + shift + l => On the east (Snap the window to right half of screen)
-
-Option + shift + q => Snap On the top left quadrant.
-Option + shift + w => Snap On the bottom left quadrant.
-Option + shift + e => Snap On the bottom right quadrant.
-Option + shift + r => Snap On the top right quadrant.
 
 ### Shortcut set 1:
 Option h => On the west
