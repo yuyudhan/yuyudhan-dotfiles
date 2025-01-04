@@ -19,8 +19,8 @@ for file in aliases.zsh environment.zsh plugins.zsh path.zsh; do
 done
 
 # Source personal aliases if it exists
-if [ -f "$HOME/.config/zsh/personal-aliases.zsh" ]; then
-  source "$HOME/.config/zsh/personal-aliases.zsh"
+if [ -f "$HOME/.personal_aliases" ]; then
+  source "$HOME/.personal_aliases"
 fi
 
 # Prompt customization (Powerlevel10k)

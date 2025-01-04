@@ -1,7 +1,7 @@
 -- lua/plugins/nvim-treesitter.lua
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "javascript", "typescript", "python", "go", "lua", "react", "tailwindcss" }, -- Add more languages as needed
+  ensure_installed = { "javascript", "typescript", "python", "go", "lua" }, -- Add more languages as needed
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
