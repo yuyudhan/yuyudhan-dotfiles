@@ -17,17 +17,17 @@ log.i("Loading Hammerspoon configuration")
 -- if not success_space then
 --     log.e("Error loading space_movement.lua: " .. err_space)
 -- end
--- 
--- -- Require pane_management module
--- local success_pane, err_pane = pcall(require, "pane_management")
--- if not success_pane then
---     log.e("Error loading pane_management.lua: " .. err_pane)
--- end
 
 -- Require hammerspoon module
 local success_hs, err_hs = pcall(require, "hammerspoon")
 if not success_hs then
     log.e("Error loading hammerspoon.lua: " .. err_hs)
+end
+
+-- Require pane_management module
+local success_pane, err_pane = pcall(require, "pane_management")
+if not success_pane then
+    log.e("Error loading pane_management.lua: " .. err_pane)
 end
 
 -- Reload configuration on file change
