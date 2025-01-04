@@ -18,7 +18,7 @@ require('mappings')
 require('lsp')
 
 -- Load which-key configurations
-require('whichkey')
+-- require('whichkey')
 
 -- Load utility functions
 require('utils.helpers')
