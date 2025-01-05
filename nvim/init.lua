@@ -1,25 +1,26 @@
--- nvim/nvim/lua/yuyudhan/init.lua
+-- nvim/init.lua
 
 vim.opt.termguicolors = true
 
 -- Load general settings
-require('yuyudhan.config')
+require('core.options')
+require('core.autocommands')
 
 -- Load keymaps
-require('yuyudhan.keymaps')
+require('core.keymaps')
 
 -- Load plugins
-require('yuyudhan.plugins')
+require('plugins')
 
 -- Load LSP configurations
-require('yuyudhan.lsp.config')
-require('yuyudhan.lsp.handlers')
+require('lsp.config')
+require('lsp.handlers')
 
 -- Load additional configurations
-require('yuyudhan.macros')
-require('yuyudhan.plugin-config')
-require('yuyudhan.reload')
+require('utils/helpers')
 
 -- Load the custom theme
-require('yuyudhan.theme')
+require('core.options')
+require('core.keymaps')
+require('core')
 
