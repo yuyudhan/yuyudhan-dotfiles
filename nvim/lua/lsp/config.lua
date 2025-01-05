@@ -1,23 +1,12 @@
--- nvim/nvim/lua/yuyudhan/lsp/config.lua
---
----- LSP setup
---local nvim_lsp = require('lspconfig')
---
----- Define a list of LSP servers to set up
---local servers = { 'pyright', 'tsserver', 'rust_analyzer' }
---
---for _, lsp in ipairs(servers) do
---    nvim_lsp[lsp].setup {
---        on_attach = function(client, bufnr)
---            -- Enable completion triggered by <c-x><c-o>
---            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
---            -- Additional on_attach configurations can be added here
---        end,
---        flags = {
---            debounce_text_changes = 150,
---        },
---        -- Additional LSP server configurations can be added here
---    }
---end
---
+-- nv/Users/yuyudhan/yuyudhan-dotfiles/im/lua/lsp/config.lua
+
+-- Additional LSP configuration setup
+local lspconfig = require("lspconfig")
+local handlers = require("lsp.handlers")
+
+-- Attach custom handlers for hover and signature help
+vim.lsp.handlers["textDocument/hover"] = handlers.hover
+vim.lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help
+
+-- Add fallback or general LSP configurations here if needed
 

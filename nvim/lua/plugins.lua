@@ -1,17 +1,17 @@
 -- nvim/lua/yuyudhan/plugins.lua
 
--- Ensure packer is installed
+-- Ensure Packer is installed
 local ensure_packer = function()
     local fn = vim.fn
-    File: ~/.config/nvim/local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
         fn.system({
-            'git',
-            'clone',
-            '--depth',
-            '1',
-            'https://github.com/wbthomason/packer.nvim',
-            install_path
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "https://github.com/wbthomason/packer.nvim",
+            install_path,
         })
         vim.cmd([[packadd packer.nvim]])
         return true
@@ -21,76 +21,101 @@ end
 
 local packer_bootstrap = ensure_packer()
 
--- Use packer to manage plugins
-return require('packer').startup(function(use)
+-- Plugin management with Packer
+return require("packer").startup(function(use)
+
+    -- ========================================
+    -- Package management
+    -- ========================================
+
     -- Packer manages itself
-    use 'wbthomason/packer.nvim'
+    use("wbthomason/packer.nvim")
 
-    -- Core functionalities
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- Treesitter for better syntax highlighting
-    use 'neovim/nvim-lspconfig' -- LSP support
-    use 'hrsh7th/nvim-cmp' -- Autocompletion framework
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-    use 'L3MON4D3/LuaSnip' -- Snippets support
+    use { "williamboman/mason.nvim" }
+    use { "williamboman/mason-lspconfig.nvim" }
 
-    -- File explorers
+
+    -- ========================================
+    -- Core Functionalities
+    -- ========================================
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+    }) -- Treesitter for better syntax highlighting
+    use("neovim/nvim-lspconfig") -- LSP support
+    use("hrsh7th/nvim-cmp") -- Autocompletion framework
+    use("hrsh7th/cmp-nvim-lsp") -- LSP source for nvim-cmp
+    use("L3MON4D3/LuaSnip") -- Snippets support
+
     use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- Optional: for file icons
-        },
-        config = function()
-            require('plugin-config.nvim-tree') -- Load the nvim-tree configuration
-        end
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
+
     use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
+    }
+
+
+    -- ========================================
+    -- File Explorers
+    -- ========================================
+    use({
+        "nvim-tree/nvim-tree.lua",
+        requires = {
+            "nvim-tree/nvim-web-devicons", -- Optional: for file icons
+        },
+    })
+    use({
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
         requires = {
-            "nvim-lua/plenary.nvim",          -- Required dependency
-            "nvim-tree/nvim-web-devicons",   -- Optional for file icons
-            "MunifTanjim/nui.nvim",          -- Required dependency
-        }
-    }
+            "nvim-lua/plenary.nvim", -- Required dependency
+            "nvim-tree/nvim-web-devicons", -- Optional for file icons
+            "MunifTanjim/nui.nvim", -- Required dependency
+        },
+    })
 
+    -- ========================================
     -- Statusline
-    use 'nvim-lualine/lualine.nvim'
+    -- ========================================
+    use("nvim-lualine/lualine.nvim")
 
-    -- Fuzzy finder
-    use { 'junegunn/fzf', run = './install --bin' }
-    use 'junegunn/fzf.vim'
+    -- ========================================
+    -- Fuzzy Finder
+    -- ========================================
+    use({
+        "junegunn/fzf",
+        run = "./install --bin",
+    })
+    use("junegunn/fzf.vim")
 
-    -- Terminal integration
-    use {
-        'akinsho/toggleterm.nvim',
-        config = function()
-            require('plugin-config.toggleterm') -- Load the toggleterm configuration
-        end
-    }
+    -- ========================================
+    -- Terminal Integration
+    -- ========================================
+    use({
+        "akinsho/toggleterm.nvim",
+    })
 
-    -- Yazi integration with Neovim
-    use {
-        'mikavilpas/yazi.nvim',
-        config = function()
-            require('plugin-config.yazi') -- Load the Yazi configuration
-        end
-    }
+    -- ========================================
+    -- Git Integration
+    -- ========================================
+    use("kdheepak/lazygit.nvim")
 
-    -- Git integration
-    use 'kdheepak/lazygit.nvim'
+    -- ========================================
+    -- Utilities
+    -- ========================================
+    use("karb94/neoscroll.nvim") -- Smooth scrolling
+    use("folke/which-key.nvim") -- Keybinding helper
+    use("numToStr/Comment.nvim") -- Commenting utility
 
-    -- Scrolling
-    use 'karb94/neoscroll.nvim'
-
-    -- Keybinding helper
-    use 'folke/which-key.nvim'
-
-    -- Commenting utility
-    use 'numToStr/Comment.nvim'
-
-    -- Automatically set up your configuration if packer_bootstrap is true
+    -- ========================================
+    -- Automatically set up configuration
+    -- ========================================
     if packer_bootstrap then
-        require('packer').sync()
+        require("packer").sync()
     end
+
 end)
 
