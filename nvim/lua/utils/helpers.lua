@@ -1,4 +1,4 @@
--- nvim/nvim/lua/yuyudhan/macros.lua
+-- nvim/lua/utils/helpers.lua
 
 -- Similar to insertnums functionality of Sublime Text
 vim.api.nvim_create_user_command(
@@ -142,27 +142,4 @@ function SortLines()
         vim.cmd(":%sort")
     end
 end
-
-
--- this is a test comment
---[[
-1
-2
-1
-5
-3
-46
-547
-45
-2
-]]
--- 1
--- 2
--- 3
--- 4
--- 2
--- 3
--- 4
--- 6
---
 
