@@ -18,7 +18,7 @@ keymap("n", "<leader>x", ":bdelete<CR>", opts) -- Close buffer
 keymap("v", "<C-c>", '"+y', opts)
 
 -- Reload Neovim configuration
-keymap("n", "<leader>rr", ':lua require("yuyudhan.reload").reload_config()<CR>', opts)
+keymap("n", "<leader>rr", ':lua require("utils.helpers").reload_config()<CR>', opts)
 
 -- Close all buffers except current
 keymap("n", "<leader>Q", ":lua CloseAllExceptCurrent()<CR>", opts)
@@ -37,7 +37,19 @@ keymap("n", "<leader>wl", "<C-w>l", opts) -- Move to right window
 -- ========================================
 
 -- File Explorer: NeoTree
-vim.keymap.set("n", "<leader>e", ":NeoTreeShowToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ee", ":NeoTreeFloatToggle<CR>", { noremap = true, silent = true }) -- Toggle floating file explorer
+vim.keymap.set("n", "<leader>er", ":NeoTreeReveal<CR>", { noremap = true, silent = true }) -- Reveal current file
+vim.keymap.set("n", "<leader>ef", ":NeoTreeFocus<CR>", { noremap = true, silent = true }) -- Focus on file explorer
+
+-- Telescope Keybindings
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true }) -- Find files
+vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true }) -- Search text in files
+vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true }) -- List open buffers
+vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true }) -- Search help tags
+vim.keymap.set("n", "<leader>fs", ":Telescope lsp_document_symbols<CR>", { noremap = true, silent = true }) -- Search symbols in current file
+vim.keymap.set("n", "<leader>fw", ":Telescope lsp_workspace_symbols<CR>", { noremap = true, silent = true }) -- Search symbols in workspace
+vim.keymap.set("n", "<leader>fr", ":Telescope oldfiles<CR>", { noremap = true, silent = true }) -- Find recently opened files
+vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { noremap = true, silent = true }) -- List available commands
 
 -- Lazygit Integration
 keymap("n", "<leader>lg", ":LazyGit<CR>", opts)
@@ -47,14 +59,8 @@ vim.keymap.set("n", "<leader>pss", ":PackerSync<CR>", opts)  -- Sync plugins
 vim.keymap.set("n", "<leader>pst", ":PackerStatus<CR>", opts) -- Check status
 vim.keymap.set("n", "<leader>psc", ":PackerClean<CR>", opts)  -- Clean unused plugins
 
--- ========================================
--- Fuzzy Finder: fzf.vim
--- ========================================
-keymap("n", "<C-p>", ":Files<CR>", opts)       -- Open file search
-keymap("n", "<leader>pp", ":Files<CR>", opts) -- Project files search
-keymap("n", "<leader>ff", ":Files<CR>", opts) -- Files search
-keymap("n", "<leader>b", ":Buffers<CR>", opts) -- List open buffers
-keymap("n", "<leader>r", ":Rg<CR>", opts)      -- Search with ripgrep
+-- Toggleterm
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
 -- ========================================
 -- Additional Utilities
@@ -72,8 +78,23 @@ vim.api.nvim_set_keymap("v", "<leader>L", ":lua LowerCase()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>S", ":lua SortLines()<CR>", opts)
 vim.api.nvim_set_keymap("v", "<leader>S", ":lua SortLines()<CR>", opts)
 
--- ========================================
+-- Resize splits with <leader> and arrow keys (step size: 5)
+vim.api.nvim_set_keymap("n", "<leader>r<Up>", ":resize +10<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>r<Down>", ":resize -10<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>r<Left>", ":vertical resize -10<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>r<Right>", ":vertical resize +10<CR>", { noremap = true, silent = true })
+
+-- ========================= ==============
 -- Keymap Extensions Placeholder
 -- ========================================
 -- Add new keymaps here in a structured manner
+
+
+-- Plugin-specific keymaps
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true }) -- File explorer
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true }) -- Find files
+vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true }) -- Live grep
+vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true }) -- Buffers
+vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true }) -- Help tags
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true }) -- Terminal
 

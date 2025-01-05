@@ -1,26 +1,27 @@
 -- nvim/init.lua
 
-vim.opt.termguicolors = true
+-- ========================================
+-- Core Settings
+-- ========================================
+require("core.options")        -- General settings and options
+require("core.autocommands")   -- Autocommands
+require("core.keymaps")        -- Keymaps
 
--- Load general settings
-require('core.options')
-require('core.autocommands')
+-- ========================================
+-- Plugin Management
+-- ========================================
+require("plugins")             -- Plugin definitions and configurations
+require("plugin-config")             -- Plugin definitions and configurations
 
--- Load keymaps
-require('core.keymaps')
+-- ========================================
+-- LSP (Language Server Protocol)
+-- ========================================
+require("lsp.config")          -- LSP configurations
+require("lsp.handlers")        -- LSP handlers and enhancements
 
--- Load plugins
-require('plugins')
+-- ========================================
+-- Utility Modules
+-- ========================================
+require("utils.helpers")       -- Helper functions
 
--- Load LSP configurations
-require('lsp.config')
-require('lsp.handlers')
-
--- Load additional configurations
-require('utils/helpers')
-
--- Load the custom theme
-require('core.options')
-require('core.keymaps')
-require('core')
 

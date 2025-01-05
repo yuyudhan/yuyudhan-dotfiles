@@ -143,3 +143,19 @@ function SortLines()
     end
 end
 
+
+local M = {}
+
+-- Reload Neovim configuration
+M.reload_config = function()
+    for name, _ in pairs(package.loaded) do
+        if name:match("^user") or name:match("^core") or name:match("^plugin%-config") then
+            package.loaded[name] = nil
+        end
+    end
+    vim.cmd("source $MYVIMRC")
+    print("Neovim configuration reloaded!")
+end
+
+return M
+
