@@ -1,25 +1,25 @@
--- init.lua
+-- nvim/nvim/lua/yuyudhan/init.lua
 
--- Set the leader key to space
-vim.g.mapleader = ' '
+vim.opt.termguicolors = true
 
--- Load core settings
-require('core.options')
-require('core.keymaps')
-require('core.settings')
+-- Load general settings
+require('yuyudhan.config')
 
--- Load plugin manager and plugins
-require('plugins')
+-- Load keymaps
+require('yuyudhan.keymaps')
 
--- Load key mappings
-require('mappings')
+-- Load plugins
+require('yuyudhan.plugins')
 
 -- Load LSP configurations
-require('lsp')
+require('yuyudhan.lsp.config')
+require('yuyudhan.lsp.handlers')
 
--- Load which-key configurations
--- require('whichkey')
+-- Load additional configurations
+require('yuyudhan.macros')
+require('yuyudhan.plugin-config')
+require('yuyudhan.reload')
 
--- Load utility functions
-require('utils.helpers')
+-- Load the custom theme
+require('yuyudhan.theme')
 
