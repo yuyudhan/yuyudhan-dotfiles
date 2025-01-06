@@ -34,6 +34,31 @@ return require("packer").startup(function(use)
     use { "williamboman/mason.nvim" }
     use { "williamboman/mason-lspconfig.nvim" }
 
+    -- ========================================
+    -- ChatGPT  Plugin
+    -- ========================================
+    -- use {
+    --     "jackMort/chatgpt.nvim",
+    --     requires = {
+    --         "MunifTanjim/nui.nvim",
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-telescope/telescope.nvim",
+    --     },
+    --     config = function()
+    --         require("plugin-config.chatgpt")
+    --     end,
+    -- }
+    --
+
+    use {
+        '/Users/yuyudhan/code/yuyudhan/ChatGptNvim',
+        config = function()
+            require('plugin-config/chatgptnvim')
+        end,
+    }
+
+
+    use("tpope/vim-commentary")
 
     -- ========================================
     -- Core Functionalities

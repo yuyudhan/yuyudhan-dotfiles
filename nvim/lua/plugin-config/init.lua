@@ -11,6 +11,7 @@ local plugin_config = {
     "comment",        -- Commenting utility
     "neoscroll",      -- Smooth scrolling
     "telescope",      -- Fuzzy finder
+    "chatgptnvim",        -- ChatGPT
 }
 
 -- Load each plugin configuration

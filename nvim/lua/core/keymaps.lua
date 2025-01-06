@@ -84,17 +84,38 @@ vim.api.nvim_set_keymap("n", "<leader>r<Down>", ":resize -10<CR>", { noremap = t
 vim.api.nvim_set_keymap("n", "<leader>r<Left>", ":vertical resize -10<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r<Right>", ":vertical resize +10<CR>", { noremap = true, silent = true })
 
--- ========================= ==============
--- Keymap Extensions Placeholder
--- ========================================
--- Add new keymaps here in a structured manner
-
-
 -- Plugin-specific keymaps
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true }) -- File explorer
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true }) -- Find files
 vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true }) -- Live grep
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true }) -- Buffers
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true }) -- Help tags
 vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true }) -- Terminal
+
+-- ========================================
+-- ChatGPT Key mappings
+-- ========================================
+
+-- ChatGPT Key Mappings
+vim.keymap.set("n", "<leader>cc", ":ChatGPT<CR>", { noremap = true, silent = true }) -- Open ChatGPT interactive window
+vim.keymap.set("v", "<leader>ce", ":ChatGPTEditWithInstructions<CR>", { noremap = true, silent = true }) -- Edit selected text with instructions
+vim.keymap.set("n", "<leader>ca", ":ChatGPTActAs<CR>", { noremap = true, silent = true }) -- Use ChatGPT Act-As prompt
+
+-- ChatGPTRun Actions
+vim.keymap.set({ "n", "v" }, "<leader>cg", ":ChatGPTRun grammar_correction<CR>", { noremap = true, silent = true }) -- Grammar correction
+vim.keymap.set({ "n", "v" }, "<leader>ct", ":ChatGPTRun translate<CR>", { noremap = true, silent = true }) -- Translate
+vim.keymap.set({ "n", "v" }, "<leader>ck", ":ChatGPTRun keywords<CR>", { noremap = true, silent = true }) -- Extract keywords
+vim.keymap.set({ "n", "v" }, "<leader>cd", ":ChatGPTRun docstring<CR>", { noremap = true, silent = true }) -- Generate docstring
+vim.keymap.set({ "n", "v" }, "<leader>cT", ":ChatGPTRun add_tests<CR>", { noremap = true, silent = true }) -- Add tests
+vim.keymap.set({ "n", "v" }, "<leader>co", ":ChatGPTRun optimize_code<CR>", { noremap = true, silent = true }) -- Optimize code
+vim.keymap.set({ "n", "v" }, "<leader>cs", ":ChatGPTRun summarize<CR>", { noremap = true, silent = true }) -- Summarize
+vim.keymap.set({ "n", "v" }, "<leader>cf", ":ChatGPTRun fix_bugs<CR>", { noremap = true, silent = true }) -- Fix bugs
+vim.keymap.set({ "n", "v" }, "<leader>cx", ":ChatGPTRun explain_code<CR>", { noremap = true, silent = true }) -- Explain code
+vim.keymap.set({ "n", "v" }, "<leader>cr", ":ChatGPTRun roxygen_edit<CR>", { noremap = true, silent = true }) -- Roxygen edit
+vim.keymap.set({ "n", "v" }, "<leader>cl", ":ChatGPTRun code_readability_analysis<CR>", { noremap = true, silent = true }) -- Code readability analysis
+
+-- ========================= ==============
+-- Keymap Extensions Placeholder
+-- ========================================
+-- Add new keymaps here in a structured manner
+
 
