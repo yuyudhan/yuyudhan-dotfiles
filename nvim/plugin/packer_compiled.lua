@@ -74,6 +74,12 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ChatGptNvim = {
+    config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30plugin-config/chatgptnvim\frequire\0" },
+    loaded = true,
+    path = "/Users/yuyudhan/.local/share/nvim/site/pack/packer/start/ChatGptNvim",
+    url = "/Users/yuyudhan/code/yuyudhan/ChatGptNvim"
+  },
   ["Comment.nvim"] = {
     loaded = true,
     path = "/Users/yuyudhan/.local/share/nvim/site/pack/packer/start/Comment.nvim",
@@ -184,6 +190,11 @@ _G.packer_plugins = {
     path = "/Users/yuyudhan/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/yuyudhan/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/Users/yuyudhan/.local/share/nvim/site/pack/packer/start/which-key.nvim",
@@ -192,6 +203,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: ChatGptNvim
+time([[Config for ChatGptNvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30plugin-config/chatgptnvim\frequire\0", "config", "ChatGptNvim")
+time([[Config for ChatGptNvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
