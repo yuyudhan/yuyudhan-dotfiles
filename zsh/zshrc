@@ -1,9 +1,11 @@
+# zsh/zshrc
+
 # Disable Powerlevel10k instant prompt
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Set Zsh options
@@ -15,22 +17,22 @@ setopt prompt_subst        # Enable command substitution in prompts
 
 # Load modular Zsh configuration files from ~/.config/zsh
 for file in aliases.zsh environment.zsh plugins.zsh path.zsh; do
-  [ -f "$HOME/.config/zsh/$file" ] && source "$HOME/.config/zsh/$file"
+    [ -f "$HOME/.config/zsh/$file" ] && source "$HOME/.config/zsh/$file"
 done
 
 # Source personal aliases if it exists
 if [ -f "$HOME/.personal_aliases" ]; then
-  source "$HOME/.personal_aliases"
+    source "$HOME/.personal_aliases"
 fi
 
 # Prompt customization (Powerlevel10k)
 if [ -f "$HOME/.config/zsh/p10k.zsh" ]; then
-  source "$HOME/.config/zsh/p10k.zsh"
+    source "$HOME/.config/zsh/p10k.zsh"
 fi
 
 # Source personal messages (e.g., welcome message) after prompt initialization
 if [ -f "$HOME/.config/zsh/message.zsh" ]; then
-  source "$HOME/.config/zsh/message.zsh"
+    source "$HOME/.config/zsh/message.zsh"
 fi
 
 # History configuration
@@ -39,7 +41,7 @@ HISTSIZE=5000                             # Number of history entries in memory
 SAVEHIST=5000                             # Number of history entries saved to file
 setopt share_history                       # Share history across terminals
 
-# Editor and keybindings
+# Editor
 export EDITOR="nvim"
-bindkey -v  # Vi-mode keybindings
+
 
