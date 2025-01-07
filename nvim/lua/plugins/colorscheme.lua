@@ -1,3 +1,5 @@
+-- lua/plugins/colorscheme.lua
+
 return {
     {
         "bluz71/vim-moonfly-colors",
@@ -33,3 +35,4 @@ return {
         end,
     },
 }
+
