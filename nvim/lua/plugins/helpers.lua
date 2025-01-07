@@ -1,4 +1,4 @@
--- nvim/lua/utils/helpers.lua
+-- lua/utils/helpers.lua
 
 local M = {}
 
@@ -29,3 +29,4 @@ vim.api.nvim_create_user_command("CopyAbsolutePath", function()
 end, {})
 
 return M
+
