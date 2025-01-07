@@ -21,7 +21,13 @@ create_symlink() {
         fi
     fi
 
-    ln -s "$source" "$target"
+    # Create the symlink
+    if [ -d "$source" ]; then
+        # If source is a directory, ensure trailing slash for clarity
+        ln -s "${source}/" "$target"
+    else
+        ln -s "$source" "$target"
+    fi
     echo "Created symlink: $target -> $source"
 }
 
@@ -38,8 +44,8 @@ create_symlink "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
 create_symlink "$DOTFILES_DIR/aerospace" "$HOME/.config/aerospace"
 create_symlink "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 create_symlink "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
-create_symlink "$DOTFILES_DIR/hammerspoon" "$HOME/.config/hammerspoon"
+create_symlink "$DOTFILES_DIR/hammerspoon" "$HOME/.hammerspoon"
+create_symlink "$DOTFILES_DIR/sketchybar" "$HOME/.config/sketchybar"
 
 echo "All symlinks have been created or updated."
-
 
