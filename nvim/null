@@ -1,0 +1,71 @@
+return {
+    {
+        "bluz71/vim-moonfly-colors",
+        name = "moonfly",
+        lazy = false, -- Load the theme immediately
+        priority = 1000, -- Ensure it loads first
+        config = function()
+            vim.cmd("colorscheme moonfly") -- Set the moonfly colorscheme
+
+            -- Apply transparency by clearing background highlights
+            local groups = {
+                "Normal",            -- Main background
+                "NormalNC",          -- Non-current windows
+                "NormalFloat",       -- Floating windows
+                "LineNr",            -- Line numbers
+                "SignColumn",        -- Sign column (git signs, diagnostics)
+                "EndOfBuffer",       -- End of buffer lines
+                "WinSeparator",      -- Window separators
+                "VertSplit",         -- Vertical split lines
+                "StatusLine",        -- Status line
+                "StatusLineNC",      -- Non-current window's status line
+                "CursorLine",        -- Highlighted current line
+                "CursorLineNr",      -- Line number of the current line
+                "Pmenu",             -- Popup menu
+                "PmenuSbar",         -- Popup menu scrollbar
+                "PmenuSel",          -- Popup menu selected item
+                "PmenuThumb",        -- Popup menu scrollbar thumb
+            }
+
+            for _, group in ipairs(groups) do
+                vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+            end
+        end,
+    },
+}
+
+return {
+    {
+        "tiagovla/tokyodark.nvim",
+        config = function()
+            -- Load the colorscheme
+            require("tokyodark").setup({
+                -- Tokyodark doesn't natively support transparent backgrounds
+                -- Additional adjustments for transparency need to be made
+                -- Leave other options at their default values
+            })
+            vim.cmd("colorscheme tokyodark")
+
+            -- Set transparency by clearing background highlights
+            vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+            vim.api.nvim_set_hl(0, "LineNr", { bg = "NONE" })
+            vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
+            vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" })
+        end,
+    },
+}
+
+return {
+    {
+        "tiagovla/tokyodark.nvim",
+        opts = {
+            transparent = true,
+            styles = {
+                sidebars = "transparent",
+                floats = "transparent",
+            },
+        },
+    },
+}
+

@@ -3,7 +3,7 @@
 -- Add any additional options here
 
 --
--- /Users/yuyudhan/yuyudhan/yuyudhan-dotfiles/nvim/lua/config/options.lua
+-- ~/.config/nvim/lua/config/options.lua
 
 -- Set leader key before other configurations
 vim.g.mapleader = " "
