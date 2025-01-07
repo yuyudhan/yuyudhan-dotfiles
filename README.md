@@ -58,5 +58,4 @@ Modify the files in their respective directories to suit your needs. Changes are
 
 ## License
 This repository is for personal use. Feel free to use or adapt it, but I provide no guarantees or support.
-```
 
