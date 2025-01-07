@@ -10,8 +10,8 @@ local opts = { noremap = true, silent = true }
 -- ========================================
 -- General Keymaps
 -- ========================================
-keymap("n", "<leader>w", ":w<CR>", opts)      -- Save file
-keymap("n", "<leader>q", ":q<CR>", opts)      -- Quit Neovim
+keymap("n", "<leader>w", ":w<CR>", opts) -- Save file
+keymap("n", "<leader>q", ":q<CR>", opts) -- Quit Neovim
 keymap("n", "<leader>x", ":bdelete<CR>", opts) -- Close buffer
 
 -- Copy to system clipboard in visual mode
@@ -55,9 +55,9 @@ vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { noremap = true, s
 keymap("n", "<leader>lg", ":LazyGit<CR>", opts)
 
 -- Packer Plugin Manager
-vim.keymap.set("n", "<leader>pss", ":PackerSync<CR>", opts)  -- Sync plugins
+vim.keymap.set("n", "<leader>pss", ":PackerSync<CR>", opts) -- Sync plugins
 vim.keymap.set("n", "<leader>pst", ":PackerStatus<CR>", opts) -- Check status
-vim.keymap.set("n", "<leader>psc", ":PackerClean<CR>", opts)  -- Clean unused plugins
+vim.keymap.set("n", "<leader>psc", ":PackerClean<CR>", opts) -- Clean unused plugins
 
 -- Toggleterm
 vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true })
@@ -111,11 +111,14 @@ vim.keymap.set({ "n", "v" }, "<leader>cs", ":ChatGPTRun summarize<CR>", { norema
 vim.keymap.set({ "n", "v" }, "<leader>cf", ":ChatGPTRun fix_bugs<CR>", { noremap = true, silent = true }) -- Fix bugs
 vim.keymap.set({ "n", "v" }, "<leader>cx", ":ChatGPTRun explain_code<CR>", { noremap = true, silent = true }) -- Explain code
 vim.keymap.set({ "n", "v" }, "<leader>cr", ":ChatGPTRun roxygen_edit<CR>", { noremap = true, silent = true }) -- Roxygen edit
-vim.keymap.set({ "n", "v" }, "<leader>cl", ":ChatGPTRun code_readability_analysis<CR>", { noremap = true, silent = true }) -- Code readability analysis
+vim.keymap.set(
+	{ "n", "v" },
+	"<leader>cl",
+	":ChatGPTRun code_readability_analysis<CR>",
+	{ noremap = true, silent = true }
+) -- Code readability analysis
 
 -- ========================= ==============
 -- Keymap Extensions Placeholder
 -- ========================================
 -- Add new keymaps here in a structured manner
-
-
