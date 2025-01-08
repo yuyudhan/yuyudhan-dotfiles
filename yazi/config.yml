@@ -1,0 +1,16 @@
+# ~/.config/yazi/config.yml
+
+# Set the theme (flavor) to onedark
+flavor: onedark.yazi
+
+# Other example configurations
+keybindings:
+  quit: "q"
+  move_up: "k"
+  move_down: "j"
+  move_left: "h"
+  move_right: "l"
+
+layout:
+  preview: true  # Enable file preview
+
