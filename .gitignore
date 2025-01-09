@@ -1,36 +1,21 @@
-plugged
-*.swp
-.DS_Store
-.netrwhist
-
-# Ignore Lazy.nvim plugin directory
-/lazy/
-
-# If you have set a custom plugin install path, add it here
-# /lua/plugins/
+# Ignore plugin-related directories
+plugged/
+lazy/
+lazy-lock.json
+lazy-lock.yaml
 
 # Ignore Neovim cache directories
-/.cache/
-/cache/
+.cache/
+cache/
 
-# Ignore Undo files
-*.un~
-
-# Ignore Swap files
+# Ignore temporary files
 *.swp
 *.swo
 *.swn
-
-# Ignore Backup files
 *.bak
 *.tmp
-
-# Ignore Session files
+*.un~
 Session.vim
-
-# Ignore specific Lazy.nvim lock files (if any)
-/lazy-lock.json
-/lazy-lock.yaml
 
 # Ignore log files
 *.log
@@ -39,10 +24,21 @@ Session.vim
 .DS_Store
 Thumbs.db
 
-# Ignore temporary directories
+# Ignore temporary and backup directories
 /tmp/
 temp/
+automatic_backups/
+debug/
+.repro/
 
-undo
-after
+# Ignore undo and session-related files
+undo/
+after/
+data/
+
+# Ignore specific files and extensions
+tt.*
+foo.*
+.tests
+doc/tags
 

@@ -28,5 +28,10 @@ vim.api.nvim_create_user_command("CopyAbsolutePath", function()
     print("Absolute path copied to clipboard: " .. absolute_path)
 end, {})
 
+-- Define the :IndentFile command
+vim.api.nvim_create_user_command("IndentFile", function()
+    vim.cmd("normal! gg=G")
+end, { desc = "Re-indent the entire file" })
+
 return M
 

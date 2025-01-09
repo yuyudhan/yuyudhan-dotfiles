@@ -8,13 +8,27 @@ create_symlink() {
     local source=$1
     local target=$2
 
+    # Ask if the user wants to create the symlink
+    read -p "Do you want to create a symlink for $target? [y/N] " install_confirm
+    if [[ ! "$install_confirm" =~ ^[Yy]$ ]]; then
+        echo "Skipping symlink creation for $target."
+        return
+    fi
+
     if [ -L "$target" ]; then
-        echo "Symlink exists for $target. Removing it."
-        rm -f "$target"
+        read -p "Symlink exists for $target. Do you want to delete it? [y/N] " delete_confirm
+        if [[ "$delete_confirm" =~ ^[Yy]$ ]]; then
+            rm -f "$target"
+            echo "Deleted existing symlink for $target."
+        else
+            echo "Skipping $target."
+            return
+        fi
     elif [ -e "$target" ]; then
-        read -p "File or directory exists at $target. Remove it? [y/N] " answer
-        if [[ "$answer" =~ ^[Yy]$ ]]; then
+        read -p "File or directory exists at $target. Do you want to delete it? [y/N] " delete_confirm
+        if [[ "$delete_confirm" =~ ^[Yy]$ ]]; then
             rm -rf "$target"
+            echo "Deleted existing file or directory at $target."
         else
             echo "Skipping $target."
             return
@@ -46,6 +60,7 @@ create_symlink "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 create_symlink "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 create_symlink "$DOTFILES_DIR/hammerspoon" "$HOME/.hammerspoon"
 create_symlink "$DOTFILES_DIR/sketchybar" "$HOME/.config/sketchybar"
+create_symlink "$DOTFILES_DIR/karabiner" "$HOME/.config/karabiner"
 
 echo "All symlinks have been created or updated."
 
