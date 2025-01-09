@@ -21,8 +21,8 @@ config.hide_tab_bar_if_only_one_tab = true
 
 -- Window appearance
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.7
-config.macos_window_background_blur = 10
+config.window_background_opacity = 0.8
+config.macos_window_background_blur = 25
 
 -- Window layout and padding
 config.line_height = 1.2
