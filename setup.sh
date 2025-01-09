@@ -61,6 +61,7 @@ create_symlink "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 create_symlink "$DOTFILES_DIR/hammerspoon" "$HOME/.hammerspoon"
 create_symlink "$DOTFILES_DIR/sketchybar" "$HOME/.config/sketchybar"
 create_symlink "$DOTFILES_DIR/karabiner" "$HOME/.config/karabiner"
+create_symlink "$DOTFILES_DIR/btop" "$HOME/.config/btop"
 
 echo "All symlinks have been created or updated."
 
