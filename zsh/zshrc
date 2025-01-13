@@ -3,37 +3,12 @@
 # Disable Powerlevel10k instant prompt
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Set Zsh options
 setopt autocd              # Automatically cd into directories
 setopt hist_ignore_dups    # Ignore duplicate history entries
 setopt hist_ignore_space   # Ignore commands starting with space in history
 setopt interactivecomments # Allow comments in interactive mode
 setopt prompt_subst        # Enable command substitution in prompts
-
-# Load modular Zsh configuration files from ~/.config/zsh
-for file in aliases.zsh environment.zsh plugins.zsh path.zsh; do
-    [ -f "$HOME/.config/zsh/$file" ] && source "$HOME/.config/zsh/$file"
-done
-
-# Source personal aliases if it exists
-if [ -f "$HOME/.personal_aliases" ]; then
-    source "$HOME/.personal_aliases"
-fi
-
-# Prompt customization (Powerlevel10k)
-if [ -f "$HOME/.config/zsh/p10k.zsh" ]; then
-    source "$HOME/.config/zsh/p10k.zsh"
-fi
-
-# Source personal messages (e.g., welcome message) after prompt initialization
-if [ -f "$HOME/.config/zsh/message.zsh" ]; then
-    source "$HOME/.config/zsh/message.zsh"
-fi
 
 # History configuration
 HISTFILE="$HOME/.local/share/zsh/history" # Default location for Zsh history
@@ -43,5 +18,30 @@ setopt share_history                       # Share history across terminals
 
 # Editor
 export EDITOR="nvim"
+
+# -------------------------------------------------------------------
+# Modular Configuration Sourcing
+# -------------------------------------------------------------------
+
+# Define an array with the desired order of configuration files
+config_files=(
+    "$HOME/.config/zsh/environment.zsh"
+    "$HOME/.config/zsh/plugins.zsh"
+    "$HOME/.config/zsh/path.zsh"
+    "$HOME/.personal_aliases"
+    "$HOME/.config/zsh/p10k.zsh"
+    "$HOME/.config/zsh/aliases.zsh"
+    "$HOME/.config/zsh/message.zsh"
+)
+
+# Loop through each file and source it if it exists
+for file in "${config_files[@]}"; do
+    if [ -f "$file" ]; then
+        source "$file"
+    else
+        echo "Warning: Configuration file '$file' not found."
+    fi
+done
+
 
 

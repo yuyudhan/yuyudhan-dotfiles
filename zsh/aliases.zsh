@@ -44,14 +44,39 @@ alias tmuxrename-window='tmux rename-window'         # Rename the current window
 alias tmuxkill-all='tmux kill-server'                # Kill all Tmux sessions
 alias tmuxdetach='tmux detach'                       # Detach from the current session
 
+
 # -------------------------------------------------------------------
-# Navigation
+# Navigation (Enhanced with zoxide)
 # -------------------------------------------------------------------
 
-alias ..='cd ..'                     # Go up one directory
-alias ...='cd ../..'                 # Go up two directories
-alias ~='cd ~'                       # Shortcut to home directory
-alias fcd='cd "$(find . -type d | fzf)"' # Fuzzy directory navigation
+# Initialize zoxide if available, else fallback to default navigation
+if [[ $(type zoxide) ]]; then
+  # Initialize zoxide
+  eval "$(zoxide init zsh)"
+
+  # Replace 'cd' with 'z' for smarter navigation
+  alias cd='z'
+  alias ..='z ..'              # Go up one directory
+  alias ...='z ../..'          # Go up two directories
+  alias ~='z ~'                # Shortcut to home directory
+
+  # Fuzzy search with zoxide and fzf
+  alias fcd='z $(zoxide query -l | fzf)'  # Fuzzy search with zoxide history
+
+  # Interactive jump to frequent directories
+  alias zi='zoxide query -i'
+
+  # Silent confirmation message
+  echo "✅ zoxide is active for smart navigation."
+else
+  # Default navigation aliases if zoxide isn't installed
+  alias ..='cd ..'
+  alias ...='cd ../..'
+  alias ~='cd ~'
+  alias fcd='cd "$(find . -type d | fzf)"'
+
+  echo "⚠️  zoxide not found. Default navigation enabled."
+fi
 
 # -------------------------------------------------------------------
 # System Management
