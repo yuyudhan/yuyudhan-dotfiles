@@ -1,4 +1,4 @@
--- lua/utils/helpers.lua
+-- lua/plugins/helpers.lua
 
 local M = {}
 
@@ -44,24 +44,48 @@ vim.api.nvim_create_user_command("AddNumberCursor", function()
     end
 end, { range = true })
 
--- Copy the relative path of the current file to the clipboard
 vim.api.nvim_create_user_command("CopyRelativePath", function()
-    local relative_path = vim.fn.expand("%")
+    -- Force relative path to current working directory
+    local relative_path = vim.fn.expand("%:.")
     vim.fn.setreg("+", relative_path)
     print("Relative path copied to clipboard: " .. relative_path)
-end, {})
-
--- Copy the absolute path of the current file to the clipboard
-vim.api.nvim_create_user_command("CopyAbsolutePath", function()
-    local absolute_path = vim.fn.expand("%:p")
-    vim.fn.setreg("+", absolute_path)
-    print("Absolute path copied to clipboard: " .. absolute_path)
 end, {})
 
 -- Define the :IndentFile command
 vim.api.nvim_create_user_command("IndentFile", function()
     vim.cmd("normal! gg=G")
 end, { desc = "Re-indent the entire file" })
+
+local function insert_commented_file_path()
+    -- Move to the first line
+    vim.cmd("normal! gg")
+
+    vim.cmd("normal! O<Esc>O<Esc>")
+
+    -- Get the relative file path
+    local file_path = vim.fn.expand("%:.")
+
+    -- Get commentstring for the current filetype
+    local comment_string = vim.bo.commentstring
+    if comment_string == "" then
+        comment_string = "# %s" -- Default to shell-style comment
+    end
+
+    -- Format the file path as a comment
+    local commented_path = comment_string:gsub("%%s", file_path)
+
+    -- Insert the commented file path
+    vim.api.nvim_set_current_line(commented_path)
+
+    -- Insert a blank second line
+    -- vim.cmd("normal! o<Esc>")
+    vim.cmd("normal! gg")
+    vim.cmd("normal! o")
+    vim.api.nvim_set_current_line("")
+end
+
+-- Create a command to trigger this function
+vim.api.nvim_create_user_command("InsertFilePathComment", insert_commented_file_path, {})
 
 return M
 

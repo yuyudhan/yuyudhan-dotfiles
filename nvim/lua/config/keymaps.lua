@@ -12,3 +12,8 @@ end, { desc = "Select all and copy to clipboard, cursor stays" })
 
 vim.keymap.set("n", "<Space>ii", "<cmd>IndentFile<CR>", { desc = "Re-indent the entire file" })
 
+-- Keybinding for SPC a c to insert commented file path
+vim.keymap.set("n", "<leader>ac", function()
+    vim.cmd("InsertFilePathComment")
+end, { desc = "Insert Commented File Path" })
+
