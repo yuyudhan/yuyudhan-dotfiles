@@ -1,0 +1,86 @@
+// ~/.config/zellij/config.kdl
+
+// Custom Zellij Configuration for Productivity
+
+// Set general options
+pane_frames true            // Show borders around panes
+theme "default"             // Theme can be "default", "catppuccin", etc.
+default_mode "normal"       // Start in normal mode
+default_layout "compact"    // Default layout: compact, default, or strider
+auto_layout true            // Auto balance panes on split
+scroll_buffer_size 10000    // Scrollback buffer size
+
+keybinds {
+    normal {
+        // 🗂 Pane Management
+        "Ctrl n"  { NewPane }                       // New pane (split vertically)
+        "Ctrl h"  { NewPane "down" }               // Split horizontally (below)
+        "Ctrl v"  { NewPane "right" }             // Split vertically (right)
+        "Ctrl x"  { CloseFocus }                   // Close current pane
+        "Ctrl r"  { Resize }                       // Resize mode
+
+        // 🔄 Pane Navigation
+        "Alt h"   { MoveFocus "left" }            // Move focus left
+        "Alt l"   { MoveFocus "right" }           // Move focus right
+        "Alt k"   { MoveFocus "up" }              // Move focus up
+        "Alt j"   { MoveFocus "down" }            // Move focus down
+
+        // 🔀 Pane Switching
+        "Ctrl Tab" { ToggleFocus }                // Toggle between panes
+        "Alt Tab"  { ToggleTab }                  // Switch between tabs
+
+        // 📑 Tab Management
+        "Ctrl t"   { NewTab }                     // New tab
+        "Ctrl w"   { CloseTab }                   // Close current tab
+        "Alt ,"    { GoToPreviousTab }           // Previous tab
+        "Alt ."    { GoToNextTab }               // Next tab
+
+        // 🔐 Lock Mode
+        "Ctrl g"   { SwitchToMode "locked" }     // Lock Zellij (focus-safe)
+
+        // 🔍 Search Mode
+        "/"        { SwitchToMode "search" }     // Search in scrollback buffer
+
+        // 💾 Session Management
+        "Ctrl s"   { Detach }                    // Detach session
+        "Ctrl q"   { Quit }                      // Quit Zellij
+
+        // 🔎 Help
+        "Ctrl ?"   { ShowKeybindTable }         // Show keybinding help
+    }
+
+    locked {
+        "Ctrl g"   { SwitchToMode "normal" }     // Unlock Zellij
+    }
+
+    resize {
+        "h" { Resize "left" }
+        "l" { Resize "right" }
+        "k" { Resize "up" }
+        "j" { Resize "down" }
+        "Esc" { SwitchToMode "normal" }
+    }
+
+    search {
+        "Esc" { SwitchToMode "normal" }
+    }
+}
+
+// Plugins (Status Bar, Clock, etc.)
+plugins {
+    tab-bar {
+        enabled true
+            position "top"    // "top" or "bottom"
+    }
+
+    status-bar {
+        enabled true
+            position "bottom"
+    }
+
+    strider {
+        enabled true
+            position "left"
+    }
+}
+
