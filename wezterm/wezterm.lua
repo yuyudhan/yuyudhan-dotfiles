@@ -19,8 +19,8 @@ config.font_size = 14
 
 -- Window appearance
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 25
+config.window_background_opacity = 0.9
+config.macos_window_background_blur = 0
 
 -- Window border settings
 config.window_frame = {
