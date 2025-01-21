@@ -1,4 +1,4 @@
--- lua/plugins/colorscheme.lua
+-- FilePath: lua/plugins/colorscheme.lua
 
 return {
     {

@@ -1,19 +1,28 @@
--- lua/config/keymaps.lua
+--  FilePath: nvim/lua/config/keymaps.lua
 
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- Add custom keymaps under <leader>z for all your configurations
 
-vim.keymap.set("n", "<Space>as", function()
+-- Keybinding to re-indent the entire file
+vim.keymap.set("n", "<leader>zif", "<cmd>IndentFile<CR>", {
+    desc = "Re-indent the entire file",
+})
+
+-- Keybinding to add a commented file path at the top of the file
+vim.keymap.set("n", "<leader>zafn", "<cmd>InsertFilePathComment<CR>", {
+    desc = "Add commented file path at the start",
+})
+
+-- Keybinding to copy the entire file contents to the clipboard
+vim.keymap.set("n", "<leader>zcc", function()
     local cursor_pos = vim.fn.getpos(".") -- Save current cursor position
     vim.cmd('normal! ggVG"+y') -- Select all and copy to clipboard
     vim.fn.setpos(".", cursor_pos) -- Restore cursor position
-end, { desc = "Select all and copy to clipboard, cursor stays" })
+end, {
+    desc = "Copy entire file to clipboard",
+})
 
-vim.keymap.set("n", "<Space>ii", "<cmd>IndentFile<CR>", { desc = "Re-indent the entire file" })
-
--- Keybinding for SPC a c to insert commented file path
-vim.keymap.set("n", "<leader>ac", function()
-    vim.cmd("InsertFilePathComment")
-end, { desc = "Insert Commented File Path" })
+-- Keybinding to clear the entire file contents
+vim.keymap.set("n", "<leader>zcf", "<cmd>ClearFileContents<CR>", {
+    desc = "Clear the entire file contents",
+})
 
