@@ -1,4 +1,4 @@
--- lua/plugins/multiple-cursors.lua
+-- FilePath: lua/plugins/multiple-cursors.lua
 
 return {
     "terryma/vim-multiple-cursors",
