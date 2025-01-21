@@ -1,4 +1,4 @@
-# ~/.config/zsh/plugins.zsh
+#  FilePath: zsh/plugins.zsh
 
 # -------------------------------------------------------------------
 # Plugin Manager: Zinit (https://github.com/zdharma-continuum/zinit)

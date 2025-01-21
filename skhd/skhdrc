@@ -1,4 +1,4 @@
-# config/skhd/skhdrc
+#  FilePath: skhd/skhdrc
 
 # change window focus within space
 alt - j : yabai -m window --focus south

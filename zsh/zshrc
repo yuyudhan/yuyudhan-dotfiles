@@ -1,4 +1,4 @@
-# zsh/zshrc
+#  FilePath: zsh/zshrc
 
 # Disable Powerlevel10k instant prompt
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
