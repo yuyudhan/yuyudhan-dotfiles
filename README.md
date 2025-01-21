@@ -1,3 +1,5 @@
+<!-- FilePath: README.md-->
+
 # Yuyudhan Dotfiles
 
 This repository contains my personal dotfiles and configurations for various tools and applications I use on macOS. The setup ensures consistency across systems and allows for quick provisioning of a new machine.

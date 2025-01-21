@@ -1,4 +1,4 @@
--- wezterm/wezterm.lua
+--  FilePath: wezterm/wezterm.lua
 
 -- Pull in the WezTerm API
 local wezterm = require("wezterm")

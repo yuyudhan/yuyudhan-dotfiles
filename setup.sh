@@ -1,6 +1,7 @@
+#  FilePath: setup.sh
+
 #!/bin/sh
 
-# ~/.yuyudhan-dotfiles/setup.sh
 # Script to set up symlinks for dotfiles
 
 # Exit on errors
