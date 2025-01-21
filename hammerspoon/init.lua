@@ -1,33 +1,31 @@
 -- ~/.config/hammerspoon/init.lua
 
--- Entry point for Hammerspoon configuration
--- Includes mac-stuff.lua and hammerspoon.lua for additional functionalities
-
--- Logger setup
-local log = hs.logger.new('init', 'info')
+local log = hs.logger.new("init", "info")
 log.i("Loading Hammerspoon configuration")
 
--- Helper function to load modules with error handling
+-- Helper function to safely require modules
 local function safeRequire(moduleName)
-    local success, module = pcall(require, moduleName)
-    if success then
-        log.i("Successfully loaded " .. moduleName)
-        return module
-    else
-        log.e("Error loading " .. moduleName .. ": " .. module)
-        return nil
-    end
+	local success, module = pcall(require, "modules." .. moduleName)
+	if success then
+		log.i("Loaded module: " .. moduleName)
+		return module
+	else
+		log.e("Failed to load module: " .. moduleName .. " - " .. module)
+		return nil
+	end
 end
 
--- Require mac-stuff module
-local macStuff = safeRequire("mac-stuff")
+-- Load custom modules
+safeRequire("battery_alerts")
+-- safeRequire("focus_alerts")
+safeRequire("wifi_automation")
+safeRequire("mac_stuff")
+safeRequire("hammerspoon") -- Core utilities
+safeRequire("water_reminder") -- Core utilities
+safeRequire("system_resources") -- Core utilities
+safeRequire("aerospace_alerts") -- Core utilities
 
--- Require hammerspoon module
-local hammerspoon = safeRequire("hammerspoon")
-
--- Reload configuration on file change
+-- Auto-reload on config change
 hs.pathwatcher.new(os.getenv("HOME") .. "/.config/hammerspoon/", hs.reload):start()
-log.i("Path watcher set up to auto-reload config")
-hs.alert.show("Hammerspoon config loaded")
-
+hs.alert.show("Hammerspoon configuration loaded")
 
