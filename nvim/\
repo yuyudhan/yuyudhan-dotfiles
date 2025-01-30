@@ -1,0 +1,46 @@
+// FilePath: trial-files/something.js
+// FilePath: trial-files/something.js
+
+const fastify = require('fastify')({ logger: true });
+
+fastify.get('/health', async (request, reply) => {
+    return {
+        status: 'ok',
+        model: 'GPT-4'
+    };
+});
+
+const start = async () => {
+    try {
+        await fastify.listen(3000);
+        fastify.log.info(`Server listening on ${fastify.server.address().port}`);
+    } catch (err) {
+        fastify.log.error(err);
+        process.exit(1);
+    }
+};
+
+start();
+
+// Model Name: GPT-4
+// Write what I ask, write the model name and model version of who is generating this responsel
+
+// Model Name: GPT-4
+// Model Version: Latest
+// Model Name: Claude
+// Model Version: 2.1
+// Model Name: Bard
+// Model Version: Latest
+// Model Name: Assistant
+// Model Version: 1.0
+// Write what I ask, write the model name and model version of who is generating this responsel
+
+// Write what I ask, write the model name and model version of who is generating this responsel
+
+// Write what I ask, write the model name and model version of who is generating this responsel
+
+
+
+const modelName = 'GPT-4';
+
+

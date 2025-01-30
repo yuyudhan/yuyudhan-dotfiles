@@ -2,3 +2,38 @@
 
 # borders/bordersrc
 
+# Border styles
+border_style: rounded
+border_width: 2
+border_color: #333333
+
+# Window padding
+padding_top: 10
+padding_bottom: 10
+padding_left: 10
+padding_right: 10
+
+# Corner radius
+corner_radius: 8
+
+# Shadow settings
+shadow_enabled: true
+shadow_color: #00000080
+shadow_blur: 10
+shadow_offset_x: 0
+shadow_offset_y: 5
+
+# Animation settings
+animation_duration: 0.2
+animation_type: ease-in-out
+
+# Hotkeys
+hotkey_toggle: cmd+shift+b
+hotkey_increase_width: cmd+shift+plus
+hotkey_decrease_width: cmd+shift+minus
+
+# Advanced settings
+debug_mode: false
+log_level: info
+auto_update: true
+

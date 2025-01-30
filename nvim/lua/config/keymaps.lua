@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>zafn", "<cmd>InsertFilePathComment<CR>", {
 })
 
 -- Keybinding to copy the entire file contents to the clipboard
-vim.keymap.set("n", "<leader>zcc", function()
+vim.keymap.set("n", "<leader>zcef", function()
     local cursor_pos = vim.fn.getpos(".") -- Save current cursor position
     vim.cmd('normal! ggVG"+y') -- Select all and copy to clipboard
     vim.fn.setpos(".", cursor_pos) -- Restore cursor position
@@ -22,7 +22,15 @@ end, {
 })
 
 -- Keybinding to clear the entire file contents
-vim.keymap.set("n", "<leader>zcf", "<cmd>ClearFileContents<CR>", {
+vim.keymap.set("n", "<leader>zclf", "<cmd>ClearFileContents<CR>", {
     desc = "Clear the entire file contents",
+})
+
+vim.keymap.set("n", "<leader>zsef", "<cmd>SelectEntireFile<CR>", {
+    desc = "Select entire file contents",
+})
+
+vim.keymap.set("n", "<leader>zcdm", "<cmd>CopyDiagnosticMessage<CR>", {
+    desc = "Copy Diagnostic Message to Clipboard",
 })
 
