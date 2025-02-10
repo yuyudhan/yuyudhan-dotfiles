@@ -1,0 +1,87 @@
+#  FilePath: alacritty/alacritty.yml
+
+# Optimized Alacritty Configuration for macOS with transparency
+
+window:
+    padding:
+        x: 10
+        y: 10
+    dynamic_padding: true
+    decorations: none  # No window decorations (borderless)
+    opacity: 0.85  # Partial transparency (adjust 0.0 to 1.0)
+    blur: true  # macOS only (enables background blur)
+scrolling:
+  history: 10000
+  multiplier: 3  # Faster scrolling
+
+font:
+    normal:
+        family: "JetBrainsMono Nerd Font"
+        style: Regular
+    bold:
+        family: "JetBrainsMono Nerd Font"
+        style: Bold
+    italic:
+        family: "JetBrainsMono Nerd Font"
+        style: Italic
+    size: 14.0  # Adjust based on your preference
+    use_thin_strokes: true  # Makes text look sharper
+
+draw_bold_text_with_bright_colors: true
+
+cursor:
+    style: Block  # Vim-like block cursor
+    unfocused_hollow: true
+
+live_config_reload: true  # Reload config changes automatically
+
+shell:
+    program: /bin/zsh  # Change to /opt/homebrew/bin/fish if using Fish shell
+
+key_bindings:
+    - { key: K, mods: Command, action: ScrollPageUp }
+    - { key: J, mods: Command, action: ScrollPageDown }
+    - { key: H, mods: Command, action: ScrollToTop }
+    - { key: L, mods: Command, action: ScrollToBottom }
+    - { key: Return, mods: Command, action: ToggleFullscreen }
+    - { key: F11, action: ToggleFullscreen }
+
+# Vim-like navigation between tmux / neovim splits
+    - { key: H, mods: Control, chars: "\x1b[1;5D" }
+    - { key: J, mods: Control, chars: "\x1b[1;5B" }
+    - { key: K, mods: Control, chars: "\x1b[1;5A" }
+    - { key: L, mods: Control, chars: "\x1b[1;5C" }
+
+# Colorscheme (Gruvbox Dark)
+colors:
+    primary:
+        background: "0x282828" # Dark background
+        foreground: "0xebdbb2" # Light text
+
+    normal:
+        black: "0x282828"
+        red: "0xcc241d"
+        green: "0x98971a"
+        yellow: "0xd79921"
+        blue: "0x458588"
+        magenta: "0xb16286"
+        cyan: "0x689d6a"
+        white: "0xa89984"
+
+    bright:
+        black: "0x928374"
+        red: "0xfb4934"
+        green: "0xb8bb26"
+        yellow: "0xfabd2f"
+        blue: "0x83a598"
+        magenta: "0xd3869b"
+        cyan: "0x8ec07c"
+        white: "0xebdbb2"
+
+selection:
+    save_to_clipboard: true  # Copy to clipboard automatically
+
+# MacOS Retina display tweaks
+decorations: none
+dynamic_title: true
+

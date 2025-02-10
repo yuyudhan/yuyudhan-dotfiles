@@ -1,6 +1,15 @@
 # zsh/zsh/aliases.zsh
 
 # -------------------------------------------------------------------
+# Utilities.
+# -------------------------------------------------------------------
+alias clearscroll='printf "\033c"'
+alias reloadshell='exec $SHELL -l'   # Reload the shell
+alias path='echo -e ${PATH//:/\\n}'  # Display PATH in a readable format
+alias mkcd='foo(){ mkdir -p "$1"; cd "$1"; }; foo'  # Create and navigate to a directory
+alias histg='history | grep'         # Search command history
+
+# -------------------------------------------------------------------
 # File and Directory Management
 # -------------------------------------------------------------------
 
