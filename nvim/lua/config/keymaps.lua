@@ -47,3 +47,9 @@ vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Move to below pane" })
 vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Move to above pane" })
 vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Move to right pane" })
 
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tp", "<cmd>TmuxNavigatePrevious<CR>", { noremap = true, silent = true })
+
