@@ -76,6 +76,8 @@ sketchybar $HOME/.config/sketchybar
 karabiner $HOME/.config/karabiner
 btop $HOME/.config/btop
 obsidian $HOME/.config/obsidian
+alacritty $HOME/.config/alacritty
+zellij $HOME/.config/zellij
 "
 
 # Function to process all symlinks
