@@ -150,7 +150,7 @@ function M.copy_diagnostic_message()
     ) or "No documentation"
 
     local output =
-        string.format("Diagnostic Message: %s\nCode: %s\nSource: %s\nReference: %s", message, code, source, href)
+        string.format("Diagnostic Message: %s | Code: %s | Source: %s | Reference: %s", message, code, source, href)
 
     vim.fn.setreg("+", output)
     print("Diagnostic copied to clipboard!")

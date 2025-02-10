@@ -2,6 +2,8 @@
 
 -- Add custom keymaps under <leader>z for all your configurations
 
+vim.keymap.set("n", "gf", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, silent = true })
+
 -- Keybinding to re-indent the entire file
 vim.keymap.set("n", "<leader>zif", "<cmd>IndentFile<CR>", {
     desc = "Re-indent the entire file",
@@ -33,4 +35,15 @@ vim.keymap.set("n", "<leader>zsef", "<cmd>SelectEntireFile<CR>", {
 vim.keymap.set("n", "<leader>zcdm", "<cmd>CopyDiagnosticMessage<CR>", {
     desc = "Copy Diagnostic Message to Clipboard",
 })
+
+-- Keybinding to clear the line but not remove it
+vim.keymap.set("n", "<leader>zdd", '"_dd', {
+    desc = "Clear the line but not remove it",
+})
+
+-- Keybindings for moving between panes
+vim.keymap.set("n", "<leader>wh", "<C-w>h", { desc = "Move to left pane" })
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Move to below pane" })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Move to above pane" })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Move to right pane" })
 
