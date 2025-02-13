@@ -29,7 +29,7 @@ alias ll="eza --icons -lh"
 alias cat='bat'
 
 # Use nvim instead of vim.
-# alias vim='nvim'
+alias vim='nvim'
 
 # -------------------------------------------------------------------
 # Tmux Aliases
@@ -145,8 +145,20 @@ alias gcb='git branch'
 # -------------------------------------------------------------------
 
 alias dc='docker compose'
-alias docker-stop-all-containers="docker stop $(docker ps -aq)" # Stop all containers
-alias docker-rm-all-containers='docker rm $(docker ps -aq)'     # Remove all containers
+
+# The below two were changed to functions because the earlier the commands were running immediate
+# and causing the zshrc load to fail and zsh not starting
+# and leading to zsh hanging.
+#
+# Stop all running Docker containers safely
+docker-stop-all-containers() {
+    docker ps -aq | xargs -r docker stop
+}
+
+# Remove all stopped Docker containers safely
+docker-rm-all-containers() {
+    docker ps -aq | xargs -r docker rm
+}
 
 # -------------------------------------------------------------------
 # Search and Text Processing
@@ -185,5 +197,20 @@ alias printfiles='find . \
 # Path Management
 # -------------------------------------------------------------------
 
-export PATH="$PATH:/usr/local/go/bin"
+# # Ensure /opt/homebrew/bin is added if it exists
+if [ -d "/opt/homebrew/bin" ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
+# # Ensure /usr/local/bin is added if it exists
+if [ -d "/usr/local/bin" ]; then
+    export PATH="/usr/local/bin:$PATH"
+fi
+
+# # Ensure ~/.cargo/bin is added if it exists
+if [ -d "$HOME/.cargo/bin" ]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+
 

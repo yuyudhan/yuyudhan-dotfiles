@@ -16,8 +16,8 @@ config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 14
 
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.9
-config.macos_window_background_blur = 30
+config.window_background_opacity = 0.8
+config.macos_window_background_blur = 10
 
 config.window_frame = {
 	active_titlebar_bg = "#1D1F21",
@@ -34,8 +34,8 @@ config.window_frame = {
 
 config.line_height = 1.3
 config.window_padding = {
-	left = 0,
-	right = 0,
+	left = 10,
+	right = 10,
 	top = 0,
 	bottom = 0,
 }
