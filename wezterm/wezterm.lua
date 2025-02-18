@@ -10,26 +10,25 @@ end
 -- ================================
 -- Appearance Settings
 -- ================================
-
-config.color_scheme = "Chalk (dark) (terminal.sexy)"
+config.color_scheme = "Gruvbox Dark"
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 14
 
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 10
+config.window_background_opacity = 0.7
+config.macos_window_background_blur = 0
 
 config.window_frame = {
-	active_titlebar_bg = "#1D1F21",
-	inactive_titlebar_bg = "#282A2E",
+	active_titlebar_bg = "#2E3440",
+	inactive_titlebar_bg = "#3B4252",
 	border_left_width = 2,
 	border_right_width = 3,
 	border_top_height = 2,
 	border_bottom_height = 2,
-	border_left_color = "#44475A",
-	border_right_color = "#44475A",
-	border_top_color = "#44475A",
-	border_bottom_color = "#44475A",
+	border_left_color = "#4C566A",
+	border_right_color = "#4C566A",
+	border_top_color = "#4C566A",
+	border_bottom_color = "#4C566A",
 }
 
 config.line_height = 1.3
