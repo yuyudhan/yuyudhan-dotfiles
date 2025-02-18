@@ -1,78 +1,69 @@
-// FilePath: tampermonkey/remove-backgrounds-and-beauitify.js
 
+// FilePath: tampermonkey/remove-backgrounds-and-beauitify.js
 // ==UserScript==
-// @name         Global Background Setter with GitHub Overrides (No Blur, Exclude Tridactyl, Preserve BG Images)
+// @name         Global Background Cleaner on All Pages (Exclude Tridactyl)
 // @namespace    http://tampermonkey.net/
-// @version      1.8
-// @description  Set a custom background image on all webpages and remove background colors (set to transparent) on all common box-like elements—unless they already have a background image—while ignoring elements whose class starts with "tridactyl". Dynamically processes new elements using MutationObserver, using Tampermonkey
-// @author       Ankur Pandey, with LLM Help
+// @version      1.3
+// @description  Set a custom background image on html/body and remove background colors on other elements – preserving any background images. Skips elements with a class starting with "tridactyl". Uses a MutationObserver to catch future elements.
+// @author       Ankur (@yuyudhan), ChatGPT
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
-    console.info("INFO: Global Background Setter (Preserve BG Images) script initialized.");
+    console.info("INFO: Global Background Cleaner script initialized.");
 
-    // Inject CSS for html and body to set the global background image.
-    const customCSS = `
+    const customBackgroundCSS = `
         html, body {
-            background: url('https://yuyudhan.github.io/yuyudhan-wallpapers/Parshuram/parshuram-9.jpg') no-repeat center center fixed !important;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                        url('https://yuyudhan.github.io/yuyudhan-wallpapers/Parshuram/parshuram-9.jpg') no-repeat center center fixed !important;
             background-size: cover !important;
         }
     `;
     const styleElement = document.createElement('style');
     styleElement.type = 'text/css';
-    styleElement.id = 'global-background-style';
-    styleElement.appendChild(document.createTextNode(customCSS));
+    styleElement.appendChild(document.createTextNode(customBackgroundCSS));
     document.head.appendChild(styleElement);
-    console.info("INFO: Global background image CSS injected.");
+    console.debug("DEBUG: Custom background CSS injected.");
 
-    /**
-     * Process an element: if it doesn't have a background image and doesn't belong
-     * to an element whose class starts with "tridactyl", remove its background color.
-     */
+    const selectors = "div, table, td, th, a, tr, c-wiz, nav, ul, ol, section, span, input, textarea";
+
+    function hasTridactylClass(el) {
+        return Array.from(el.classList).some((cls) =>
+            cls.toLowerCase().startsWith("tridactyl")
+        );
+    }
+
     function processElement(el) {
-        if (el.nodeType !== Node.ELEMENT_NODE) return;
-
-        const tag = el.tagName.toLowerCase();
-        // Skip html and body
-        if (tag === 'html' || tag === 'body') return;
-
-        // Skip if element's classList contains any class starting with "tridactyl" (case-insensitive)
-        if (Array.from(el.classList).some(cls => cls.toLowerCase().startsWith('tridactyl'))) return;
-
-        // Check computed style for background-image
-        const computed = window.getComputedStyle(el);
-        if (!computed) return;
-        // If no background image is set, remove background color by setting it to transparent.
-        if (computed.backgroundImage === 'none' || computed.backgroundImage === 'initial' || computed.backgroundImage === 'unset') {
-            el.style.backgroundColor = 'transparent';
+        if (hasTridactylClass(el)) {
+            return;
+        }
+        const compStyle = window.getComputedStyle(el);
+        if (compStyle.backgroundImage === "none") {
+            el.style.setProperty("background", "transparent", "important");
+        } else {
+            el.style.setProperty("background-color", "transparent", "important");
         }
     }
 
-    /**
-     * Process an element and all its descendants.
-     */
-    function processSubtree(root) {
-        processElement(root);
-        root.querySelectorAll("*").forEach(child => processElement(child));
-    }
+    document.querySelectorAll(selectors).forEach(processElement);
+    console.debug("DEBUG: Initial background cleaning applied to existing elements.");
 
-    // Process all existing elements on the page
-    processSubtree(document.body);
-    console.info("INFO: Initial processing of document completed.");
-
-    // Set up a MutationObserver to process dynamically added nodes.
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            mutation.addedNodes.forEach(node => {
-                processSubtree(node);
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.matches(selectors)) {
+                        processElement(node);
+                    }
+                    node.querySelectorAll(selectors).forEach(processElement);
+                }
             });
         });
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
-    console.info("INFO: MutationObserver established to process dynamically added elements.");
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    console.info("INFO: MutationObserver is active. New elements will be processed as they appear.");
 })();
 
