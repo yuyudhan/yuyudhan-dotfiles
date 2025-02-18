@@ -16,10 +16,10 @@ preset = 'qwerty'
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
-outer.left = 15
-outer.bottom = 15
-outer.top = 15
-outer.right = 15
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
 
 [mode.main.binding]
 ctrl-alt-cmd-shift-slash = 'layout tiles horizontal vertical'
