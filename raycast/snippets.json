@@ -1,0 +1,78 @@
+[
+    {
+        "name": "rewrite: React-Only with Tailwind Frontend File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise file header explaining the file’s purpose and developer guidance.\nCode Quality:\n  - Enforce clean code formatting and linting.\n  - Write clean, maintainable, and optimized React code following best practices.\nFunctionality & UX:\n  - Ensure accessibility, responsiveness, and smooth animations.\n  - Optimize state management and performance.\nLogging & Error Handling:\n  - Add robust logging (logger.info, logger.debug, logger.warn, logger.error) liberally.\n  - Implement comprehensive error handling without exposing sensitive information.\nOutput Quality:\n  - Deliver elegant output that supports both standard and dark mode.\nTech Stack Specifics:\n  - Use Tailwind CSS and shadcn/ui components consistently.\nCommenting Strategies:\n  - Add comments only where they offer valuable guidance to developers.\n  - Avoid trivial comments that merely state inputs and outputs.\n"
+    },
+    {
+        "name": "rewrite: Next.js Frontend File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header documenting the file’s purpose and guidance for developers.\nCode Quality:\n  - Enforce clean code formatting and linting.\n  - Write clean, maintainable, and optimized code following Next.js best practices.\nFunctionality & UX:\n  - Ensure a sleek, responsive, dark mode-compatible design.\n  - Implement dynamic imports for lazy loading and efficient state management.\n  - Enhance UX with smooth animations and accessible components.\nPerformance & Security:\n  - Optimize routing, caching, and prefetching.\n  - Ensure type safety with TypeScript.\nTech Stack Specifics:\n  - Use Tailwind CSS and shadcn/ui components consistently.\nLogging & Error Handling:\n  - Add robust logging (logger.info, logger.debug, logger.warn, logger.error) liberally.\n  - Implement comprehensive error handling and graceful failure responses.\nCommenting Strategies:\n  - Include meaningful comments to guide developers.\n  - Avoid unnecessary comments that do not add value.\n"
+    },
+    {
+        "name": "rewrite: React Component File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header explaining the component’s functionality and developer guidance.\nCode Quality:\n  - Enforce clean formatting, linting, and maintainable code practices.\n  - Write optimized, performant, and reusable React component code.\nFunctionality & UX:\n  - Ensure component accessibility, responsiveness, and integration with animations if needed.\n  - Use efficient state management and dynamic imports where applicable.\nTech Stack Specifics:\n  - Use Tailwind CSS and shadcn/ui components consistently.\nLogging & Error Handling:\n  - Include logging (logger.info, logger.debug, logger.warn, logger.error) as needed.\n  - Provide comprehensive error handling and graceful failure responses.\nCommenting Strategies:\n  - Add comments where they offer clear guidance.\n  - Avoid cluttering the code with trivial comments.\n"
+    },
+    {
+        "name": "rewrite: Generic Frontend File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header summarizing the file’s purpose and offering guidance to developers.\nCode Quality:\n  - Enforce clean code formatting and linting.\n  - Write clean, maintainable, and optimized code.\nFunctionality & UX:\n  - Ensure an elegant, responsive, dark mode-compatible design.\n  - Implement smooth animations and accessible UI components.\nPerformance & State Management:\n  - Optimize with lazy loading, efficient state management, caching, and memoization.\nTech Stack Specifics:\n  - Use Tailwind CSS and shadcn/ui components consistently.\nLogging & Error Handling:\n  - Add robust logging (logger.info, logger.debug, logger.warn, logger.error) liberally.\n  - Implement comprehensive error handling and graceful failure responses.\nCommenting Strategies:\n  - Add useful, guiding comments for developers.\n  - Avoid superfluous comments that do not enhance clarity.\n"
+    },
+    {
+        "name": "rewrite: Next.js Backend File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header documenting the file’s purpose and providing developer guidance.\nCode Quality:\n  - Enforce clean code formatting, linting, and maintainability.\n  - Write optimized, scalable, and bug-free code.\nFunctionality, Performance & Security:\n  - Ensure efficient routing, atomic transactions, and optimal performance.\n  - Follow strict security practices including input validation, rate limiting, and authentication/authorization.\nLogging & Error Handling:\n  - Add robust logging (logger.info, logger.debug, logger.warn, logger.error) liberally.\n  - Implement comprehensive error handling with graceful failure responses without exposing sensitive data.\nCommenting Strategies:\n  - Include comments only where they add meaningful guidance for developers.\n  - Avoid trivial or redundant comments.\n"
+    },
+    {
+        "name": "rewrite: Fastify Backend File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header that explains the file’s purpose and offers developer guidance.\nCode Quality:\n  - Enforce strict code formatting and linting for maintainability.\n  - Write optimized, scalable, and bug-free Fastify backend code.\nFunctionality, Performance & Security:\n  - Ensure efficient routing, atomic operations, and overall high performance.\n  - Follow best security practices including input validation, rate limiting, and proper authentication/authorization.\nLogging & Error Handling:\n  - Add robust logging (logger.info, logger.debug, logger.warn, logger.error) throughout the code.\n  - Implement comprehensive error handling and graceful failure responses.\nCommenting Strategies:\n  - Use comments judiciously to provide meaningful developer guidance.\n  - Avoid unnecessary comments that do not add value.\n"
+    },
+    {
+        "name": "rewrite: Generic Backend File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header summarizing the file’s purpose and offering developer guidance.\nCode Quality:\n  - Enforce clean code formatting, linting, and maintainability.\n  - Write optimized, scalable, and bug-free code.\nFunctionality, Performance & Security:\n  - Ensure atomic operations and optimized performance.\n  - Implement strict security practices including input validation, rate limiting, and secure authentication/authorization.\nLogging & Error Handling:\n  - Add robust logging (logger.info, logger.debug, logger.warn, logger.error) liberally.\n  - Provide comprehensive error handling with graceful failure responses.\nCommenting Strategies:\n  - Include meaningful comments that guide developers effectively.\n  - Avoid superfluous comments that do not enhance clarity.\n"
+    },
+    {
+        "name": "rewrite: PostgreSQL File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header explaining the SQL script’s purpose and developer guidance.\nSQL Quality:\n  - Enforce clean formatting and consistent naming conventions.\n  - Write maintainable and optimized SQL code that is bug-free.\nFunctionality, Performance & Security:\n  - Optimize indexing, constraints, and query efficiency.\n  - Ensure atomic transactions and data consistency.\n  - Follow security best practices including input validation and access control.\nLogging & Error Handling:\n  - Include logging comments or guidelines for monitoring/debugging where applicable.\n  - Implement proper error handling strategies.\nCommenting Strategies:\n  - Add comments that explain complex logic or critical decisions.\n  - Avoid unnecessary comments that do not add value.\n"
+    },
+    {
+        "name": "rewrite: MySQL File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header detailing the script’s purpose and developer guidance.\nSQL Quality:\n  - Enforce clean formatting, consistent naming conventions, and maintainable structure.\n  - Write optimized and bug-free SQL code.\nFunctionality, Performance & Security:\n  - Optimize queries, indexing, and ensure atomic transactions.\n  - Follow strict security practices including input validation and access control.\nLogging & Error Handling:\n  - Include logging comments or guidelines for monitoring/debugging if applicable.\n  - Implement robust error handling.\nCommenting Strategies:\n  - Add meaningful comments that clarify complex logic.\n  - Avoid trivial comments that do not enhance clarity.\n"
+    },
+    {
+        "name": "rewrite: Documentation File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header summarizing the document’s purpose and providing developer guidance.\nContent Quality:\n  - Write clear, concise, and developer-friendly documentation.\n  - Ensure the content is well-structured, natural, and actionable.\nBest Practices & Readability:\n  - Maintain consistent terminology, formatting, and logical sections.\n  - Include examples and instructions that are easy to follow.\nLogging & Code References:\n  - For embedded code snippets, include logging instructions (logger.info, logger.debug, logger.warn, logger.error) where applicable.\nCommenting Strategies:\n  - Use comments to enhance understanding without cluttering the document.\n  - Avoid overly generic or redundant explanations.\n"
+    },
+    {
+        "name": "rewrite: Markdown File Rewrite",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header explaining the document’s purpose and usage guidance.\nContent Quality:\n  - Write in clear, concise language that is natural and developer-friendly.\n  - Ensure consistent markdown formatting and a well-organized structure.\nBest Practices & Readability:\n  - Use logical sections, headings, and bullet points for clarity.\n  - Provide actionable instructions and helpful examples.\nLogging & Code References:\n  - For any embedded code examples, include logging instructions as needed.\nCommenting Strategies:\n  - Add comments that offer meaningful guidance.\n  - Avoid unnecessary commentary that clutters the content.\n"
+    },
+    {
+        "name": "rewrite: Product Documentation (Markdown Format)",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header explaining the document’s purpose and offering developer guidance.\nContent Quality:\n  - Write detailed, clear, and accurate product information.\n  - Use natural language with consistent terminology and a structured format.\nBest Practices & Readability:\n  - Organize content into well-defined sections, headings, and bullet points.\n  - Include actionable instructions, examples, and embedded code with logging instructions where applicable.\nLogging & Code References:\n  - For any code snippets, add logging (logger.info, logger.debug, logger.warn, logger.error) as necessary.\nCommenting Strategies:\n  - Include only meaningful comments that aid understanding.\n  - Avoid comments that are redundant or add no value.\n"
+    },
+    {
+        "name": "rewrite: User Manuals",
+        "text": "\nFile Header:\n  - Include the file path as a comment on the first line, followed by an empty second line.\n  - Add a concise header explaining the manual’s purpose and intended audience.\nContent Quality:\n  - Write clear, accessible, and user-friendly instructions.\n  - Use step-by-step guidance, clear examples, and visual aids where applicable.\nBest Practices & Readability:\n  - Organize content with logical sections and clear headings.\n  - Include troubleshooting tips, FAQs, and actionable steps.\nLogging & Code References:\n  - For any embedded code examples, include appropriate logging instructions (logger.info, logger.debug, logger.warn, logger.error) if relevant.\nCommenting Strategies:\n  - Use comments to clarify instructions and highlight key points.\n  - Avoid unnecessary technical jargon or redundant explanations.\n"
+    },
+    {
+        "name": "Reply: Generic Mail Reply",
+        "text": "\nHi,\n\nThank you for reaching out. I appreciate your message and will get back to you as soon as possible. If you have any urgent queries, please let me know.\n\nBest regards,\n[Your Name]\n"
+    },
+    {
+        "name": "Reply: Promotional Not Interested",
+        "text": "\nHi,\n\nThanks for reaching out. However, this doesn't seem to be of interest to us right now. We have made a note of it and will get back to you if we identify any synergies.\n\nBest regards,\n[Your Name]\n"
+    },
+    {
+        "name": "Snippet: category: primary label:unread",
+        "text": "\ncategory: primary label:unread\n"
+    },
+    {
+        "name": "Editing: Frontend Code Edit",
+        "text": "Edit the frontend code to ensure it is clean, maintainable, and optimized. Follow best practices for code formatting, accessibility, performance, and responsiveness. Incorporate dynamic imports and efficient state management while ensuring a sleek design using Tailwind CSS and shadcn/ui components."
+    },
+    {
+        "name": "Editing: Backend Code Edit",
+        "text": "Edit the backend code to ensure robust error handling, security, and scalability. Optimize performance with atomic operations and comprehensive logging. Follow best practices for maintainability and adhere to industry standards."
+    },
+    {
+        "name": "Editing: SQL Code Edit",
+        "text": "Edit the SQL code to ensure clean formatting, optimized queries, and proper indexing. Follow best practices for data consistency, security, and maintainability. Ensure the code is efficient and bug-free."
+    }
+]
