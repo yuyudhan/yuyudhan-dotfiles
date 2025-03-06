@@ -6,10 +6,10 @@
     Configures the 'yetone/avante.nvim' plugin for Neovim, setting up AI providers, dependencies, and additional integrations
     for enhanced editor functionality, including auto-suggestions and markdown rendering.
     Functionality:
-    - Configures OpenAI and Deepseek as AI providers with specified endpoints and models.
-    - Integrates Copilot for additional auto-suggestions and side panel.
-    - Sets up Claude AI models for extended functionality.
-    - Declares dependencies on various plugins for enhanced features like treesitter, web icons, etc.
+    - Primary configuration using Claude 3.5 and Claude 3.7 models
+    - Configures OpenAI as an alternative provider
+    - Integrates Copilot for additional auto-suggestions and side panel
+    - Sets up dependencies for enhanced features like treesitter, web icons, etc.
 ]]
 
 return {
@@ -19,17 +19,19 @@ return {
         lazy = false,
         version = false, -- Always pull the latest change
         opts = {
-            provider = "openai",
-            auto_suggestions_provider = "openai", -- Use OpenAI for auto-suggestions
-            openai = {
-                endpoint = "https://api.openai.com/v1",
-                model = "gpt-4o",
-                -- model = "o1-mini",
-                -- model = "o1-mini",
+            provider = "claude", -- Using Claude as the default provider
+            auto_suggestions_provider = "claude-haiku", -- Using Claude Haiku for auto-suggestions
+
+            -- Claude configuration for Claude 3.7 Sonnet
+            claude = {
+                endpoint = "https://api.anthropic.com",
+                model = "claude-3-7-sonnet-20250219",
                 timeout = 30000, -- Timeout in milliseconds
                 temperature = 0,
-                max_tokens = 16000,
+                max_tokens = 64000,
+                api_key_name = "ANTHROPIC_API_KEY", -- Environment variable for API key
             },
+
             deepseek = {
                 debug = true,
                 endpoint = "https://api.deepseek.com/v1",
@@ -39,28 +41,73 @@ return {
                 max_tokens = 8000,
                 api_key_name = "DEEPSEEK_KEY", -- default OPENAI_API_KEY if not set
             },
+
+            -- OpenAI configuration as alternative
+            openai = {
+                endpoint = "https://api.openai.com/v1",
+                model = "gpt-4o",
+                timeout = 30000, -- Timeout in milliseconds
+                temperature = 0,
+                max_tokens = 16000,
+            },
+
+            -- Additional providers defined as vendor extensions
+            vendors = {
+                -- Claude 3.5 Haiku configuration
+                ["claude-haiku"] = {
+                    __inherited_from = "claude",
+                    model = "claude-3-5-haiku-20241022",
+                    timeout = 30000,
+                    temperature = 0,
+                    max_tokens = 4000,
+                },
+
+                -- Claude 3.5 Sonnet configuration
+                ["claude-sonnet"] = {
+                    __inherited_from = "claude",
+                    model = "claude-3-5-sonnet-20240620",
+                    timeout = 30000,
+                    temperature = 0,
+                    max_tokens = 8000,
+                },
+            },
+
+            -- Copilot integration
+            copilot = {
+                suggestion = { enabled = true }, -- Enable Copilot auto-completions
+                panel = { enabled = true }, -- Enable Copilot side panel
+            },
+
+            -- Behavior settings
+            behaviour = {
+                auto_focus_sidebar = true,
+                auto_suggestions = false, -- Disable auto suggestions initially
+                auto_set_highlight_group = true,
+                auto_set_keymaps = true,
+                auto_apply_diff_after_generation = false,
+                jump_result_buffer_on_finish = false,
+                minimize_diff = true,
+                enable_token_counting = true,
+            },
+
+            -- Windows layout configuration
+            windows = {
+                position = "right",
+                wrap = true,
+                width = 30,
+                height = 30,
+                sidebar_header = {
+                    enabled = true,
+                    align = "center",
+                    rounded = true,
+                },
+            },
         },
-        copilot = {
-            suggestion = { enabled = true }, -- Enable Copilot auto-completions
-            panel = { enabled = true }, -- Enable Copilot side panel
-        },
-        claude_v3 = {
-            endpoint = "https://api.claude.ai/v3",
-            model = "claude-v3",
-            timeout = 30000, -- Timeout in milliseconds
-            temperature = 0,
-            max_tokens = 12000,
-            api_key_name = "CLAUDE_V3_KEY", -- Added API key name
-        },
-        claude = {
-            endpoint = "https://api.claude.ai/v2",
-            model = "claude-v2",
-            timeout = 20000, -- Timeout in milliseconds
-            temperature = 0,
-            max_tokens = 10000,
-            api_key_name = "CLAUDE_V2_KEY", -- Added API key name
-        },
-        build = "make", -- Build from source
+
+        -- Build command
+        build = "make",
+
+        -- Dependencies
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "stevearc/dressing.nvim",
