@@ -53,3 +53,17 @@ vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { noremap = true, silent
 vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>tp", "<cmd>TmuxNavigatePrevious<CR>", { noremap = true, silent = true })
 
+-- Keybindings for inserting blank lines
+vim.keymap.set(
+    "n",
+    "<leader>o",
+    ":put =''<CR>",
+    { noremap = true, silent = true, desc = "Blank line after current line" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>O",
+    ":put! =''<CR>",
+    { noremap = true, silent = true, desc = "Blank line before current line" }
+)
+
