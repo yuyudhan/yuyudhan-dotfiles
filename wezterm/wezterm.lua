@@ -11,8 +11,10 @@ end
 -- Appearance Settings
 -- ================================
 config.color_scheme = "Gruvbox Dark"
-config.font = wezterm.font("MesloLGS Nerd Font Mono")
-config.font_size = 14
+-- config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("UbuntuMono Nerd Font")
+config.font_size = 16
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.7
