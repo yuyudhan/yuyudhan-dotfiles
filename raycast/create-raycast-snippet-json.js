@@ -11,6 +11,59 @@
 const fs = require('fs');
 const path = require('path');
 
+const rewriteGenericFile = {
+    name: "rewrite: Generic File Rewrite",
+    text: `
+Rewrite this file to achieve exceptional standards of quality, scalability, security, and maintainability, regardless of its specific type or purpose. Follow these detailed instructions to ensure best practices are implemented comprehensively.
+
+**File Header & Documentation:**
+  - **File Path Comment:** Start with a comment on the first line indicating the file path (e.g., '// File: src/path/to/file.ext'). Follow with an empty second line.
+  - **Informative Header:** Include a multi-line comment block documenting:
+    - The file's purpose and role within the broader system or application.
+    - Key functionalities or content implemented in the file.
+    - General considerations relevant to the file type (e.g., code, configuration, documentation).
+    - Guidance for future maintainers to ensure long-term usability and scalability.
+
+**Content Quality & Best Practices:**
+  - **Clean Formatting & Consistency:** Enforce rigorous formatting standards appropriate to the file type (e.g., code linting, text structuring) to ensure readability and consistency.
+  - **Optimized, Scalable, and Reliable Content:**
+    - Modularity & Separation of Concerns: Structure the file into logical sections, modules, or components with clear responsibilities to enhance maintainability and testability.
+    - Efficient Processing: Optimize operations for performance, using asynchronous techniques, lazy loading, or efficient algorithms as applicable to the file’s context.
+    - Validation & Integrity: Implement robust validation and integrity checks for any inputs, data, or configurations to prevent errors and ensure reliability.
+    - Resource Management: Optimize resource usage (e.g., memory, connections, file handles) to support scalability and efficient operation under load.
+
+**Functionality, Performance & Security:**
+  - **Core Functionality:** Ensure the file fulfills its intended purpose effectively, with all critical operations or content clearly defined and executed.
+  - **Performance Optimization:** Design for optimal performance by minimizing bottlenecks, employing caching where appropriate, and optimizing resource-intensive operations.
+  - **Strict Security Practices:**
+    - Input Validation & Sanitization: Rigorously validate and sanitize all inputs or data at entry points to prevent vulnerabilities (e.g., injection attacks, data corruption).
+    - Access Control: Implement or reinforce access control mechanisms to protect sensitive operations or data, ensuring least privilege principles.
+    - Rate Limiting & Abuse Prevention: Apply rate limiting or similar techniques if applicable to prevent abuse and ensure availability.
+    - Secure Configuration: Externalize and protect sensitive configurations (e.g., credentials, keys) to avoid hardcoding and exposure.
+    - Auditing & Monitoring: Incorporate mechanisms to log or track significant events for auditing and debugging purposes.
+
+**Logging & Error Handling:**
+  - **Robust Logging:** Implement comprehensive logging tailored to the file type (e.g., code-level logs, execution tracking) at appropriate levels (info, debug, warn, error) to aid monitoring and troubleshooting.
+  - **Comprehensive Error Handling:**
+    - Centralized Error Management: Use centralized mechanisms (e.g., try-catch, error handlers) to manage errors consistently, log them, and prevent unhandled failures.
+    - Graceful Failure: Ensure the file handles failures gracefully, providing meaningful feedback or fallback options without exposing sensitive details.
+    - Monitoring Integration: Design error handling to support integration with monitoring tools for proactive issue detection.
+
+**Commenting Strategies:**
+  - **Meaningful Guidance Comments:** Add comments judiciously to explain complex logic, critical decisions, or integration points, enhancing understanding for future maintainers.
+  - **Avoid Superfluous Comments:** Refrain from redundant or obvious comments that do not add significant value to the file’s comprehension.
+
+**Edge Cases & General Considerations:**
+  - **Scalability:** Design the file to handle increased load or complexity, considering horizontal scaling, resource efficiency, or extensibility as relevant.
+  - **Compatibility:** Ensure compatibility with intended environments, tools, or systems, addressing platform-specific nuances where necessary.
+    - **Performance Under Load:** Optimize for performance under high usage or large data scenarios, addressing potential bottlenecks.
+    - **Interoperability:** If the file interacts with other components, ensure robust and secure communication or data exchange mechanisms.
+    - **Maintainability:** Structure the file to facilitate updates, testing, and debugging over time, reducing technical debt.
+
+By meticulously adhering to these instructions, ensure this rewritten file becomes a robust, secure, scalable, and maintainable asset, embodying industry best practices tailored to its specific type and purpose, and performing reliably across diverse conditions.
+`
+};
+
 // Rewrite snippets (names now start with "rewrite:") - Optimized for LLM prompting
 const rewriteReactOnly = {
     name: "rewrite: React-Only with Tailwind Frontend File Rewrite",
@@ -810,8 +863,186 @@ Apply these editing directives to elevate the SQL code to a state of optimal per
     `
 };
 
+const rewriteGolangBackend = {
+    name: "rewrite: Golang Backend Code Rewrite",
+    text: `
+Rewrite this Golang backend file to conform to best practices in Go, emphasizing performance, clarity, and maintainability. Follow these detailed instructions:
+
+**File Header & Documentation:**
+  - Add a file comment at the top with the full file path (e.g., '// File: internal/api/handlers.go').
+  - Include a comprehensive comment block describing:
+      - The purpose of the file and its role in the backend.
+      - A summary of key functionalities and any notable design decisions.
+      - Guidelines for future maintenance and contribution.
+
+**Code Organization & Structure:**
+  - Organize the code using idiomatic Go practices: group imports, use clear package names, and separate concerns (handlers, business logic, data access).
+  - Break down large functions into smaller, testable helper functions.
+  - Ensure that functions have clear input/output parameters and minimal side effects.
+
+**Error Handling & Logging:**
+  - Use Go's error handling idioms: check errors immediately and return wrapped errors where necessary.
+  - Implement structured logging (e.g., with logrus or the standard log package) to capture relevant context.
+  - Add comments to explain non-obvious error handling or fallback logic.
+
+**Performance & Concurrency:**
+  - Ensure that any concurrent operations (using goroutines, channels, sync primitives) are safe and free of race conditions.
+  - Optimize critical code paths and use profiling tools (like pprof) to identify bottlenecks.
+  - Refactor blocking operations to use non-blocking alternatives where feasible.
+
+**Code Quality & Best Practices:**
+  - Adhere to Go’s standard formatting using gofmt and follow established conventions (Effective Go).
+  - Write clear, concise, and idiomatic Go code.
+  - Remove any redundant or dead code and document non-trivial logic.
+  - Include unit tests for complex functions to ensure maintainability.
+
+By following these directives, the rewritten Golang backend file should become a model of clarity, performance, and maintainability, aligned with Go’s idiomatic standards.
+`
+};
+
+const editingGolangBackend = {
+    name: "editing: Golang Backend Code Edit",
+    text: `
+Refactor and enhance this Golang backend code to improve readability, maintainability, and performance. Implement the following edits:
+
+**Code Quality & Readability:**
+  - Clean up the code formatting and remove any redundant comments.
+  - Ensure variable and function names are descriptive and follow Go naming conventions.
+  - Refactor complex functions into smaller, reusable components.
+  - Remove duplicate code and consolidate common logic into utility functions or packages.
+
+**Error Handling & Logging Improvements:**
+  - Review and improve error handling: check errors promptly and provide context when wrapping errors.
+  - Standardize logging across the module using a structured logging library (e.g., logrus).
+  - Add logging at critical points (entry/exit of functions, error conditions, significant state changes) to aid debugging and monitoring.
+
+**Performance & Concurrency:**
+  - Optimize performance by reviewing code paths and ensuring that any goroutines or concurrent processes are well-managed.
+  - Use Go’s race detector to ensure no data races exist.
+  - Refactor any blocking operations to improve concurrency and throughput.
+
+**Security & Best Practices:**
+  - Ensure all user inputs and external data are validated and sanitized.
+  - Review the usage of external packages to ensure they are up-to-date and secure.
+  - Add comments to document decisions around security, especially in areas dealing with authentication, data processing, or external communications.
+
+**Testing & Maintainability:**
+  - Add or improve unit tests for key functions to ensure future changes don’t break existing functionality.
+  - Document any assumptions or complex business logic with clear comments.
+  - Ensure the code is modular enough to facilitate future extensions and maintenance.
+
+Apply these edits to enhance the overall quality of your Golang backend code, ensuring it meets high standards for performance, reliability, and maintainability.
+`
+};
+
+const rewriteRustBackend = {
+    name: "rewrite: Rust Backend Code Rewrite",
+    text: `
+Rewrite this Rust backend file to align with idiomatic Rust practices, focusing on performance, safety, and maintainability. Follow these detailed instructions:
+
+**File Header & Documentation:**
+  - Add a file comment at the very top with the full file path (e.g., '// File: src/api/handlers.rs').
+  - Include a detailed comment block describing:
+      - The purpose of the file and its role in the backend.
+      - A summary of the key functionalities and any important design decisions.
+      - Guidelines for future maintainers, including potential areas for improvement or known limitations.
+
+**Code Organization & Structure:**
+  - Organize code using Rust’s module system; group related functions, types, and traits into modules.
+  - Break complex functions into smaller, well-defined helper functions.
+  - Use clear and descriptive naming conventions following Rust’s style guidelines (snake_case for functions and variables, CamelCase for types and traits).
+  - Leverage Rust’s ownership, borrowing, and lifetimes to ensure memory safety and avoid data races.
+
+**Error Handling & Logging:**
+  - Utilize Rust’s error handling patterns, such as the Result type and the ? operator, to propagate errors cleanly.
+  - Provide meaningful error messages and use custom error types if needed.
+  - Implement structured logging (using crates like 'log' with a concrete logger, e.g., 'env_logger' or 'tracing') to capture context for debugging and monitoring.
+
+**Performance & Concurrency:**
+  - Ensure performance by writing efficient, idiomatic Rust code. Consider using asynchronous programming (with async/await and Tokio or async-std) for I/O-bound operations.
+  - Optimize critical sections and, where applicable, leverage parallelism safely with threads or async tasks.
+  - Use Rust’s profiling tools (like 'cargo flamegraph' or 'perf') to identify and optimize bottlenecks.
+
+**Code Quality & Best Practices:**
+  - Enforce code formatting with rustfmt and linting with clippy.
+  - Remove redundant code, and document non-obvious logic.
+  - Write unit tests for complex functions to ensure correctness and facilitate future changes.
+  - Use Cargo features and dependency management wisely to keep the build fast and the binary lean.
+
+By following these directives, the rewritten Rust backend file should exemplify idiomatic Rust, achieving high performance, safety, and maintainability.
+`
+};
+
+const editingRustBackend = {
+    name: "editing: Rust Backend Code Edit",
+    text: `
+Refactor and enhance this Rust backend code to improve clarity, performance, and maintainability. Apply the following edits:
+
+**Code Quality & Readability:**
+  - Reformat the code using rustfmt to ensure consistent style.
+  - Review variable, function, and module names to ensure they are descriptive and follow Rust naming conventions.
+  - Simplify complex logic by breaking it into smaller functions or using Rust’s powerful pattern matching.
+  - Remove duplicate code and consolidate common logic into reusable functions or modules.
+
+**Error Handling & Logging Improvements:**
+  - Ensure all potential error cases are properly handled using Result and the ? operator.
+  - Enhance error messages with context using libraries like 'anyhow' or 'thiserror' where appropriate.
+  - Improve logging by standardizing the use of a logging crate (e.g., 'tracing' or 'log' with 'env_logger'), ensuring that all critical operations and error conditions are logged with sufficient context.
+
+**Performance & Concurrency:**
+  - Identify any blocking operations or inefficient algorithms and refactor them to use asynchronous programming if applicable (e.g., using Tokio).
+  - Verify that concurrent operations (threads, async tasks) are free of data races by using Rust’s ownership and borrowing rules effectively.
+  - Run benchmarks and profiling (using tools like 'cargo bench' or 'cargo flamegraph') to identify performance bottlenecks and optimize them.
+
+**Security & Best Practices:**
+  - Review the code for potential security vulnerabilities (e.g., unsafe blocks, unchecked unwraps) and replace them with safer alternatives.
+  - Ensure that any external data is validated and sanitized before use.
+  - Document any critical business logic and decision points in comments for future reference.
+
+**Testing & Maintainability:**
+  - Add or enhance unit tests and integration tests to cover critical functionality.
+  - Refactor code to be more modular, making it easier to test and maintain.
+  - Update documentation comments to reflect any changes and to guide future developers.
+
+Apply these edits to elevate your Rust backend code to a higher standard of quality, ensuring it is clear, efficient, and maintainable.
+`
+};
+
+const gitConfigGlobalSignzy = {
+    name: "Git config global Signzy",
+    text: `
+git config --global user.name "yuyudhan"
+git config --global user.email "ankur@signzy.com"
+`,
+};
+
+const gitConfigGlobalPersonal = {
+    name: "Git config global Personal",
+    text: `
+git config --global user.name "yuyudhan"
+git config --global user.email "ankurkumarpandey@gmail.com"
+`,
+};
+
+const gitConfigLocalPersonal = {
+    name: "Git config local Personal",
+    text: `
+git config user.name "yuyudhan"
+git config user.email "ankurkumarpandey@gmail.com"
+`,
+};
+
+const gitConfigLocalSignzy = {
+    name: "Git config local Signzy",
+    text: `
+git config user.name "yuyudhan"
+git config user.email "ankur@signzy.com"
+`,
+};
+
 // Merge all snippet objects into one object
 const allSnippets = [
+    rewriteGenericFile,
     rewriteReactOnly,
     rewriteNextjsFrontend,
     rewriteReactComponent,
@@ -831,6 +1062,14 @@ const allSnippets = [
     editingFrontend,
     editingBackend,
     editingSQL,
+    rewriteGolangBackend,
+    editingGolangBackend,
+    rewriteRustBackend,
+    editingRustBackend,
+    gitConfigLocalPersonal,
+    gitConfigLocalSignzy,
+    gitConfigGlobalPersonal,
+    gitConfigGlobalSignzy,
 ];
 
 const outputPath = path.join(__dirname, 'snippets.json');
