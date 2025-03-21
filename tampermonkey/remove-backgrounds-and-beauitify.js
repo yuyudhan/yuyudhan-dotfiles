@@ -20,6 +20,9 @@
                         url('https://yuyudhan.github.io/yuyudhan-wallpapers/Parshuram/parshuram-9.jpg') no-repeat center center fixed !important;
             background-size: cover !important;
         }
+        * {
+            font-family: "JetBrainsMono Nerd Font" !important;
+        }
     `;
     const styleElement = document.createElement('style');
     styleElement.type = 'text/css';
