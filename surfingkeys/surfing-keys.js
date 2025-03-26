@@ -31,10 +31,11 @@
         );
     }
 
-    // Check if element size meets criteria (width > 500px or height > 300px)
+    // Check if element size meets criteria (area > 600px × 400px)
     function isLargeElement(el) {
         const rect = el.getBoundingClientRect();
         // return rect.width > 600 || rect.height > 400;
+        // now we have moved to calculating the area of the element.
         return rect.width * rect.height > 600 * 400;
     }
 

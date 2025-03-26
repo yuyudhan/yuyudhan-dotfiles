@@ -719,16 +719,12 @@ If your matter is urgent, please indicate "URGENT" in the subject line or call m
 
 Best regards,
 
-[Your Name]
-[Your Title/Department - Optional]
 `
 };
 
 const replyPromotionalNotInterested = {
     name: "Reply: Promotional Not Interested",
     text: `
-Subject: Re: [Original Subject Line - if applicable]
-
 Hi,
 
 Thank you for reaching out and sharing information about your product.

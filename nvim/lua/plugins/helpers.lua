@@ -71,11 +71,14 @@ vim.api.nvim_create_user_command("IndentFile", function()
 end, { desc = "Re-indent the entire file" })
 
 function M.insert_commented_file_path()
+    -- Go to the top of the file and open two new lines.
     vim.cmd("normal! gg")
     vim.cmd("normal! O<Esc>O<Esc>")
+
     local file_path = vim.fn.expand("%:.")
     local comment_string = vim.bo.commentstring
 
+    -- If no valid comment string is set, use our own mapping.
     if comment_string == "" or not comment_string:find("%%s") then
         local ft_comment_map = {
             lua = "-- %s",
@@ -93,17 +96,31 @@ function M.insert_commented_file_path()
             toml = "# %s",
             vim = '" %s',
             markdown = "<!-- %s -->",
+            go = "// %s",
+            rust = "// %s",
+            java = "// %s",
+            c = "// %s",
+            cpp = "// %s",
+            php = "// %s",
+            ruby = "# %s",
+            swift = "// %s",
+            kotlin = "// %s",
         }
         comment_string = ft_comment_map[vim.bo.filetype] or "# %s"
     end
 
-    local formatted_path = " FilePath: " .. file_path
+    -- Create the file path string with exactly one leading space already provided by the comment template.
+    local formatted_path = "FilePath: " .. file_path
     local commented_path = comment_string:gsub("%%s", formatted_path)
+
+    -- Insert the commented file path in the first line.
     vim.api.nvim_set_current_line(commented_path)
     vim.cmd("normal! gg")
     vim.cmd("normal! o")
+
     print("Inserted relative file path in first line (commented)")
 
+    -- Clear the current line after printing.
     vim.api.nvim_set_current_line("")
 end
 
