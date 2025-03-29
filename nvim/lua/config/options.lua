@@ -7,6 +7,7 @@
 -- Set leader key before other configurations
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.autoformat = "true"
 
 -- General settings
 vim.opt.encoding = "utf-8" -- File encoding
@@ -66,11 +67,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- LazyVim integrations
 -- Set LazyVim colorscheme
-
--- Leader keybindings and shortcuts
-vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
-vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit" })
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "Remove search highlight" })
 
 -- Custom LSP settings
 vim.lsp.set_log_level("info")
