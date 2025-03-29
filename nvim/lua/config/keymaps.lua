@@ -4,6 +4,16 @@
 
 vim.keymap.set("n", "gf", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, silent = true })
 
+-- Leader keybindings and shortcuts
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>qx", "<cmd>q<CR>", { desc = "Quit", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Remove search highlight", silent = true })
+
+-- leader z ff should format file. I'm using lazyvim distro
+vim.keymap.set("n", "<leader>zff", function()
+    vim.lsp.buf.format({ async = true })
+end, { desc = "Format file" })
+
 -- Keybinding to re-indent the entire file
 vim.keymap.set("n", "<leader>zif", "<cmd>IndentFile<CR>", {
     desc = "Re-indent the entire file",
