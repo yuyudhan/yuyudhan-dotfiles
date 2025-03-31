@@ -1,0 +1,9 @@
+# FilePath: .editorconfig
+
+# in this repo I have the dotfiles for different types.
+#
+# Create me the editorconfig for all kinds of files for nvim and others like toml, yaml etc.
+# I want 4 spaces indentation everywhere.
+#
+#
+

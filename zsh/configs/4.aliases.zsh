@@ -34,6 +34,8 @@ alias vim='nvim'
 # -------------------------------------------------------------------
 # Tmux Aliases
 # -------------------------------------------------------------------
+alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+
 # Tmux session management
 alias tmuxlist='tmux list-sessions'                  # List all Tmux sessions
 alias tmuxkill='tmux kill-session -t'                # Kill a specific Tmux session
@@ -211,6 +213,5 @@ fi
 if [ -d "$HOME/.cargo/bin" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
-
 
 
