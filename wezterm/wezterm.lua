@@ -12,7 +12,10 @@ end
 -- ================================
 config.color_scheme = "Gruvbox Dark"
 -- config.font = wezterm.font("MesloLGS Nerd Font Mono")
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono", { weight = "Regular" })
+
+wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 -- config.font = wezterm.font("UbuntuMono Nerd Font")
 config.font_size = 16
 
