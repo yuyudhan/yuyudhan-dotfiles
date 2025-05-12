@@ -46,6 +46,11 @@ vim.keymap.set("n", "<leader>zcdm", "<cmd>CopyDiagnosticMessage<CR>", {
     desc = "Copy Diagnostic Message to Clipboard",
 })
 
+vim.keymap.set("n", "<leader>zcdam", "<cmd>CopyAllDiagnosticMessagesInFile<CR>", {
+    desc = "Copy all Diagnostic Message to Clipboard",
+})
+
+--
 -- Keybinding to clear the line but not remove it
 vim.keymap.set("n", "<leader>zdd", '"_dd', {
     desc = "Clear the line but not remove it",

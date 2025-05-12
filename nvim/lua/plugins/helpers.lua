@@ -177,5 +177,38 @@ vim.api.nvim_create_user_command("CopyDiagnosticMessage", function()
     M.copy_diagnostic_message()
 end, { desc = "Copy diagnostic message on the current line" })
 
+-- Copy all diagnostic messages in the file.
+function M.copy_all_diagnostic_messages_in_file()
+    -- Get diagnostics for the current buffer (0)
+    local diagnostics = vim.diagnostic.get(0)
+    if not diagnostics or #diagnostics == 0 then
+        print("No diagnostics found in this file")
+        return
+    end
+
+    local output = "All Diagnostics in File:\n"
+    for _, diag in ipairs(diagnostics) do
+        -- Convert zero-indexed line number to human-friendly one-indexed.
+        local line = diag.lnum + 1
+        local message = diag.message or "No message"
+        -- Try to get code directly; fallback to accessing lsp specific user data.
+        local code = diag.code or (diag.user_data and diag.user_data.lsp and diag.user_data.lsp.code) or "No code"
+        local source = diag.source
+            or (diag.user_data and diag.user_data.lsp and diag.user_data.lsp.source)
+            or "Unknown source"
+
+        output = output .. string.format("Line %d: %s | Code: %s | Source: %s\n", line, message, code, source)
+    end
+
+    -- Set clipboard content.
+    vim.fn.setreg("+", output)
+    print("All diagnostics copied to clipboard!")
+end
+
+-- Create a user command that triggers the function.
+vim.api.nvim_create_user_command("CopyAllDiagnosticMessagesInFile", function()
+    M.copy_all_diagnostic_messages_in_file()
+end, { desc = "Copy all diagnostic messages in the file" })
+
 return {}
 
