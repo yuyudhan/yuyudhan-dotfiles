@@ -34,7 +34,7 @@ alias vim='nvim'
 # -------------------------------------------------------------------
 # Tmux Aliases
 # -------------------------------------------------------------------
-alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+# alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 # Tmux session management
 alias tmuxlist='tmux list-sessions'                  # List all Tmux sessions
