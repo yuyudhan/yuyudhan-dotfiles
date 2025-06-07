@@ -1,3 +1,5 @@
+-- FilePath: lua/plugins/rustaceanvim.lua
+
 return {
     {
         "mrcjkb/rustaceanvim",

@@ -1,15 +1,18 @@
 -- FilePath: lua/plugins/avante.lua
 
 --[[
-    Avante Plugin Configuration
+    Avante Plugin Configuration - Claude 3.7 Optimized Setup
     Description:
-    Configures the 'yetone/avante.nvim' plugin for Neovim, setting up AI providers, dependencies, and additional integrations
-    for enhanced editor functionality, including auto-suggestions and markdown rendering.
+    Configures the 'yetone/avante.nvim' plugin for Neovim using Claude 3.7 Sonnet
+    as the primary provider for code editing and conversations.
     Functionality:
-    - Primary configuration using Claude 3.5 and Claude 3.7 models
-    - Configures OpenAI as an alternative provider
-    - Integrates Copilot for additional auto-suggestions and side panel
-    - Sets up dependencies for enhanced features like treesitter, web icons, etc.
+    - Claude 3.7 Sonnet for main code edits and conversations ($3/$15 per MTok)
+    - Claude Haiku for cost-effective autocompletion ($0.25/$1.25 per MTok)
+    - DeepSeek as ultra-cheap backup option
+    - Additional Claude variants for different use cases
+    - Integrates Copilot for additional code completion
+    - Sets up dependencies for enhanced features like treesitter, web icons
+    - Supports image pasting and markdown rendering
 ]]
 
 return {
@@ -19,93 +22,62 @@ return {
         lazy = false,
         version = false, -- Always pull the latest change
         opts = {
-            provider = "claude", -- Using Claude as the default provider
-            auto_suggestions_provider = "claude-haiku", -- Using Claude Haiku for auto-suggestions
+            provider = "claude", -- Use claude as primary provider (Claude 3.7)
+            auto_suggestions_provider = "claude-haiku", -- Use cheap Haiku for autocompletion
 
-            -- Claude configuration for Claude 3.7 Sonnet
+            -- Base Claude configuration - Claude 3.7 Sonnet
             claude = {
                 endpoint = "https://api.anthropic.com",
-                model = "claude-3-7-sonnet-20250219",
-                timeout = 30000, -- Timeout in milliseconds
-                temperature = 0,
-                max_tokens = 64000,
-                api_key_name = "ANTHROPIC_API_KEY", -- Environment variable for API key
-            },
-
-            deepseek = {
-                debug = true,
-                endpoint = "https://api.deepseek.com/v1",
-                model = "deepseek-chat",
-                timeout = 30000, -- Timeout in milliseconds
+                model = "claude-3-7-sonnet-20250219", -- Claude 3.7 Sonnet for coding
+                timeout = 30000,
                 temperature = 0,
                 max_tokens = 8000,
-                api_key_name = "DEEPSEEK_KEY", -- default OPENAI_API_KEY if not set
+                api_key_name = "ANTHROPIC_API_KEY",
             },
 
-            -- OpenAI configuration as alternative
-            openai = {
-                endpoint = "https://api.openai.com/v1",
-                model = "gpt-4o",
-                timeout = 30000, -- Timeout in milliseconds
-                temperature = 0,
-                max_tokens = 16000,
-            },
-
-            -- Additional providers defined as vendor extensions
+            -- Additional vendor configurations
             vendors = {
-                -- Claude 3.5 Haiku configuration
+                -- DeepSeek as backup option
+                deepseek = {
+                    __inherited_from = "openai",
+                    api_key_name = "DEEPSEEK_API_KEY",
+                    endpoint = "https://api.deepseek.com",
+                    model = "deepseek-coder",
+                    max_tokens = 8192,
+                },
+
+                -- Claude Haiku for fast/cheap operations
                 ["claude-haiku"] = {
                     __inherited_from = "claude",
-                    model = "claude-3-5-haiku-20241022",
-                    timeout = 30000,
+                    model = "claude-3-haiku-20240307",
+                    timeout = 15000,
                     temperature = 0,
                     max_tokens = 4000,
                 },
 
-                -- Claude 3.5 Sonnet configuration
-                ["claude-sonnet"] = {
+                -- Claude 3.5 Haiku for mid-tier operations
+                ["claude-3-5-haiku"] = {
                     __inherited_from = "claude",
-                    model = "claude-3-5-sonnet-20240620",
+                    model = "claude-3-5-haiku-20241022",
+                    timeout = 15000,
+                    temperature = 0,
+                    max_tokens = 4000,
+                },
+
+                -- Claude 3.7 Sonnet - optimized for coding ($3/$15 per MTok)
+                ["claude-3-7-sonnet"] = {
+                    __inherited_from = "claude",
+                    model = "claude-3-7-sonnet-20250219",
                     timeout = 30000,
                     temperature = 0,
                     max_tokens = 8000,
                 },
             },
-
-            -- Copilot integration
-            copilot = {
-                suggestion = { enabled = true }, -- Enable Copilot auto-completions
-                panel = { enabled = true }, -- Enable Copilot side panel
-            },
-
-            -- Behavior settings
-            behaviour = {
-                auto_focus_sidebar = true,
-                auto_suggestions = false, -- Disable auto suggestions initially
-                auto_set_highlight_group = true,
-                auto_set_keymaps = true,
-                auto_apply_diff_after_generation = false,
-                jump_result_buffer_on_finish = false,
-                minimize_diff = true,
-                enable_token_counting = true,
-            },
-
-            -- Windows layout configuration
-            windows = {
-                position = "right",
-                wrap = true,
-                width = 30,
-                height = 30,
-                sidebar_header = {
-                    enabled = true,
-                    align = "center",
-                    rounded = true,
-                },
-            },
         },
 
-        -- Build command
+        -- Build command - this is crucial for the plugin to work
         build = "make",
+        -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
 
         -- Dependencies
         dependencies = {
@@ -113,23 +85,15 @@ return {
             "stevearc/dressing.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
-            -- Optional dependencies
-            "nvim-tree/nvim-web-devicons", -- Optional: For icons
-            {
-                "zbirenbaum/copilot.lua", -- Copilot for additional auto-suggestions
-                event = "VeryLazy",
-                config = function()
-                    require("copilot").setup({
-                        suggestion = { enabled = true }, -- Enable Copilot auto-completions
-                        panel = { enabled = true }, -- Enable Copilot side panel
-                    })
-                end,
-            },
+            --- The below dependencies are optional,
+            "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+            "zbirenbaum/copilot.lua", -- for providers='copilot'
             {
                 -- Support for image pasting
                 "HakonHarnes/img-clip.nvim",
                 event = "VeryLazy",
                 opts = {
+                    -- Recommended settings
                     default = {
                         embed_image_as_base64 = false,
                         prompt_for_file_name = false,
