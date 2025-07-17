@@ -5,69 +5,70 @@
 -- Add any additional options here
 
 -- Set leader key before other configurations
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.autoformat = "true"
+-- The leader key is used as a prefix for custom keybindings
+vim.g.mapleader = " "         -- Set space as the main leader key
+vim.g.maplocalleader = " "    -- Set space as the local leader key for buffer-specific mappings
+vim.g.autoformat = "true"      -- Enable automatic formatting on save
 
--- General settings
-vim.opt.encoding = "utf-8" -- File encoding
-vim.opt.fileencoding = "utf-8" -- Set file encoding
-vim.opt.clipboard = "unnamedplus" -- Use system clipboard
-vim.opt.mouse = "a" -- Enable mouse in all modes
-vim.opt.title = true -- Set window title
+-- General settings that affect overall Neovim behavior
+vim.opt.encoding = "utf-8"        -- Internal character encoding used by Neovim
+vim.opt.fileencoding = "utf-8"    -- Character encoding for file reading/writing
+vim.opt.clipboard = "unnamedplus"  -- Sync with system clipboard (allows copy/paste with OS)
+vim.opt.mouse = "a"               -- Enable mouse support in all modes (normal, visual, insert, command)
+vim.opt.title = true               -- Set the window title to show current file information
 
--- User Interface
-vim.opt.number = true -- Show line numbers
-vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.cursorline = true -- Highlight current line
-vim.opt.signcolumn = "yes" -- Always show sign column
-vim.opt.wrap = false -- Disable line wrapping
-vim.opt.scrolloff = 8 -- Minimum lines above/below cursor
-vim.opt.sidescrolloff = 8 -- Minimum lines to the side of cursor
-vim.opt.termguicolors = true -- Enable true color support
-vim.opt.splitbelow = true -- Horizontal splits open below
-vim.opt.splitright = true -- Vertical splits open to the right
+-- User Interface configuration for better visual experience
+vim.opt.number = true              -- Show absolute line numbers on the left
+vim.opt.relativenumber = true      -- Show relative line numbers (useful for motions like 5j, 3k)
+vim.opt.cursorline = true          -- Highlight the line where the cursor is located
+vim.opt.signcolumn = "yes"          -- Always show the sign column (prevents text shifting when signs appear)
+vim.opt.wrap = false               -- Disable line wrapping (long lines extend beyond screen width)
+vim.opt.scrolloff = 8              -- Keep minimum 8 lines visible above/below cursor when scrolling
+vim.opt.sidescrolloff = 8          -- Keep minimum 8 columns visible left/right of cursor when scrolling horizontally
+vim.opt.termguicolors = true       -- Enable 24-bit RGB color support for better syntax highlighting
+vim.opt.splitbelow = true          -- New horizontal splits open below current window
+vim.opt.splitright = true         -- New vertical splits open to the right of current window
 
--- Tab and Indentation
-vim.opt.tabstop = 4 -- Number of spaces for a tab
-vim.opt.shiftwidth = 4 -- Number of spaces for indentation
-vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.smarttab = true -- Insert tabs intelligently
-vim.opt.autoindent = true -- Auto-indent new lines
-vim.opt.smartindent = true -- Smart indentation
+-- Tab and Indentation settings for consistent code formatting
+vim.opt.tabstop = 4        -- Number of spaces that a tab character represents when displayed
+vim.opt.shiftwidth = 4     -- Number of spaces to use for each step of (auto)indent
+vim.opt.expandtab = true   -- Convert tabs to spaces when typing
+vim.opt.smarttab = true    -- Insert tabs intelligently at the beginning of lines
+vim.opt.autoindent = true  -- Copy indent from current line when starting a new line
+vim.opt.smartindent = true -- Smart indentation for C-like languages (recognizes brackets, etc.)
 
--- Search
-vim.opt.ignorecase = true -- Ignore case in searches
-vim.opt.smartcase = true -- Override ignorecase if uppercase is present
-vim.opt.incsearch = true -- Show matches while typing
-vim.opt.hlsearch = true -- Highlight search results
+-- Search behavior configuration for efficient text finding
+vim.opt.ignorecase = true  -- Ignore case in search patterns (makes searches case-insensitive)
+vim.opt.smartcase = true   -- Override ignorecase if search contains uppercase letters
+vim.opt.incsearch = true   -- Show search matches as you type (incremental search)
+vim.opt.hlsearch = true    -- Highlight all search matches in the buffer
 
--- Backup and Swap
-vim.opt.swapfile = false -- Disable swap files
-vim.opt.backup = false -- Disable backups
-vim.opt.undofile = true -- Enable persistent undo
-vim.opt.undodir = vim.fn.stdpath("data") .. "/undo" -- Undo directory
+-- Backup and Swap file management for data safety and performance
+vim.opt.swapfile = false   -- Disable swap files (temporary files created during editing)
+vim.opt.backup = false     -- Disable backup files (copies of original files)
+vim.opt.undofile = true    -- Enable persistent undo (undo history survives Neovim restarts)
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undo" -- Directory where undo files are stored
 
--- Performance
-vim.opt.updatetime = 300 -- Faster completion and diagnostics
-vim.opt.timeoutlen = 500 -- Key sequence timeout
-vim.opt.hidden = true -- Enable background buffers
+-- Performance optimizations for responsive editing experience
+vim.opt.updatetime = 300   -- Time in milliseconds to wait before triggering CursorHold event (affects completion and diagnostics)
+vim.opt.timeoutlen = 500   -- Time in milliseconds to wait for a mapped sequence to complete
+vim.opt.hidden = true      -- Allow buffers to be hidden without saving (enables background buffers)
 
--- Folding
-vim.opt.foldmethod = "expr" -- Folding method
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Use Treesitter for folds
-vim.opt.foldenable = false -- Disable folding by default
+-- Folding configuration for code structure visualization
+vim.opt.foldmethod = "expr"                        -- Use expression-based folding method
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"     -- Use Treesitter for intelligent code folding
+vim.opt.foldenable = false                         -- Start with all folds open (folding disabled by default)
 
--- Highlight on yank
+-- Highlight on yank - briefly highlight yanked text for visual feedback
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {timeout=200}]])
 
--- Disable distribution plugins
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Disable built-in Neovim plugins that we replace with better alternatives
+vim.g.loaded_netrw = 1       -- Disable netrw (we use neo-tree for file management)
+vim.g.loaded_netrwPlugin = 1 -- Disable netrw plugin
 
 -- LazyVim integrations
 -- Set LazyVim colorscheme
 
--- Custom LSP settings
-vim.lsp.set_log_level("info")
+-- Custom LSP settings for debugging and development
+vim.lsp.set_log_level("info")  -- Set LSP log level to 'info' for detailed logging
 

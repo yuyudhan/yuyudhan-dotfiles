@@ -1,10 +1,11 @@
 --  FilePath: nvim/lua/config/lazy.lua
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+-- Bootstrap lazy.nvim plugin manager if not already installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"  -- Path where lazy.nvim will be installed
+if not (vim.uv or vim.loop).fs_stat(lazypath) then             -- Check if lazy.nvim is already installed
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"   -- Official lazy.nvim repository
     local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
+    if vim.v.shell_error ~= 0 then                              -- Check if git clone failed
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
             { out, "WarningMsg" },
@@ -14,41 +15,42 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         os.exit(1)
     end
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath)  -- Add lazy.nvim to runtime path so it can be required
 
+-- Configure lazy.nvim plugin manager with LazyVim integration
 require("lazy").setup({
     spec = {
-        -- add LazyVim and import its plugins
+        -- Import LazyVim base configuration and its default plugins
         { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-        -- import/override with your plugins
+        -- Import your custom plugins from lua/plugins/ directory
         { import = "plugins" },
     },
     defaults = {
-        -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-        -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+        -- Plugin loading behavior - set to false for immediate loading
+        -- Setting lazy = true would defer loading until plugins are actually needed
         lazy = false,
-        -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-        -- have outdated releases, which may break your Neovim install.
+        -- Version management - use latest git commits instead of releases
+        -- Many plugins have outdated releases, so git HEAD is often more stable
         version = false, -- always use the latest git commit
-        -- version = "*", -- try installing the latest stable version for plugins that support semver
+        -- version = "*", -- alternative: try installing the latest stable version for plugins that support semver
     },
-    install = { colorscheme = { "tokyonight", "habamax" } },
+    install = { colorscheme = { "tokyonight", "habamax" } },  -- Fallback colorschemes during installation
     checker = {
-        enabled = true, -- check for plugin updates periodically
-        notify = false, -- notify on update
-    }, -- automatically check for plugin updates
+        enabled = true, -- automatically check for plugin updates periodically
+        notify = false, -- don't show notifications when updates are found
+    },
     performance = {
         rtp = {
-            -- disable some rtp plugins
+            -- Disable built-in Neovim plugins that are not needed to improve startup time
             disabled_plugins = {
-                "gzip",
-                -- "matchit",
-                -- "matchparen",
-                -- "netrwPlugin",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
+                "gzip",        -- Disable gzip file handling
+                -- "matchit",     -- Keep matchit for better % matching
+                -- "matchparen",  -- Keep matchparen for bracket highlighting
+                -- "netrwPlugin", -- Keep netrw disabled (we use neo-tree)
+                "tarPlugin",   -- Disable tar file handling
+                "tohtml",      -- Disable :TOhtml command
+                "tutor",       -- Disable :Tutor command
+                "zipPlugin",   -- Disable zip file handling
             },
         },
     },
