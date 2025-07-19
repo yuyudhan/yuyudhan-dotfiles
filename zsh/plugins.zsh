@@ -38,6 +38,5 @@ zinit light christoomey/vim-tmux-navigator
 # Additional Configurations
 # -------------------------------------------------------------------
 
-# Make sure syntax highlighting loads after other plugins
-zinit light zsh-users/zsh-syntax-highlighting
+# Note: Syntax highlighting is already loaded above - no need to load twice
 
