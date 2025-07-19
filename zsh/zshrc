@@ -1,47 +1,49 @@
-#  FilePath: zsh/zshrc
 
-# Disable Powerlevel10k instant prompt
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-# Set Zsh options
-setopt autocd              # Automatically cd into directories
-setopt hist_ignore_dups    # Ignore duplicate history entries
-setopt hist_ignore_space   # Ignore commands starting with space in history
-setopt interactivecomments # Allow comments in interactive mode
-setopt prompt_subst        # Enable command substitution in prompts
+# FilePath: zsh/zshrc
 
-# History configuration
-HISTFILE="$HOME/.local/share/zsh/history" # Default location for Zsh history
-HISTSIZE=5000                             # Number of history entries in memory
-SAVEHIST=5000                             # Number of history entries saved to file
-setopt share_history                       # Share history across terminals
-
-# Editor
-export EDITOR="nvim"
+# Enable Powerlevel10k instant prompt for faster startup
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # -------------------------------------------------------------------
 # Modular Configuration Sourcing
 # -------------------------------------------------------------------
 
-# Define an array with the desired order of configuration files
+# Define configuration files in loading order
+# Get the directory where this zshrc file is located
+ZSH_CONFIG_DIR="$(dirname "${(%):-%N}")/configs"
+
+# Define configuration files in optimized loading order
+# Core configs first, then plugins, then aliases and tools
 config_files=(
-    "$HOME/.config/zsh/environment.zsh"
+    "$ZSH_CONFIG_DIR/00-profiling.zsh"
+    "$ZSH_CONFIG_DIR/01-core.zsh"
+    "$ZSH_CONFIG_DIR/02-environment.zsh"
+    "$ZSH_CONFIG_DIR/03-path.zsh"
+    "$ZSH_CONFIG_DIR/05-plugins.zsh"
     "$HOME/.config/zsh/plugins.zsh"
-    "$HOME/.config/zsh/path.zsh"
-    "$HOME/.personal_aliases"
     "$HOME/.config/zsh/p10k.zsh"
-    "$HOME/.config/zsh/aliases.zsh"
-    "$HOME/.config/zsh/message.zsh"
+    "$ZSH_CONFIG_DIR/04-languages.zsh"
+    "$HOME/.personal_aliases"
+    "$ZSH_CONFIG_DIR/06-utilities.zsh"
+    "$ZSH_CONFIG_DIR/07-file-management.zsh"
+    "$ZSH_CONFIG_DIR/08-navigation.zsh"
+    "$ZSH_CONFIG_DIR/09-git.zsh"
+    "$ZSH_CONFIG_DIR/10-tmux.zsh"
+    "$ZSH_CONFIG_DIR/11-zellij.zsh"
+    "$ZSH_CONFIG_DIR/12-docker.zsh"
+    "$ZSH_CONFIG_DIR/13-system.zsh"
+    "$ZSH_CONFIG_DIR/15-misc.zsh"
+    "$ZSH_CONFIG_DIR/97-profiling-end.zsh"
+    "$ZSH_CONFIG_DIR/98-behavior.zsh"
+    "$ZSH_CONFIG_DIR/99-startup-message.zsh"
 )
 
-# Loop through each file and source it if it exists
+# Load configuration files efficiently
 for file in "${config_files[@]}"; do
-    if [ -f "$file" ]; then
-        source "$file"
-    else
-        echo "Warning: Configuration file '$file' not found."
-    fi
+    [[ -f "$file" ]] && source "$file"
 done
-
 
 

@@ -54,6 +54,9 @@ vim.opt.updatetime = 300   -- Time in milliseconds to wait before triggering Cur
 vim.opt.timeoutlen = 500   -- Time in milliseconds to wait for a mapped sequence to complete
 vim.opt.hidden = true      -- Allow buffers to be hidden without saving (enables background buffers)
 
+-- File reload configuration for external changes
+vim.opt.autoread = true    -- Automatically reload files changed outside of Neovim
+
 -- Folding configuration for code structure visualization
 vim.opt.foldmethod = "expr"                        -- Use expression-based folding method
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"     -- Use Treesitter for intelligent code folding
