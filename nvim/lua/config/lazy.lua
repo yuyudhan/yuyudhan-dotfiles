@@ -22,6 +22,11 @@ require("lazy").setup({
     spec = {
         -- Import LazyVim base configuration and its default plugins
         { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+        -- Import LazyVim extras for enhanced productivity
+        { import = "lazyvim.plugins.extras.editor.telescope" },
+        -- { import = "lazyvim.plugins.extras.editor.leap" }, -- Disabled: conflicts with Flash.nvim
+        { import = "lazyvim.plugins.extras.coding.yanky" },
+        { import = "lazyvim.plugins.extras.ui.mini-animate" },
         -- Import your custom plugins from lua/plugins/ directory
         { import = "plugins" },
     },

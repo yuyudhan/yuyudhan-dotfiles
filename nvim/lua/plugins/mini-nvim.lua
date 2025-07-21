@@ -15,10 +15,11 @@ return {
             require("mini.surround").setup() -- Surround actions (better than alternatives)
 
             -- APPEARANCE MODULES
-            require("mini.indentscope").setup({
-                symbol = "│", -- Customize the symbol for the scope
-                options = { try_as_border = true },
-            }) -- Visualize and work with indent scope
+            -- Disabled: Using indent-blankline instead for consistency
+            -- require("mini.indentscope").setup({
+            --     symbol = "│", -- Customize the symbol for the scope
+            --     options = { try_as_border = true },
+            -- }) -- Visualize and work with indent scope
 
             -- GENERAL WORKFLOW MODULES
             require("mini.bufremove").setup() -- Remove buffers without closing windows
