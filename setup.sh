@@ -5,8 +5,8 @@ set -e
 if [[ "$1" == "zsh" ]]; then
 	CURRENT_DIR=$(cd "$(dirname "$0")" && pwd)
 	ZSH_DIR="$CURRENT_DIR/zsh"
-	OH_MY_ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
-	mkdir -p "$OH_MY_ZSH_CUSTOM"
+	ZSH_CONFIG_DIR="$HOME/.config/zsh"
+	mkdir -p "$ZSH_CONFIG_DIR"
 
 	create_symlink() {
 		local source_file=$1
@@ -17,16 +17,26 @@ if [[ "$1" == "zsh" ]]; then
 		fi
 		ln -s "$source_file" "$target_file"
 		echo "Created symlink: $target_file -> $source_file"
-
 	}
-	for file in "$ZSH_DIR/configs"/*; do
-		[ -f "$file" ] || continue
-		create_symlink "$file" "$OH_MY_ZSH_CUSTOM/$(basename "$file")"
-	done
 
+	# Symlink zshrc to ~/.zshrc
+	create_symlink "$ZSH_DIR/zshrc" "$HOME/.zshrc"
+
+	# Symlink all other zsh files to ~/.config/zsh/
 	for file in "$ZSH_DIR"/*.zsh; do
 		[ -f "$file" ] || continue
-		create_symlink "$file" "$OH_MY_ZSH_CUSTOM/$(basename "$file")"
+		filename=$(basename "$file")
+		# Skip zshrc since we already handled it
+		if [[ "$filename" != "zshrc" ]]; then
+			create_symlink "$file" "$ZSH_CONFIG_DIR/$filename"
+		fi
+	done
+
+	# Symlink all config files to ~/.config/zsh/configs/
+	mkdir -p "$ZSH_CONFIG_DIR/configs"
+	for file in "$ZSH_DIR/configs"/*; do
+		[ -f "$file" ] || continue
+		create_symlink "$file" "$ZSH_CONFIG_DIR/configs/$(basename "$file")"
 	done
 
 	echo "✅ Zsh setup complete!"
@@ -93,19 +103,13 @@ create_symlink() {
 # List of symlink mappings (source target).
 SYMLINKS="
 nvim $HOME/.config/nvim
-vimrc $HOME/.vimrc
-vim $HOME/.config/vim
 wezterm $HOME/.config/wezterm
 aerospace $HOME/.config/aerospace
 tmux $HOME/.config/tmux
 yazi $HOME/.config/yazi
-hammerspoon $HOME/.hammerspoon
-sketchybar $HOME/.config/sketchybar
 karabiner $HOME/.config/karabiner
 btop $HOME/.config/btop
 obsidian $HOME/.config/obsidian
-alacritty $HOME/.config/alacritty
-zellij $HOME/.config/zellij
 "
 
 # Function to process all symlinks.

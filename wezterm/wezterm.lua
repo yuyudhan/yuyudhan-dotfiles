@@ -16,8 +16,8 @@ config.font_size = 15
 
 config.window_decorations = "RESIZE"
 -- Disabled for performance - transparency/blur are GPU-intensive
--- config.window_background_opacity = 0.7
--- config.macos_window_background_blur = 10
+config.window_background_opacity = 0.7
+config.macos_window_background_blur = 10
 
 config.window_frame = {
 	active_titlebar_bg = "#2E3440",

@@ -1,49 +1,12 @@
-
-
 # FilePath: zsh/zshrc
-
-# Enable Powerlevel10k instant prompt for faster startup
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # -------------------------------------------------------------------
 # Modular Configuration Sourcing
 # -------------------------------------------------------------------
 
-# Define configuration files in loading order
-# Get the directory where this zshrc file is located
-ZSH_CONFIG_DIR="$(dirname "${(%):-%N}")/configs"
-
-# Define configuration files in optimized loading order
-# Core configs first, then plugins, then aliases and tools
-config_files=(
-    "$ZSH_CONFIG_DIR/00-profiling.zsh"
-    "$ZSH_CONFIG_DIR/01-core.zsh"
-    "$ZSH_CONFIG_DIR/02-environment.zsh"
-    "$ZSH_CONFIG_DIR/03-path.zsh"
-    "$ZSH_CONFIG_DIR/05-plugins.zsh"
-    "$HOME/.config/zsh/plugins.zsh"
-    "$HOME/.config/zsh/p10k.zsh"
-    "$ZSH_CONFIG_DIR/04-languages.zsh"
-    "$HOME/.personal_aliases"
-    "$ZSH_CONFIG_DIR/06-utilities.zsh"
-    "$ZSH_CONFIG_DIR/07-file-management.zsh"
-    "$ZSH_CONFIG_DIR/08-navigation.zsh"
-    "$ZSH_CONFIG_DIR/09-git.zsh"
-    "$ZSH_CONFIG_DIR/10-tmux.zsh"
-    "$ZSH_CONFIG_DIR/11-zellij.zsh"
-    "$ZSH_CONFIG_DIR/12-docker.zsh"
-    "$ZSH_CONFIG_DIR/13-system.zsh"
-    "$ZSH_CONFIG_DIR/15-misc.zsh"
-    "$ZSH_CONFIG_DIR/97-profiling-end.zsh"
-    "$ZSH_CONFIG_DIR/98-behavior.zsh"
-    "$ZSH_CONFIG_DIR/99-startup-message.zsh"
-)
-
-# Load configuration files efficiently
-for file in "${config_files[@]}"; do
-    [[ -f "$file" ]] && source "$file"
+# Auto-load all .zsh files from ~/.config/zsh recursively in sorted order
+for config_file in ~/.config/zsh/**/*.zsh(N); do
+    source "$config_file"
 done
 
 
