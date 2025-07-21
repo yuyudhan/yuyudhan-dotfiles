@@ -1,8 +1,0 @@
-source ~/.config/vim/autoload/plug.vim
-source ~/.config/vim/plug.vim
-source ~/.config/vim/yuyudhan/remap.vim
-source ~/.config/vim/yuyudhan/plugin-config.vim
-source ~/.config/vim/yuyudhan/config.vim
-source ~/.config/vim/yuyudhan/macros.vim
-
-
