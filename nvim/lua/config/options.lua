@@ -60,7 +60,7 @@ vim.opt.autoread = true    -- Automatically reload files changed outside of Neov
 -- Folding configuration for code structure visualization
 vim.opt.foldmethod = "expr"                        -- Use expression-based folding method
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"     -- Use Treesitter for intelligent code folding
-vim.opt.foldenable = false                         -- Start with all folds open (folding disabled by default)
+vim.opt.foldenable = true                          -- Enable folding (UFO plugin will enhance this)
 
 -- Highlight on yank - briefly highlight yanked text for visual feedback
 vim.cmd([[au TextYankPost * silent! lua vim.highlight.on_yank {timeout=200}]])
