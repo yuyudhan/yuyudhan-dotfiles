@@ -8,7 +8,10 @@ alias ...='cd ../..'
 alias ~='cd ~'
 alias fcd='cd "$(find . -type d | fzf)"'
 
-# Optional zoxide integration (manual setup)
-# Uncomment if you want zoxide and have it installed:
-# eval "$(zoxide init zsh)"
+# Lazy load zoxide
+z() {
+    unfunction z
+    eval "$(zoxide init zsh)"
+    z "$@"
+}
 

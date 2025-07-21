@@ -14,10 +14,10 @@ alias rd='rmdir'                     # Remove directory
 alias ll='ls -la'
 
 # Optional enhanced tools (manual setup)
-# Uncomment if you have these tools installed:
-# alias ls="eza --icons"
-# alias ll="eza --icons -lh"
-# alias cat='bat'
+alias ls="eza --icons"
+alias ll="eza --icons -lh"
+alias cat='bat'
 
 # Use nvim instead of vim
 alias vim='nvim'
+

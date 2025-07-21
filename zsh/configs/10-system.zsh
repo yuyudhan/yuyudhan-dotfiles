@@ -10,4 +10,4 @@ alias update='brew update && brew upgrade && brew cleanup'
 
 # Network management
 alias ip='ipconfig getifaddr en0'    # Get local IP address
-alias publicip='curl -s ifconfig.me' # Get public IP address
+
