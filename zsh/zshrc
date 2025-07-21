@@ -1,21 +1,43 @@
 # FilePath: zsh/zshrc
-# Add this to the TOP of your .zshrc
-zmodload zsh/zprof
+
+# Profiling (uncomment to enable)
+# zmodload zsh/zprof
+
+# Early exit for non-interactive shells
+[[ $- != *i* ]] && return
+
+# Additional check for specific parent processes
+if [[ -n "$NVIM" ]] || [[ "$TERM_PROGRAM" == "vscode" ]] || [[ -n "$INSIDE_EMACS" ]]; then
+    # Minimal setup for editor terminals
+    export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+    return
+fi
 
 # -------------------------------------------------------------------
-# Modular Configuration Sourcing
+# Powerlevel10k Instant Prompt
 # -------------------------------------------------------------------
+# Must stay close to the top of ~/.zshrc
+# Console input (password prompts, [y/n] confirmations) must go above this
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Auto-load all .zsh files from ~/.config/zsh recursively in sorted order
+# -------------------------------------------------------------------
+# Modular Configuration Loading
+# -------------------------------------------------------------------
+# Auto-load all .zsh files from configs directory
 for config_file in ~/.config/zsh/**/*.zsh(N); do
     source "$config_file"
 done
 
+# -------------------------------------------------------------------
+# External Tools
+# -------------------------------------------------------------------
+# Atuin shell history
 . "$HOME/.atuin/bin/env"
-
 eval "$(atuin init zsh)"
 
-# Add this to the BOTTOM of your .zshrc
-set +x
-zprof
+# Profiling (uncomment to enable)
+# set +x
+# zprof
 

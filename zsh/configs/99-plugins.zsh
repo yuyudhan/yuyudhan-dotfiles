@@ -9,9 +9,13 @@ ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 source "$ZINIT_HOME/bin/zinit.zsh"
 
 # Essential plugins only - optimized for speed
-zinit light zsh-users/zsh-autosuggestions
-# Removed for performance - was taking 22.97% of startup time
+# Removed for performance - autosuggestions and syntax highlighting were slowing startup
+# zinit light zsh-users/zsh-autosuggestions
 # zinit light zsh-users/zsh-syntax-highlighting
+
+# Load Powerlevel10k theme
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 
 # -------------------------------------------------------------------
 # Additional Configurations
