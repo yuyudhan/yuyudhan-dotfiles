@@ -30,13 +30,6 @@ for config_file in ~/.config/zsh/**/*.zsh(N); do
     source "$config_file"
 done
 
-# -------------------------------------------------------------------
-# External Tools
-# -------------------------------------------------------------------
-# Atuin shell history
-. "$HOME/.atuin/bin/env"
-eval "$(atuin init zsh)"
-
 # Profiling (uncomment to enable)
 # set +x
 # zprof
