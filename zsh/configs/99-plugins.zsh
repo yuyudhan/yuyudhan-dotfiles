@@ -10,7 +10,8 @@ source "$ZINIT_HOME/bin/zinit.zsh"
 
 # Essential plugins only - optimized for speed
 zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-syntax-highlighting
+# Removed for performance - was taking 22.97% of startup time
+# zinit light zsh-users/zsh-syntax-highlighting
 
 # -------------------------------------------------------------------
 # Additional Configurations

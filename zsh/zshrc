@@ -1,4 +1,6 @@
 # FilePath: zsh/zshrc
+# Add this to the TOP of your .zshrc
+zmodload zsh/zprof
 
 # -------------------------------------------------------------------
 # Modular Configuration Sourcing
@@ -9,4 +11,11 @@ for config_file in ~/.config/zsh/**/*.zsh(N); do
     source "$config_file"
 done
 
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+
+# Add this to the BOTTOM of your .zshrc
+set +x
+zprof
 
