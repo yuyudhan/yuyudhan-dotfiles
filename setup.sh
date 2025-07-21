@@ -5,14 +5,12 @@ set -e
 if [[ "$1" == "zsh" ]]; then
 	CURRENT_DIR=$(cd "$(dirname "$0")" && pwd)
 	ZSH_DIR="$CURRENT_DIR/zsh"
-	ZSH_CONFIG_DIR="$HOME/.config/zsh"
-	mkdir -p "$ZSH_CONFIG_DIR"
 
 	create_symlink() {
 		local source_file=$1
 		local target_file=$2
 		if [ -e "$target_file" ] || [ -L "$target_file" ]; then
-			rm -f "$target_file"
+			rm -rf "$target_file"
 			echo "Removed existing file/symlink: $target_file"
 		fi
 		ln -s "$source_file" "$target_file"
@@ -22,22 +20,8 @@ if [[ "$1" == "zsh" ]]; then
 	# Symlink zshrc to ~/.zshrc
 	create_symlink "$ZSH_DIR/zshrc" "$HOME/.zshrc"
 
-	# Symlink all other zsh files to ~/.config/zsh/
-	for file in "$ZSH_DIR"/*.zsh; do
-		[ -f "$file" ] || continue
-		filename=$(basename "$file")
-		# Skip zshrc since we already handled it
-		if [[ "$filename" != "zshrc" ]]; then
-			create_symlink "$file" "$ZSH_CONFIG_DIR/$filename"
-		fi
-	done
-
-	# Symlink all config files to ~/.config/zsh/configs/
-	mkdir -p "$ZSH_CONFIG_DIR/configs"
-	for file in "$ZSH_DIR/configs"/*; do
-		[ -f "$file" ] || continue
-		create_symlink "$file" "$ZSH_CONFIG_DIR/configs/$(basename "$file")"
-	done
+	# Symlink entire zsh directory to ~/.config/zsh
+	create_symlink "$ZSH_DIR" "$HOME/.config/zsh"
 
 	echo "✅ Zsh setup complete!"
 	exit 0
@@ -52,7 +36,7 @@ fi
 # Base directory for your dotfiles.
 DOTFILES_DIR=$(cd "$(dirname "$0")" && pwd)
 
-# Function to create a symlink interactively.
+# Function to create a symlink automatically.
 create_symlink() {
 	source=$1
 	target=$2
@@ -66,35 +50,14 @@ create_symlink() {
 		return
 	fi
 
-	echo -n "Do you want to create a symlink for $target? [y/N] "
-	read -r install_confirm </dev/tty
-
-	if [[ "$install_confirm" != "y" && "$install_confirm" != "Y" ]]; then
-		echo "❌ Skipping symlink creation for $target."
-		return
+	# Remove existing file, directory, or symlink
+	if [ -e "$target" ] || [ -L "$target" ]; then
+		rm -rf "$target"
+		echo "🗑️  Removed existing file/directory/symlink: $target"
 	fi
 
-	if [ -L "$target" ]; then
-		echo -n "Symlink already exists for $target. Delete it? [y/N] "
-		read -r delete_confirm </dev/tty
-		if [[ "$delete_confirm" == "y" || "$delete_confirm" == "Y" ]]; then
-			rm -f "$target"
-			echo "🗑️  Deleted existing symlink for $target."
-		else
-			echo "⚠️  Skipping $target."
-			return
-		fi
-	elif [ -e "$target" ]; then
-		echo -n "File or directory exists at $target. Delete it? [y/N] "
-		read -r delete_confirm </dev/tty
-		if [[ "$delete_confirm" == "y" || "$delete_confirm" == "Y" ]]; then
-			rm -rf "$target"
-			echo "🗑️  Deleted existing file or directory at $target."
-		else
-			echo "⚠️  Skipping $target."
-			return
-		fi
-	fi
+	# Create parent directory if it doesn't exist
+	mkdir -p "$(dirname "$target")"
 
 	ln -s "$source" "$target"
 	echo "✅ Created symlink: $target → $source"
@@ -109,7 +72,6 @@ tmux $HOME/.config/tmux
 yazi $HOME/.config/yazi
 karabiner $HOME/.config/karabiner
 btop $HOME/.config/btop
-obsidian $HOME/.config/obsidian
 "
 
 # Function to process all symlinks.
@@ -127,7 +89,7 @@ setup_single_symlink() {
 	key=$1
 	found=false
 
-	echo "$SYMLINKS" | while read -r item target; do
+	while read -r item target; do
 		[ -z "$item" ] && continue
 		if [[ "$item" == "$key" ]]; then
 			source="$DOTFILES_DIR/$item"
@@ -135,7 +97,7 @@ setup_single_symlink() {
 			found=true
 			break
 		fi
-	done
+	done <<<"$SYMLINKS"
 
 	if [ "$found" = false ]; then
 		echo "❗ Invalid option: $key"
