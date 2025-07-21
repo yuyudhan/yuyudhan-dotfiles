@@ -12,3 +12,8 @@ setopt share_history       # Share history across terminals
 HISTSIZE=5000                                 # Number of history entries in memory
 SAVEHIST=5000                                 # Number of history entries saved to file
 HISTFILE="$HOME/.local/share/zsh/history"    # Location of history file
+
+# Atuin - Enhanced shell history
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh)"
+

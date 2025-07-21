@@ -10,3 +10,4 @@ export LC_ALL="en_US.UTF-8"
 
 # macOS-specific environment variables
 export HOMEBREW_NO_AUTO_UPDATE=1             # Disable Homebrew auto-update
+
