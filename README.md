@@ -25,6 +25,14 @@ This repository contains my personal dotfiles and configurations for various too
 - **yazi/**: Configuration for Yazi file manager.
 - **zsh/**: Zsh shell configuration, including aliases, paths, and plugin settings.
 
+## 📚 Documentation
+
+For comprehensive guides and references:
+- **[📋 Complete Index](INDEX.md)** - Full project documentation and setup guide
+- **[🛠️ Tool Reference](TOOLS.md)** - Commands and configuration for all tools  
+- **[🧭 Navigation Guide](NAVIGATION.md)** - Find any documentation quickly
+- **[🤖 Claude Code Guide](CLAUDE.md)** - AI integration and repository architecture
+
 ## Usage
 
 ### Setting Up

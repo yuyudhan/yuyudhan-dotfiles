@@ -13,11 +13,11 @@ local on_attach = function(client, bufnr)
     end
 
     -- LSP navigation and action mappings
-    buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)       -- Go to definition
-    buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)            -- Show hover information
-    buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)  -- Go to implementation
-    buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)  -- Rename symbol
-    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)      -- Find references
+    buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- Go to definition
+    buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts) -- Show hover information
+    buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- Go to implementation
+    buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts) -- Rename symbol
+    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- Find references
     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts) -- Format buffer
 end
 
@@ -58,10 +58,10 @@ local servers = {
 -- Loop over the servers and set them up with a common configuration
 -- This iterates through each server definition and applies consistent settings
 for server, config in pairs(servers) do
-    config.on_attach = on_attach                        -- Attach our keybindings function
-    config.capabilities = capabilities                  -- Enable enhanced completion capabilities
-    config.flags = { debounce_text_changes = 150 }    -- Reduce LSP requests for performance
-    lspconfig[server].setup(config)                   -- Initialize the LSP server
+    config.on_attach = on_attach -- Attach our keybindings function
+    config.capabilities = capabilities -- Enable enhanced completion capabilities
+    config.flags = { debounce_text_changes = 150 } -- Reduce LSP requests for performance
+    lspconfig[server].setup(config) -- Initialize the LSP server
 end
 
 return {}

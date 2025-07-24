@@ -9,10 +9,6 @@ alias cls='clear'                    # Clear terminal
 alias md='mkdir -p'                  # Create directory with parents
 alias rd='rmdir'                     # Remove directory
 
-# File listing aliases - no binary checks for speed
-# Use standard ls by default
-alias ll='ls -la'
-
 # Optional enhanced tools (manual setup)
 alias ls="eza --icons"
 alias ll="eza --icons -lh"

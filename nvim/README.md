@@ -1,49 +1,101 @@
-# 💤 LazyVim
+# @yuyudhan's Neovim Configuration
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).  
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+Custom Neovim configuration based on [LazyVim](https://github.com/LazyVim/LazyVim).
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Configuration](#configuration)
-4. [Usage](#usage)
-5. [Contributing](#contributing)
-6. [License](#license)
+## Features
 
-## Introduction
-LazyVim is an advanced, extensible, and highly customizable Neovim configuration framework meticulously designed to deliver a smooth and efficient development experience. Emphasizing modularity, LazyVim allows developers to effortlessly integrate additional plugins, customize settings, and tailor the editing environment to their unique workflows and preferences, ensuring optimal productivity and flexibility.
+### Core
+
+- 4-space indentation
+- Custom keybindings under `<leader>z` prefix
+- Modular plugin organization (`<category>.<plugin-name>.lua` pattern)
+
+### AI Integration
+
+- Claude Sonnet 4 via Avante.nvim (manual invocation only)
+- No auto-suggestions
+
+### Language Support
+
+LSP servers auto-installed via Mason:
+
+- TypeScript/JavaScript, Go, Rust, Python
+- C/C++, Lua, HTML/CSS
+- Docker, Terraform, Ansible
+- 20+ languages total
+
+### Key Plugins
+
+- **Navigation**: Flash, Harpoon, Aerial
+- **Git**: Gitsigns, Diffview
+- **UI**: Noice, Bufferline, Notify
+- **Testing**: Neotest
+- **Diagnostics**: Trouble, Glance
 
 ## Installation
-To get started with LazyVim, follow these steps:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/LazyVim/LazyVim.git ~/.config/nvim
-   ```
-2. Install dependencies:
-   ```bash
-   nvim --headless +PackerSync +qa
-   ```
-3. Restart Neovim to apply the configuration.
 
-## Configuration
-LazyVim is highly configurable. You can customize it by editing the `init.lua` file in your Neovim configuration directory. Refer to the [documentation](https://lazyvim.github.io/installation) for detailed configuration options.
+### Prerequisites
 
-## Usage
-Once installed, LazyVim provides a variety of features out of the box:
-- **File Navigation**: Use `Telescope` to quickly find files, buffers, and more.
-- **Code Completion**: Integrated with `nvim-cmp` for intelligent code completion.
-- **LSP Support**: Built-in support for Language Server Protocol (LSP) for enhanced coding assistance.
-- **Debugging**: Integrated with `nvim-dap` for debugging support.
+- Neovim >= 0.9.0
+- Git
+- Nerd Font
+- Node.js >= 16
+- Make
+- Ripgrep
 
-## Contributing
-We welcome contributions! If you'd like to contribute to LazyVim, please follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Submit a pull request with a detailed description of your changes.
+### Setup
+
+```bash
+# Backup existing config
+mv ~/.config/nvim ~/.config/nvim.bak
+
+# Clone and setup
+git clone https://github.com/yuyudhan/yuyudhan-dotfiles.git
+cd yuyudhan-dotfiles
+bash setup.sh nvim
+
+# Launch Neovim
+nvim
+```
+
+## Key Mappings
+
+Leader: `<Space>`
+
+| Mapping       | Description        |
+| ------------- | ------------------ |
+| `<leader>zff` | Format file        |
+| `<leader>zif` | Re-indent file     |
+| `<leader>ha`  | Add to Harpoon     |
+| `<leader>co`  | Toggle outline     |
+| `<leader>xx`  | Toggle diagnostics |
+| `s`           | Flash jump         |
+| `gs`          | Substitute         |
+
+Run `:WhichKey` for all mappings.
+
+## File Structure
+
+```
+nvim/
+├── init.lua
+├── lua/
+│   ├── config/
+│   │   ├── autocmds.lua
+│   │   ├── keymaps.lua
+│   │   ├── lazy.lua
+│   │   ├── lsp.lua
+│   │   └── options.lua
+│   └── plugins/
+│       └── <category>.<plugin>.lua
+└── CLAUDE.md
+```
 
 ## License
-LazyVim is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-<!--TODO: Something to be done-->
+MIT
+
+---
+
+[@yuyudhan](https://github.com/yuyudhan)
 

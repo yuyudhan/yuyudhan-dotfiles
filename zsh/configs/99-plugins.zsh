@@ -1,4 +1,4 @@
-#  FilePath: zsh/plugins.zsh
+# FilePath: zsh/configs/99-plugins.zsh
 
 # -------------------------------------------------------------------
 # Plugin Manager: Zinit (https://github.com/zdharma-continuum/zinit)
@@ -9,7 +9,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 source "$ZINIT_HOME/bin/zinit.zsh"
 
 # Essential plugins only - optimized for speed
-# Removed for performance - autosuggestions and syntax highlighting were slowing startup
+# Commented out for performance optimization
 # zinit light zsh-users/zsh-autosuggestions
 # zinit light zsh-users/zsh-syntax-highlighting
 
@@ -21,5 +21,5 @@ zinit light romkatv/powerlevel10k
 # Additional Configurations
 # -------------------------------------------------------------------
 
-# Note: Syntax highlighting is already loaded above - no need to load twice
+# Note: Plugins are commented out for performance optimization
 

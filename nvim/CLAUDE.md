@@ -1,3 +1,5 @@
+<!-- FilePath: CLAUDE.md -->
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -14,6 +16,7 @@ This is a LazyVim-based Neovim configuration with a modular plugin system. The s
 ## Key Configuration Files
 
 ### Core Configuration (`lua/config/`)
+
 - `lazy.lua` - Plugin manager setup and LazyVim integration
 - `options.lua` - Neovim options (leader key, UI settings, indentation, etc.)
 - `keymaps.lua` - Custom keybindings with heavy use of `<leader>z` prefix
@@ -22,15 +25,84 @@ This is a LazyVim-based Neovim configuration with a modular plugin system. The s
 - `productivity.lua` - Enhanced productivity configurations (diagnostics, terminal, search)
 
 ### Plugin Configuration (`lua/plugins/`)
-- `helpers.lua` - Custom utility functions and commands
-- `colorscheme.lua` - Theme configuration
+
+Plugins are organized using a `<category>.<plugin-name>.lua` naming pattern:
+
+#### AI & Assistants
 - `avante.lua` - AI assistant plugin
+- `claude-code.lua` - Claude integration
+
+#### Diagnostics & LSP
+- `diagnostics.trouble.lua` - Pretty diagnostics interface
+- `lsp.glance.lua` - Preview definitions and references
+- `lsp.inc-rename.lua` - Live preview of rename operations
+
+#### Editing & Text Manipulation
+- `editing.better-escape.lua` - Use jk/jj to exit insert mode
+- `editing.substitute.lua` - Better substitute with preview
+- `editing.treesj.lua` - Smart split/join for code blocks
+- `nvim-surround.lua` - Surround text operations
+- `vim-visual-multi.lua` - Multiple cursors
+
+#### File Management & Navigation
+- `navigation.aerial.lua` - Code outline window
+- `navigation.flash.lua` - Jump anywhere with search labels
+- `navigation.harpoon.lua` - Quick file navigation
+- `neo-tree.lua` - File explorer
+
+#### Focus & Productivity
+- `focus.twilight.lua` - Dim inactive code portions
+- `focus.zen-mode.lua` - Distraction-free coding
+
+#### Git Integration
+- `git.diffview.lua` - Better git diffs viewer
+- `git.gitsigns.lua` - Git decorations and inline blame
+
+#### History & Sessions
+- `history.undotree.lua` - Visualize undo history
+- `session.auto-session.lua` - Session management
+
+#### Keys & Commands
+- `keys.legendary.lua` - Command palette
+- `keys.which-key.lua` - Keybinding hints
+
+#### Language Support
 - `rustaceanvim.lua` - Rust development support
+- `markdown.markdown-preview.lua` - Live markdown preview
+
+#### Package Management
+- `mason.lua` - LSP, formatter, linter installer
+
+#### Refactoring
+- `refactoring.refactoring.lua` - Extract functions and variables
+
+#### Search & Find
+- `search.telescope-frecency.lua` - Smart recent files
+- `search.telescope-fzf-native.lua` - Better telescope performance
+
+#### Task Running & Testing
+- `task.overseer.lua` - Task runner integration
+- `test.neotest.lua` - Run tests from Neovim
+
+#### UI Enhancements
+- `ui.bufferline.lua` - Visual buffer tabs
+- `ui.indent-blankline.lua` - Indentation guides
+- `ui.noice.lua` - Complete UI overhaul
+- `ui.nvim-notify.lua` - Beautiful notifications
+- `colorscheme.lua` - Theme configuration
+
+#### Utilities
+- `folding.nvim-ufo.lua` - Enhanced code folding
+- `helpers.lua` - Custom utility functions and commands
+- `mini-nvim.lua` - Collection of minimal modules
+- `quickfix.nvim-bqf.lua` - Enhanced quickfix window
+- `todo-comments.lua` - Highlight TODO/FIXME comments
 - `vim-tmux-navigator.lua` - Tmux integration
 
 ## Development Commands
 
 ### Code Formatting
+
 ```bash
 # Format Lua code (uses stylua with config from stylua.toml)
 stylua .
@@ -40,6 +112,7 @@ stylua path/to/file.lua
 ```
 
 ### Plugin Management
+
 ```bash
 # Launch Neovim and run plugin commands
 nvim
@@ -49,6 +122,7 @@ nvim
 ```
 
 ### Mason Package Management
+
 ```bash
 # Launch Neovim and run Mason commands
 nvim
@@ -63,6 +137,7 @@ All LSP servers, formatters, linters, and debuggers are automatically installed 
 ## Custom Keybindings
 
 The configuration uses `<leader>z` as a prefix for custom commands:
+
 - `<leader>zff` - Format file using LSP
 - `<leader>zif` - Re-indent entire file
 - `<leader>zafn` - Add commented file path at top
@@ -75,6 +150,7 @@ The configuration uses `<leader>z` as a prefix for custom commands:
 ## Language Server Protocol (LSP)
 
 The configuration supports multiple languages through `lua/config/lsp.lua`:
+
 - TypeScript/JavaScript (ts_ls + eslint)
 - Go (gopls)
 - Rust (rust_analyzer)
@@ -89,6 +165,7 @@ The configuration supports multiple languages through `lua/config/lsp.lua`:
 **Auto-Installation**: All LSP servers are automatically installed via Mason on first launch.
 
 Enhanced diagnostic configuration in `productivity.lua`:
+
 - Custom diagnostic symbols and virtual text
 - Floating windows for detailed error information
 - Severity-based sorting and display
@@ -96,6 +173,7 @@ Enhanced diagnostic configuration in `productivity.lua`:
 ## Mason Package Management
 
 The `mason.lua` configuration automatically installs:
+
 - **LSP Servers**: 20+ language servers for comprehensive language support
 - **Formatters**: prettier, stylua, gofumpt, ruff, clang-format, and more
 - **Linters**: golangci-lint, shellcheck, hadolint, yamllint, and more
@@ -106,6 +184,7 @@ See `LSP.md` for comprehensive tooling documentation including linters, formatte
 ## Custom Utilities
 
 The `helpers.lua` plugin provides custom commands:
+
 - `AddNumberStart` - Add line numbers at start of lines
 - `AddNumberEnd` - Add line numbers at end of lines
 - `CopyRelativePath` - Copy file path to clipboard
@@ -118,6 +197,7 @@ The `helpers.lua` plugin provides custom commands:
 ## File Structure Requirements
 
 The configuration enforces specific file formatting through autocmds:
+
 - Removes trailing whitespace on save
 - Ensures single blank line at end of file
 - Removes multiple consecutive blank lines
@@ -126,6 +206,7 @@ The configuration enforces specific file formatting through autocmds:
 ## Productivity Enhancements
 
 The `productivity.lua` configuration adds:
+
 - **Enhanced diagnostics**: Custom symbols, virtual text, and floating windows
 - **Better terminal integration**: Optimized settings for terminal buffers
 - **Improved search**: Ripgrep integration and better diff algorithms
@@ -136,8 +217,10 @@ The `productivity.lua` configuration adds:
 ## Stylua Configuration
 
 Code formatting follows `stylua.toml`:
+
 - 4-space indentation (consistent with .editorconfig)
 - 120 character line width
 - Unix line endings
 - Double quotes preferred
 - Always use call parentheses
+

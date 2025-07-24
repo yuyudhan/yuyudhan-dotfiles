@@ -34,3 +34,5 @@ done
 # set +x
 # zprof
 
+. "$HOME/.local/bin/env"
+
