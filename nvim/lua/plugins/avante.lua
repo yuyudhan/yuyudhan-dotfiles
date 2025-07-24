@@ -1,112 +1,67 @@
 -- FilePath: lua/plugins/avante.lua
 
---[[
-    Avante Plugin Configuration - Claude 3.7 Optimized Setup
-    Description:
-    Configures the 'yetone/avante.nvim' plugin for Neovim using Claude 3.7 Sonnet
-    as the primary provider for code editing and conversations.
-    Functionality:
-    - Claude 3.7 Sonnet for main code edits and conversations ($3/$15 per MTok)
-    - Claude Haiku for cost-effective autocompletion ($0.25/$1.25 per MTok)
-    - DeepSeek as ultra-cheap backup option
-    - Additional Claude variants for different use cases
-    - Integrates Copilot for additional code completion
-    - Sets up dependencies for enhanced features like treesitter, web icons
-    - Supports image pasting and markdown rendering
-]]
-
 return {
     {
         "yetone/avante.nvim",
+        build = "make",
         event = "VeryLazy",
-        lazy = false,
-        version = false, -- Always pull the latest change
+        version = false, -- Never set this value to "*"! Never!
+        ---@module 'avante'
+        ---@type avante.Config
         opts = {
-            provider = "claude", -- Use claude as primary provider (Claude 3.7)
-            auto_suggestions_provider = "claude-haiku", -- Use cheap Haiku for autocompletion
-
-            -- Base Claude configuration - Claude 3.7 Sonnet
-            claude = {
-                endpoint = "https://api.anthropic.com",
-                model = "claude-3-7-sonnet-20250219", -- Claude 3.7 Sonnet for coding
-                timeout = 30000,
-                temperature = 0,
-                max_tokens = 8000,
-                api_key_name = "ANTHROPIC_API_KEY",
+            -- Use Claude as the provider
+            provider = "claude",
+            providers = {
+                claude = {
+                    endpoint = "https://api.anthropic.com",
+                    model = "claude-sonnet-4-20250514",
+                    timeout = 30000, -- Timeout in milliseconds
+                    extra_request_body = {
+                        temperature = 0.75,
+                        max_tokens = 20480,
+                    },
+                },
             },
-
-            -- Additional vendor configurations
-            vendors = {
-                -- DeepSeek as backup option
-                deepseek = {
-                    __inherited_from = "openai",
-                    api_key_name = "DEEPSEEK_API_KEY",
-                    endpoint = "https://api.deepseek.com",
-                    model = "deepseek-coder",
-                    max_tokens = 8192,
-                },
-
-                -- Claude Haiku for fast/cheap operations
-                ["claude-haiku"] = {
-                    __inherited_from = "claude",
-                    model = "claude-3-haiku-20240307",
-                    timeout = 15000,
-                    temperature = 0,
-                    max_tokens = 4000,
-                },
-
-                -- Claude 3.5 Haiku for mid-tier operations
-                ["claude-3-5-haiku"] = {
-                    __inherited_from = "claude",
-                    model = "claude-3-5-haiku-20241022",
-                    timeout = 15000,
-                    temperature = 0,
-                    max_tokens = 4000,
-                },
-
-                -- Claude 3.7 Sonnet - optimized for coding ($3/$15 per MTok)
-                ["claude-3-7-sonnet"] = {
-                    __inherited_from = "claude",
-                    model = "claude-3-7-sonnet-20250219",
-                    timeout = 30000,
-                    temperature = 0,
-                    max_tokens = 8000,
-                },
+            -- Disable auto-suggestions
+            behaviour = {
+                auto_suggestions = false,
+                auto_set_highlight_group = true,
+                auto_set_keymaps = true,
+                auto_apply_diff_after_generation = false,
+                support_paste_from_clipboard = false,
             },
         },
-
-        -- Build command - this is crucial for the plugin to work
-        build = "make",
-        -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-
-        -- Dependencies
         dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "stevearc/dressing.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
             --- The below dependencies are optional,
+            "echasnovski/mini.pick", -- for file_selector provider mini.pick
+            "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+            "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+            "ibhagwan/fzf-lua", -- for file_selector provider fzf
+            "stevearc/dressing.nvim", -- for input provider dressing
+            "folke/snacks.nvim", -- for input provider snacks
             "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            -- "zbirenbaum/copilot.lua", -- Removed: not using Copilot
             {
-                -- Support for image pasting
+                -- support for image pasting
                 "HakonHarnes/img-clip.nvim",
                 event = "VeryLazy",
                 opts = {
-                    -- Recommended settings
+                    -- recommended settings
                     default = {
                         embed_image_as_base64 = false,
                         prompt_for_file_name = false,
                         drag_and_drop = {
                             insert_mode = true,
                         },
-                        -- Required for Windows users
+                        -- required for Windows users
                         use_absolute_path = true,
                     },
                 },
             },
             {
-                -- Markdown rendering support
+                -- Make sure to set this up properly if you have lazy=true
                 "MeanderingProgrammer/render-markdown.nvim",
                 opts = {
                     file_types = { "markdown", "Avante" },

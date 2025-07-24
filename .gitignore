@@ -6,6 +6,7 @@ lazy/
 lazy-lock.json
 lazy-lock.yaml
 
+btop.log.*
 # Ignore Neovim cache directories
 .cache/
 cache/

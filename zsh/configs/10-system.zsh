@@ -1,4 +1,4 @@
-# FilePath: zsh/configs/13-system.zsh
+# FilePath: zsh/configs/10-system.zsh
 
 # System Management
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'

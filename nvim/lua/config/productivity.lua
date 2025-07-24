@@ -128,15 +128,15 @@ vim.opt.undolevels = 10000 -- Increase undo levels
 vim.opt.undoreload = 10000 -- Maximum lines to save for undo on buffer reload
 
 -- Better formatting options for consistent code style
-vim.opt.formatoptions:append("r")  -- Continue comments when pressing Enter
-vim.opt.formatoptions:append("o")  -- Continue comments when pressing o or O
-vim.opt.formatoptions:append("q")  -- Allow formatting comments with gq
-vim.opt.formatoptions:append("n")  -- Recognize numbered lists
-vim.opt.formatoptions:append("j")  -- Remove comment leader when joining lines
+vim.opt.formatoptions:append("r") -- Continue comments when pressing Enter
+vim.opt.formatoptions:append("o") -- Continue comments when pressing o or O
+vim.opt.formatoptions:append("q") -- Allow formatting comments with gq
+vim.opt.formatoptions:append("n") -- Recognize numbered lists
+vim.opt.formatoptions:append("j") -- Remove comment leader when joining lines
 
-vim.opt.formatoptions:remove("t")  -- Don't auto-wrap text
-vim.opt.formatoptions:remove("c")  -- Don't auto-wrap comments
-vim.opt.formatoptions:remove("a")  -- Don't auto-format paragraphs
+vim.opt.formatoptions:remove("t") -- Don't auto-wrap text
+vim.opt.formatoptions:remove("c") -- Don't auto-wrap comments
+vim.opt.formatoptions:remove("a") -- Don't auto-format paragraphs
 
 -- Enhanced fold configuration for better code navigation
 vim.opt.foldlevelstart = 99 -- Start with all folds open
