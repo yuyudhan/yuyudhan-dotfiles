@@ -10,43 +10,55 @@ end
 -- ================================
 -- Appearance Settings
 -- ================================
-config.color_scheme = "Gruvbox Dark"
+config.color_scheme = "Gruvbox Dark (Gogh)"
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 15
 
 config.window_decorations = "RESIZE"
--- Disabled for performance - transparency/blur are GPU-intensive
-config.window_background_opacity = 0.7
-config.macos_window_background_blur = 10
+config.window_background_opacity = 0.92
+config.macos_window_background_blur = 15
 
-config.window_frame = {
-	active_titlebar_bg = "#2E3440",
-	inactive_titlebar_bg = "#3B4252",
-	border_left_width = 2,
-	border_right_width = 3,
-	border_top_height = 2,
-	border_bottom_height = 2,
-	border_left_color = "#4C566A",
-	border_right_color = "#4C566A",
-	border_top_color = "#4C566A",
-	border_bottom_color = "#4C566A",
+-- Hacker-style dark gradient
+config.window_background_gradient = {
+	orientation = "Vertical",
+	colors = {
+		"#0c0c0c",
+		"#1a1a1a",
+		"#0f0f0f",
+	},
+	interpolation = "Linear",
+	blend = "Rgb",
 }
 
-config.line_height = 1.3
+-- Minimal dark frame
+config.window_frame = {
+	active_titlebar_bg = "#1a1a1a",
+	inactive_titlebar_bg = "#0c0c0c",
+	border_left_width = 0,
+	border_right_width = 0,
+	border_top_height = 0,
+	border_bottom_height = 0,
+}
+
+config.line_height = 1.4
 config.window_padding = {
-	left = 10,
-	right = 10,
-	top = 0,
-	bottom = 0,
+	left = 15,
+	right = 15,
+	top = 10,
+	bottom = 10,
 }
 
 -- ================================
 -- Performance Settings
 -- ================================
-config.max_fps = 60
-config.animation_fps = 10
-config.cursor_blink_rate = 500
+config.max_fps = 120
+config.animation_fps = 30
+config.cursor_blink_rate = 800
 config.default_cursor_style = "BlinkingBlock"
+config.cursor_thickness = 2
+
+-- Smooth cursor transitions
+config.force_reverse_video_cursor = true
 
 -- Enable GPU acceleration
 config.front_end = "WebGpu"
@@ -62,23 +74,42 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.tab_max_width = 25
 
--- Simplified tab styling for better performance
+-- Hacker-style minimalist tab styling
 config.colors = {
 	tab_bar = {
-		background = "#2E3440",
+		background = "#0c0c0c",
 		active_tab = {
-			bg_color = "#5E81AC",
-			fg_color = "#FFFFFF",
+			bg_color = "#1a1a1a",
+			fg_color = "#00ff00",
+			intensity = "Bold",
 		},
 		inactive_tab = {
-			bg_color = "#434C5E",
-			fg_color = "#ECEFF4",
+			bg_color = "#0c0c0c",
+			fg_color = "#888888",
 		},
 		inactive_tab_hover = {
-			bg_color = "#4C566A",
-			fg_color = "#ECEFF4",
+			bg_color = "#1a1a1a",
+			fg_color = "#cccccc",
+		},
+		new_tab = {
+			bg_color = "#0c0c0c",
+			fg_color = "#666666",
+		},
+		new_tab_hover = {
+			bg_color = "#1a1a1a",
+			fg_color = "#00ff00",
 		},
 	},
+	-- Hacker terminal colors
+	foreground = "#00ff00",
+	background = "#0c0c0c",
+	cursor_bg = "#00ff00",
+	cursor_fg = "#0c0c0c",
+	cursor_border = "#00ff00",
+	selection_fg = "#0c0c0c",
+	selection_bg = "#00ff00",
+	scrollbar_thumb = "#333333",
+	split = "#00ff00",
 }
 
 -- ================================
