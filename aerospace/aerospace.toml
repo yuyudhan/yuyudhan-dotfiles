@@ -96,4 +96,3 @@ backspace = ['close-all-windows-but-current', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
-

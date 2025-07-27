@@ -4,7 +4,7 @@ return {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     keys = {
-        { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Toggle Undotree" },
+        { "<leader>ut", "<cmd>UndotreeToggle<CR>", desc = "Toggle Undotree" },
     },
     config = function()
         vim.g.undotree_WindowLayout = 2

@@ -26,7 +26,7 @@ require("lazy").setup({
         { import = "lazyvim.plugins.extras.editor.telescope" },
         -- { import = "lazyvim.plugins.extras.editor.leap" }, -- Disabled: conflicts with Flash.nvim
         { import = "lazyvim.plugins.extras.coding.yanky" },
-        { import = "lazyvim.plugins.extras.ui.mini-animate" },
+        -- { import = "lazyvim.plugins.extras.ui.mini-animate" }, -- Disabled: conflicts with custom UI toggles
         -- Import your custom plugins from lua/plugins/ directory
         { import = "plugins" },
     },
