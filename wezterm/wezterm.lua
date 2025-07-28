@@ -10,30 +10,18 @@ end
 -- ================================
 -- Appearance Settings
 -- ================================
-config.color_scheme = "Gruvbox Dark (Gogh)"
+config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 15
 
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.92
-config.macos_window_background_blur = 15
+config.window_background_opacity = 0.95
+config.macos_window_background_blur = 0
 
--- Hacker-style dark gradient
-config.window_background_gradient = {
-	orientation = "Vertical",
-	colors = {
-		"#0c0c0c",
-		"#1a1a1a",
-		"#0f0f0f",
-	},
-	interpolation = "Linear",
-	blend = "Rgb",
-}
-
--- Minimal dark frame
+-- Catppuccin Mocha window frame
 config.window_frame = {
-	active_titlebar_bg = "#1a1a1a",
-	inactive_titlebar_bg = "#0c0c0c",
+	active_titlebar_bg = "#1e1e2e",
+	inactive_titlebar_bg = "#181825",
 	border_left_width = 0,
 	border_right_width = 0,
 	border_top_height = 0,
@@ -51,18 +39,22 @@ config.window_padding = {
 -- ================================
 -- Performance Settings
 -- ================================
-config.max_fps = 120
-config.animation_fps = 30
-config.cursor_blink_rate = 800
-config.default_cursor_style = "BlinkingBlock"
+config.max_fps = 30
+config.animation_fps = 15
+config.cursor_blink_rate = 1000
+config.default_cursor_style = "SteadyBlock"
 config.cursor_thickness = 2
 
--- Smooth cursor transitions
-config.force_reverse_video_cursor = true
+config.force_reverse_video_cursor = false
+config.front_end = "Software"
 
--- Enable GPU acceleration
-config.front_end = "WebGpu"
-config.webgpu_power_preference = "HighPerformance"
+config.scrollback_lines = 3000
+config.enable_scroll_bar = false
+config.audible_bell = "Disabled"
+config.visual_bell = {
+	fade_in_duration_ms = 0,
+	fade_out_duration_ms = 0,
+}
 
 -- ================================
 -- Tab Bar Settings
@@ -74,42 +66,64 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.tab_max_width = 25
 
--- Hacker-style minimalist tab styling
+-- Catppuccin Mocha colors
 config.colors = {
+	foreground = "#cdd6f4",
+	background = "#1e1e2e",
+	cursor_bg = "#f5e0dc",
+	cursor_fg = "#1e1e2e",
+	cursor_border = "#f5e0dc",
+	selection_fg = "#1e1e2e",
+	selection_bg = "#f5e0dc",
+	scrollbar_thumb = "#585b70",
+	split = "#6c7086",
+
+	ansi = {
+		"#45475a", -- black
+		"#f38ba8", -- red
+		"#a6e3a1", -- green
+		"#f9e2af", -- yellow
+		"#89b4fa", -- blue
+		"#f5c2e7", -- magenta
+		"#94e2d5", -- cyan
+		"#bac2de", -- white
+	},
+
+	brights = {
+		"#585b70", -- bright black
+		"#f38ba8", -- bright red
+		"#a6e3a1", -- bright green
+		"#f9e2af", -- bright yellow
+		"#89b4fa", -- bright blue
+		"#f5c2e7", -- bright magenta
+		"#94e2d5", -- bright cyan
+		"#a6adc8", -- bright white
+	},
+
 	tab_bar = {
-		background = "#0c0c0c",
+		background = "#11111b",
 		active_tab = {
-			bg_color = "#1a1a1a",
-			fg_color = "#00ff00",
+			bg_color = "#cba6f7",
+			fg_color = "#11111b",
 			intensity = "Bold",
 		},
 		inactive_tab = {
-			bg_color = "#0c0c0c",
-			fg_color = "#888888",
+			bg_color = "#181825",
+			fg_color = "#cdd6f4",
 		},
 		inactive_tab_hover = {
-			bg_color = "#1a1a1a",
-			fg_color = "#cccccc",
+			bg_color = "#313244",
+			fg_color = "#cdd6f4",
 		},
 		new_tab = {
-			bg_color = "#0c0c0c",
-			fg_color = "#666666",
+			bg_color = "#181825",
+			fg_color = "#cdd6f4",
 		},
 		new_tab_hover = {
-			bg_color = "#1a1a1a",
-			fg_color = "#00ff00",
+			bg_color = "#313244",
+			fg_color = "#cdd6f4",
 		},
 	},
-	-- Hacker terminal colors
-	foreground = "#00ff00",
-	background = "#0c0c0c",
-	cursor_bg = "#00ff00",
-	cursor_fg = "#0c0c0c",
-	cursor_border = "#00ff00",
-	selection_fg = "#0c0c0c",
-	selection_bg = "#00ff00",
-	scrollbar_thumb = "#333333",
-	split = "#00ff00",
 }
 
 -- ================================
