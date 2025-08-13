@@ -454,7 +454,7 @@ Hi,
 
 Thank you for reaching out and sharing information about your product.
 
-While your offering seems interesting, at this time it does not align with our current priorities or needs at Signzy.
+While your offering seems interesting, at this time it does not align with our current priorities or needs.
 
 We appreciate you considering us, and we will keep your information on file should our needs evolve.
 
@@ -710,13 +710,6 @@ Apply these edits to elevate your Rust backend code to higher standards of quali
 `
 };
 
-const gitConfigGlobalSignzy = {
-    name: "Git config global Signzy",
-    text: `
-git config --global user.name "yuyudhan"
-git config --global user.email "ankur@signzy.com"
-`,
-};
 
 const gitConfigGlobalPersonal = {
     name: "Git config global Personal",
@@ -734,13 +727,6 @@ git config user.email "ankurkumarpandey@gmail.com"
 `,
 };
 
-const gitConfigLocalSignzy = {
-    name: "Git config local Signzy",
-    text: `
-git config user.name "yuyudhan"
-git config user.email "ankur@signzy.com"
-`,
-};
 
 // Merge all snippet objects into one object
 const allSnippets = [
@@ -769,9 +755,7 @@ const allSnippets = [
     rewriteRustBackend,
     editingRustBackend,
     gitConfigLocalPersonal,
-    gitConfigLocalSignzy,
     gitConfigGlobalPersonal,
-    gitConfigGlobalSignzy,
 ];
 
 const outputPath = path.join(__dirname, 'snippets.json');

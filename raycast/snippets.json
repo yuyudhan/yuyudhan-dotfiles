@@ -61,7 +61,7 @@
   },
   {
     "name": "Reply: Promotional Not Interested",
-    "text": "\nHi,\n\nThank you for reaching out and sharing information about your product.\n\nWhile your offering seems interesting, at this time it does not align with our current priorities or needs at Signzy.\n\nWe appreciate you considering us, and we will keep your information on file should our needs evolve.\n\nBest regards,\n"
+    "text": "\nHi,\n\nThank you for reaching out and sharing information about your product.\n\nWhile your offering seems interesting, at this time it does not align with our current priorities or needs.\n\nWe appreciate you considering us, and we will keep your information on file should our needs evolve.\n\nBest regards,\n"
   },
   {
     "name": "Snippet: category: primary label:unread",
@@ -100,15 +100,7 @@
     "text": "\ngit config user.name \"yuyudhan\"\ngit config user.email \"ankurkumarpandey@gmail.com\"\n"
   },
   {
-    "name": "Git config local Signzy",
-    "text": "\ngit config user.name \"yuyudhan\"\ngit config user.email \"ankur@signzy.com\"\n"
-  },
-  {
     "name": "Git config global Personal",
     "text": "\ngit config --global user.name \"yuyudhan\"\ngit config --global user.email \"ankurkumarpandey@gmail.com\"\n"
-  },
-  {
-    "name": "Git config global Signzy",
-    "text": "\ngit config --global user.name \"yuyudhan\"\ngit config --global user.email \"ankur@signzy.com\"\n"
   }
 ]
