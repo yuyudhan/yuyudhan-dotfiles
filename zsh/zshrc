@@ -36,3 +36,4 @@ done
 
 . "$HOME/.local/bin/env"
 
+export PATH=~/.npm-global/bin:$PATH
