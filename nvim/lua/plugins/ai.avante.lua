@@ -1,4 +1,4 @@
--- FilePath: lua/plugins/avante.lua
+-- FilePath: lua/plugins/ai.avante.lua
 
 return {
     {
@@ -9,7 +9,7 @@ return {
         ---@module 'avante'
         ---@type avante.Config
         opts = {
-            -- Use Claude as the provider
+            -- Use Claude 4 Sonnet as the only provider
             provider = "claude",
             providers = {
                 claude = {
@@ -17,18 +17,27 @@ return {
                     model = "claude-sonnet-4-20250514",
                     timeout = 30000, -- Timeout in milliseconds
                     extra_request_body = {
-                        temperature = 0.75,
-                        max_tokens = 20480,
+                        temperature = 0.7,
+                        max_tokens = 8192,
                     },
                 },
             },
-            -- Disable auto-suggestions
+            -- Optimized behavior settings
             behaviour = {
                 auto_suggestions = false,
                 auto_set_highlight_group = true,
                 auto_set_keymaps = true,
                 auto_apply_diff_after_generation = false,
-                support_paste_from_clipboard = false,
+                support_paste_from_clipboard = true,
+            },
+            -- Chat and edit settings
+            windows = {
+                position = "right",
+                width = 30,
+                sidebar_header = {
+                    align = "center",
+                    rounded = true,
+                },
             },
         },
         dependencies = {
