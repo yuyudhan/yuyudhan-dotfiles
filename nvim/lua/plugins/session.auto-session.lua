@@ -2,6 +2,10 @@
 
 return {
     "rmagatti/auto-session",
+    lazy = false,
+    dependencies = {
+        "nvim-telescope/telescope.nvim", -- for session-lens
+    },
     config = function()
         require("auto-session").setup({
             log_level = "error",
@@ -21,8 +25,8 @@ return {
             },
         })
 
-        -- Keymaps
-        vim.keymap.set("n", "<leader>qs", require("auto-session.session-lens").search_session, { desc = "Search Sessions" })
+        -- Updated keymaps using telescope integration
+        vim.keymap.set("n", "<leader>qs", "<cmd>Telescope session-lens search_session<CR>", { desc = "Search Sessions" })
         vim.keymap.set("n", "<leader>qS", "<cmd>SessionSave<CR>", { desc = "Save Session" })
         vim.keymap.set("n", "<leader>qr", "<cmd>SessionRestore<CR>", { desc = "Restore Session" })
         vim.keymap.set("n", "<leader>qd", "<cmd>SessionDelete<CR>", { desc = "Delete Session" })
