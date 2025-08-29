@@ -17,6 +17,15 @@ if [[ "$1" == "zsh" ]]; then
 		echo "Created symlink: $target_file -> $source_file"
 	}
 
+	# Install Zinit if not already installed
+	if [ ! -d "$HOME/.local/share/zinit/zinit.git" ]; then
+		echo "Installing Zinit..."
+		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+		echo "✅ Zinit installed"
+	else
+		echo "✅ Zinit already installed"
+	fi
+
 	# Symlink zshrc to ~/.zshrc
 	create_symlink "$ZSH_DIR/zshrc" "$HOME/.zshrc"
 

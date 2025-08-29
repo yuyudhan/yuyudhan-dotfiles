@@ -6,7 +6,7 @@
 
 # Fast Zinit loading - assume it's installed
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
-source "$ZINIT_HOME/bin/zinit.zsh"
+source "$ZINIT_HOME/zinit.git/zinit.zsh"
 
 # Essential plugins only - optimized for speed
 # Commented out for performance optimization

@@ -72,14 +72,6 @@ print_status "Installing Zsh..."
 brew install zsh
 print_success "Zsh installed"
 
-# Install Oh My Zsh
-print_status "Installing Oh My Zsh..."
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-	print_success "Oh My Zsh installed"
-else
-	print_success "Oh My Zsh already installed"
-fi
 
 # Set Zsh as default shell
 if [ "$SHELL" != "$(which zsh)" ]; then
@@ -92,7 +84,6 @@ fi
 print_status "Installing development tools via Homebrew..."
 
 brew_packages=(
-	"thefuck"
 	"thefuck"
 	"zoxide"
 	"eza"
