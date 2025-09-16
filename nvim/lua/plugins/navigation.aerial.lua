@@ -27,7 +27,7 @@ return {
         
         -- Keymaps
         vim.keymap.set("n", "<leader>co", "<cmd>AerialToggle<CR>", { desc = "Toggle Code Outline" })
-        vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { desc = "Previous Symbol" })
-        vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { desc = "Next Symbol" })
+        vim.keymap.set("n", "<leader>cp", "<cmd>AerialPrev<CR>", { desc = "Previous Symbol" })
+        vim.keymap.set("n", "<leader>cn", "<cmd>AerialNext<CR>", { desc = "Next Symbol" })
     end,
 }
