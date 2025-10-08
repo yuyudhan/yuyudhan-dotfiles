@@ -18,7 +18,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- Go to implementation
     buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts) -- Rename symbol
     buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- Find references
-    buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts) -- Format buffer
+    -- Format using conform.nvim if available, fallback to LSP
+    buf_set_keymap("n", "<leader>cf", "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>", opts) -- Format buffer
 end
 
 -- Update capabilities for nvim-cmp compatibility
