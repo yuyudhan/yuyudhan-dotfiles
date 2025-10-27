@@ -36,6 +36,49 @@ if [[ "$1" == "zsh" ]]; then
     exit 0
 fi
 
+# If the first argument is "claude", perform Claude setup and exit.
+if [[ "$1" == "claude" ]]; then
+    CURRENT_DIR=$(cd "$(dirname "$0")" && pwd)
+    CLAUDE_DIR="$CURRENT_DIR/.claude"
+
+    create_symlink() {
+        local source_file=$1
+        local target_file=$2
+        if [ -e "$target_file" ] || [ -L "$target_file" ]; then
+            rm -rf "$target_file"
+            echo "Removed existing file/symlink: $target_file"
+        fi
+        # Create parent directory if it doesn't exist
+        mkdir -p "$(dirname "$target_file")"
+        ln -s "$source_file" "$target_file"
+        echo "Created symlink: $target_file -> $source_file"
+    }
+
+    # Symlink .claude/agents to ~/.claude/agents
+    if [ -d "$CLAUDE_DIR/agents" ]; then
+        create_symlink "$CLAUDE_DIR/agents" "$HOME/.claude/agents"
+    else
+        echo "⚠️  .claude/agents directory not found, skipping"
+    fi
+
+    # Symlink .claude/commands to ~/.claude/commands
+    if [ -d "$CLAUDE_DIR/commands" ]; then
+        create_symlink "$CLAUDE_DIR/commands" "$HOME/.claude/commands"
+    else
+        echo "⚠️  .claude/commands directory not found, skipping"
+    fi
+
+    # Symlink .claude/settings.json to ~/.claude/settings.json
+    if [ -f "$CLAUDE_DIR/settings.json" ]; then
+        create_symlink "$CLAUDE_DIR/settings.json" "$HOME/.claude/settings.json"
+    else
+        echo "⚠️  .claude/settings.json file not found, skipping"
+    fi
+
+    echo "✅ Claude setup complete!"
+    exit 0
+fi
+
 # Ensure the script is run with Bash.
 if [ -z "$BASH_VERSION" ]; then
     echo "❗ This script must be run using bash. Use: bash $0"
