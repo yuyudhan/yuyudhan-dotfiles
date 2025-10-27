@@ -8,20 +8,36 @@ This is a macOS dotfiles repository using a symlink-based management system with
 
 ### Symlink Management System
 
-The `setup.sh` script is the central management tool:
+The `setup.sh` script is the central management tool with modern features:
 
 ```bash
 # Setup all dotfiles
 bash setup.sh
 
-# Setup individual tools
-bash setup.sh nvim|tmux|wezterm|aerospace|yazi|karabiner|btop
+# Setup individual tools (supports multiple at once)
+bash setup.sh nvim tmux wezterm
 
-# Special zsh setup (creates both ~/.zshrc and ~/.config/zsh/)
-bash setup.sh zsh
+# Preview changes without making them (dry-run mode)
+bash setup.sh --dry-run
+bash setup.sh --dry-run zsh
+
+# Get help and see all available options
+bash setup.sh --help
+
+# Special handlers
+bash setup.sh zsh        # Creates ~/.zshrc + ~/.config/zsh/
+bash setup.sh claude     # Symlinks .claude/agents/, commands/, settings.json
 ```
 
-**Important**: The script automatically removes existing configurations before creating symlinks. Zsh has special handling - `zshrc` goes to `~/.zshrc` while the entire `zsh/` directory is symlinked to `~/.config/zsh/`.
+**Key Features**:
+- **Color Output**: Green=success, Yellow=warning, Red=error, Blue=info
+- **Multi-Tool Support**: Setup multiple tools in one command
+- **Dry-Run Mode**: Preview changes before applying
+- **Smart Skipping**: Skips symlinks that are already correct
+- **Summary Report**: Shows created/skipped/error counts
+- **Validation**: Checks source directories exist before symlinking
+
+**Important**: The script automatically removes existing configurations before creating symlinks. Zsh and Claude have special handling for multiple symlinks.
 
 ### Zsh Configuration Architecture
 
@@ -69,6 +85,24 @@ The `zshrc` file automatically loads all `*.zsh` files from the configs director
 - Gruvbox Dark theme with JetBrainsMono Nerd Font
 - Performance-optimized settings (60fps, reduced animations)
 - Transparency and blur effects enabled
+
+## Documentation Structure
+
+The repository maintains organized documentation:
+
+**Root Level**:
+- `README.md` - Project overview and quick start
+- `CLAUDE.md` - This file (repository architecture for Claude Code)
+
+**Internal Documentation** (`docs/internal-docs/`):
+- `INDEX.md` - Comprehensive project index and architecture guide
+- `TOOLS.md` - Complete tool configuration reference
+- `NAVIGATION.md` - Documentation navigation guide
+
+**Tool-Specific**:
+- `nvim/CLAUDE.md`, `nvim/LSP.md` - Neovim configuration details
+- `zsh/CLAUDE.md` - Zsh shell configuration
+- `.claude/agents/`, `.claude/commands/` - Custom Claude Code extensions
 
 ## Development Commands
 
