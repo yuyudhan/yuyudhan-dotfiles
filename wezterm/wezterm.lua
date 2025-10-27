@@ -16,7 +16,7 @@ config.font_size = 15
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.95
-config.macos_window_background_blur = 0
+config.macos_window_background_blur = 20
 
 -- Catppuccin Mocha window frame
 config.window_frame = {
@@ -39,16 +39,17 @@ config.window_padding = {
 -- ================================
 -- Performance Settings
 -- ================================
-config.max_fps = 30
-config.animation_fps = 15
+config.max_fps = 60
+config.animation_fps = 30
 config.cursor_blink_rate = 1000
 config.default_cursor_style = "SteadyBlock"
 config.cursor_thickness = 2
 
 config.force_reverse_video_cursor = false
-config.front_end = "Software"
+-- WebGpu for best performance, falls back to OpenGL if unavailable
+config.front_end = "WebGpu"
 
-config.scrollback_lines = 3000
+config.scrollback_lines = 10000
 config.enable_scroll_bar = false
 config.audible_bell = "Disabled"
 config.visual_bell = {
@@ -127,6 +128,66 @@ config.colors = {
 }
 
 -- ================================
+-- Quick Select Configuration
+-- ================================
+
+config.quick_select_patterns = {
+	-- URLs (http/https)
+	"https?://\\S+",
+	-- File paths (absolute and relative)
+	"[./~][\\w\\-@:./]+",
+	-- Git hashes
+	"[0-9a-f]{7,40}",
+	-- IP addresses
+	"\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
+	-- UUIDs
+	"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+	-- Hex colors
+	"#[0-9a-fA-F]{6}",
+}
+
+-- ================================
+-- Mouse and Hyperlink Configuration
+-- ================================
+
+-- Clickable URLs
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
+-- Add custom rules for common patterns
+table.insert(config.hyperlink_rules, {
+	regex = "\\b\\w+://[\\w.-]+\\S*\\b",
+	format = "$0",
+})
+
+-- GitHub issue/PR references (e.g., #123)
+table.insert(config.hyperlink_rules, {
+	regex = "#(\\d+)",
+	format = "https://github.com/$1",
+})
+
+-- Mouse bindings
+config.mouse_bindings = {
+	-- CMD+Click to open URLs
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CMD",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
+	-- Right-click paste
+	{
+		event = { Down = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
+	-- CTRL+Click to select block
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = wezterm.action.SelectTextAtMouseCursor("SemanticZone"),
+	},
+}
+
+-- ================================
 -- Key Bindings
 -- ================================
 
@@ -158,6 +219,20 @@ config.keys = {
 	{ key = "9", mods = "CMD", action = wezterm.action.ActivateTab(8) },
 	{ key = "[", mods = "CMD", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "]", mods = "CMD", action = wezterm.action.ActivateTabRelative(1) },
+
+	-- Search mode
+	{ key = "f", mods = "CMD", action = wezterm.action.Search("CurrentSelectionOrEmptyString") },
+
+	-- Font size adjustment
+	{ key = "=", mods = "CMD", action = wezterm.action.IncreaseFontSize },
+	{ key = "-", mods = "CMD", action = wezterm.action.DecreaseFontSize },
+	{ key = "0", mods = "CMD", action = wezterm.action.ResetFontSize },
+
+	-- Quick select mode (for URLs, paths, hashes)
+	{ key = " ", mods = "CTRL|SHIFT", action = wezterm.action.QuickSelect },
+
+	-- Fullscreen toggle
+	{ key = "f", mods = "CMD|CTRL", action = wezterm.action.ToggleFullScreen },
 }
 
 return config
