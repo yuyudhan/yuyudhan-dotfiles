@@ -1,168 +1,354 @@
 #!/bin/bash
 set -e
 
-# If the first argument is "zsh", perform Zsh setup and exit.
-if [[ "$1" == "zsh" ]]; then
-    CURRENT_DIR=$(cd "$(dirname "$0")" && pwd)
-    ZSH_DIR="$CURRENT_DIR/zsh"
+################################################################################
+# Dotfiles Setup Script
+# Manages symlinks for all configuration files
+################################################################################
 
-    create_symlink() {
-        local source_file=$1
-        local target_file=$2
-        if [ -e "$target_file" ] || [ -L "$target_file" ]; then
-            rm -rf "$target_file"
-            echo "Removed existing file/symlink: $target_file"
-        fi
-        ln -s "$source_file" "$target_file"
-        echo "Created symlink: $target_file -> $source_file"
-    }
+# Color codes for output
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly BLUE='\033[0;34m'
+readonly NC='\033[0m' # No Color
 
-    # Install Zinit if not already installed
-    if [ ! -d "$HOME/.local/share/zinit/zinit.git" ]; then
-        echo "Installing Zinit..."
-        bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-        echo "✅ Zinit installed"
-    else
-        echo "✅ Zinit already installed"
-    fi
-
-    # Symlink zshrc to ~/.zshrc
-    create_symlink "$ZSH_DIR/zshrc" "$HOME/.zshrc"
-
-    # Symlink entire zsh directory to ~/.config/zsh
-    create_symlink "$ZSH_DIR" "$HOME/.config/zsh"
-
-    echo "✅ Zsh setup complete!"
-    exit 0
-fi
-
-# If the first argument is "claude", perform Claude setup and exit.
-if [[ "$1" == "claude" ]]; then
-    CURRENT_DIR=$(cd "$(dirname "$0")" && pwd)
-    CLAUDE_DIR="$CURRENT_DIR/.claude"
-
-    create_symlink() {
-        local source_file=$1
-        local target_file=$2
-        if [ -e "$target_file" ] || [ -L "$target_file" ]; then
-            rm -rf "$target_file"
-            echo "Removed existing file/symlink: $target_file"
-        fi
-        # Create parent directory if it doesn't exist
-        mkdir -p "$(dirname "$target_file")"
-        ln -s "$source_file" "$target_file"
-        echo "Created symlink: $target_file -> $source_file"
-    }
-
-    # Symlink .claude/agents to ~/.claude/agents
-    if [ -d "$CLAUDE_DIR/agents" ]; then
-        create_symlink "$CLAUDE_DIR/agents" "$HOME/.claude/agents"
-    else
-        echo "⚠️  .claude/agents directory not found, skipping"
-    fi
-
-    # Symlink .claude/commands to ~/.claude/commands
-    if [ -d "$CLAUDE_DIR/commands" ]; then
-        create_symlink "$CLAUDE_DIR/commands" "$HOME/.claude/commands"
-    else
-        echo "⚠️  .claude/commands directory not found, skipping"
-    fi
-
-    # Symlink .claude/settings.json to ~/.claude/settings.json
-    if [ -f "$CLAUDE_DIR/settings.json" ]; then
-        create_symlink "$CLAUDE_DIR/settings.json" "$HOME/.claude/settings.json"
-    else
-        echo "⚠️  .claude/settings.json file not found, skipping"
-    fi
-
-    echo "✅ Claude setup complete!"
-    exit 0
-fi
-
-# Ensure the script is run with Bash.
-if [ -z "$BASH_VERSION" ]; then
-    echo "❗ This script must be run using bash. Use: bash $0"
-    exit 1
-fi
-
-# Base directory for your dotfiles.
+# Script state
+DRY_RUN=false
 DOTFILES_DIR=$(cd "$(dirname "$0")" && pwd)
 
-# Function to create a symlink automatically.
+# Counters for summary
+CREATED_COUNT=0
+SKIPPED_COUNT=0
+ERROR_COUNT=0
+
+################################################################################
+# Helper Functions
+################################################################################
+
+print_success() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}✗${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
+print_info() {
+    echo -e "${BLUE}ℹ${NC} $1"
+}
+
+print_header() {
+    echo -e "\n${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BLUE}$1${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
+}
+
+show_help() {
+    cat << EOF
+${BLUE}Dotfiles Setup Script${NC}
+
+${YELLOW}Usage:${NC}
+  bash setup.sh [OPTIONS] [TOOL...]
+
+${YELLOW}Options:${NC}
+  -h, --help      Show this help message
+  -d, --dry-run   Preview changes without making them
+  -a, --all       Setup all tools (default if no tools specified)
+
+${YELLOW}Tools:${NC}
+  nvim            Neovim configuration
+  wezterm         WezTerm terminal emulator
+  aerospace       Aerospace window manager
+  tmux            Tmux terminal multiplexer
+  yazi            Yazi file manager
+  karabiner       Karabiner keyboard customizer
+  btop            Btop system monitor
+  zsh             Zsh shell (special: creates ~/.zshrc + ~/.config/zsh/)
+  claude          Claude Code (special: symlinks agents/commands/settings)
+
+${YELLOW}Examples:${NC}
+  bash setup.sh                    ${BLUE}# Setup all tools${NC}
+  bash setup.sh nvim tmux          ${BLUE}# Setup only nvim and tmux${NC}
+  bash setup.sh --dry-run zsh      ${BLUE}# Preview zsh setup${NC}
+  bash setup.sh -d --all           ${BLUE}# Preview all setups${NC}
+
+${YELLOW}Special Handlers:${NC}
+  ${GREEN}zsh${NC}     - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
+  ${GREEN}claude${NC}  - Symlinks .claude/agents/, .claude/commands/, and .claude/settings.json
+
+EOF
+    exit 0
+}
+
+################################################################################
+# Core Symlink Function (Shared)
+################################################################################
+
 create_symlink() {
-    source=$1
-    target=$2
+    local source="$1"
+    local target="$2"
+    local description="${3:-}"
 
-    echo "Processing symlink:"
-    echo "  Source: $source"
-    echo "  Target: $target"
+    # Show what we're doing
+    if [ -n "$description" ]; then
+        echo -e "\n${BLUE}→${NC} $description"
+    fi
 
-    if [ ! -e "$source" ]; then
-        echo "❌ Source does not exist at: $source"
+    # Validate source exists
+    if [ ! -e "$source" ] && [ ! -L "$source" ]; then
+        print_error "Source does not exist: $source"
+        ((ERROR_COUNT++))
+        return 1
+    fi
+
+    # Check if symlink already correct
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+        print_warning "Already linked correctly: $target"
+        ((SKIPPED_COUNT++))
+        return 0
+    fi
+
+    # Dry-run mode
+    if [ "$DRY_RUN" = true ]; then
+        if [ -e "$target" ] || [ -L "$target" ]; then
+            print_info "[DRY-RUN] Would remove: $target"
+        fi
+        print_info "[DRY-RUN] Would create: $target → $source"
+        ((CREATED_COUNT++))
+        return 0
+    fi
+
+    # Create parent directory if needed
+    mkdir -p "$(dirname "$target")"
+
+    # Remove existing file/directory/symlink
+    if [ -e "$target" ] || [ -L "$target" ]; then
+        rm -rf "$target"
+        print_warning "Removed existing: $target"
+    fi
+
+    # Create symlink
+    if ln -s "$source" "$target"; then
+        print_success "Created: $target → $source"
+        ((CREATED_COUNT++))
+    else
+        print_error "Failed to create symlink: $target"
+        ((ERROR_COUNT++))
+        return 1
+    fi
+}
+
+################################################################################
+# Special Setup Handlers
+################################################################################
+
+setup_zsh() {
+    print_header "Setting up Zsh"
+
+    local zsh_dir="$DOTFILES_DIR/zsh"
+
+    # Check if zinit should be installed
+    if [ ! -d "$HOME/.local/share/zinit/zinit.git" ] && [ "$DRY_RUN" = false ]; then
+        print_info "Installing Zinit plugin manager..."
+        bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+        print_success "Zinit installed"
+    elif [ ! -d "$HOME/.local/share/zinit/zinit.git" ]; then
+        print_info "[DRY-RUN] Would install Zinit plugin manager"
+    else
+        print_warning "Zinit already installed"
+    fi
+
+    # Create symlinks
+    create_symlink "$zsh_dir/zshrc" "$HOME/.zshrc" "Symlinking zshrc to ~/.zshrc"
+    create_symlink "$zsh_dir" "$HOME/.config/zsh" "Symlinking zsh directory to ~/.config/zsh"
+
+    print_success "Zsh setup complete!"
+}
+
+setup_claude() {
+    print_header "Setting up Claude Code"
+
+    local claude_dir="$DOTFILES_DIR/.claude"
+
+    # Symlink agents directory
+    if [ -d "$claude_dir/agents" ]; then
+        create_symlink "$claude_dir/agents" "$HOME/.claude/agents" "Symlinking Claude agents"
+    else
+        print_warning ".claude/agents directory not found, skipping"
+    fi
+
+    # Symlink commands directory
+    if [ -d "$claude_dir/commands" ]; then
+        create_symlink "$claude_dir/commands" "$HOME/.claude/commands" "Symlinking Claude commands"
+    else
+        print_warning ".claude/commands directory not found, skipping"
+    fi
+
+    # Symlink settings.json
+    if [ -f "$claude_dir/settings.json" ]; then
+        create_symlink "$claude_dir/settings.json" "$HOME/.claude/settings.json" "Symlinking Claude settings"
+    else
+        print_warning ".claude/settings.json file not found, skipping"
+    fi
+
+    print_success "Claude Code setup complete!"
+}
+
+################################################################################
+# Standard Tool Setup
+################################################################################
+
+# Symlink mappings (tool target pairs)
+SYMLINK_MAPPINGS="
+nvim:$HOME/.config/nvim
+wezterm:$HOME/.config/wezterm
+aerospace:$HOME/.config/aerospace
+tmux:$HOME/.config/tmux
+yazi:$HOME/.config/yazi
+karabiner:$HOME/.config/karabiner
+btop:$HOME/.config/btop
+"
+
+get_target_for_tool() {
+    local tool="$1"
+    echo "$SYMLINK_MAPPINGS" | grep "^$tool:" | cut -d: -f2
+}
+
+get_all_tools() {
+    echo "$SYMLINK_MAPPINGS" | grep -v "^$" | cut -d: -f1
+}
+
+setup_tool() {
+    local tool="$1"
+
+    # Check for special handlers
+    if [ "$tool" = "zsh" ]; then
+        setup_zsh
         return
     fi
 
-    # Remove existing file, directory, or symlink
-    if [ -e "$target" ] || [ -L "$target" ]; then
-        rm -rf "$target"
-        echo "🗑️  Removed existing file/directory/symlink: $target"
+    if [ "$tool" = "claude" ]; then
+        setup_claude
+        return
     fi
 
-    # Create parent directory if it doesn't exist
-    mkdir -p "$(dirname "$target")"
+    # Standard tool setup
+    local target=$(get_target_for_tool "$tool")
+    if [ -z "$target" ]; then
+        print_error "Unknown tool: $tool"
+        print_info "Available tools: $(get_all_tools | xargs) zsh claude"
+        ((ERROR_COUNT++))
+        return 1
+    fi
 
-    ln -s "$source" "$target"
-    echo "✅ Created symlink: $target → $source"
+    local source="$DOTFILES_DIR/$tool"
+    create_symlink "$source" "$target" "Setting up $tool"
 }
 
-# List of symlink mappings (source target).
-SYMLINKS="
-nvim $HOME/.config/nvim
-wezterm $HOME/.config/wezterm
-aerospace $HOME/.config/aerospace
-tmux $HOME/.config/tmux
-yazi $HOME/.config/yazi
-karabiner $HOME/.config/karabiner
-btop $HOME/.config/btop
-"
+setup_all_tools() {
+    print_header "Setting up all dotfiles"
 
-# Function to process all symlinks.
-setup_all_symlinks() {
-    echo "🔧 Setting up all symlinks..."
-    echo "$SYMLINKS" | while read -r key target; do
-        [ -z "$key" ] && continue
-        source="$DOTFILES_DIR/$key"
-        create_symlink "$source" "$target"
+    # Setup all standard tools
+    for tool in $(get_all_tools); do
+        echo ""
+        setup_tool "$tool"
     done
 }
 
-# Function to process a single symlink.
-setup_single_symlink() {
-    key=$1
-    found=false
+################################################################################
+# Argument Parsing
+################################################################################
 
-    while read -r item target; do
-        [ -z "$item" ] && continue
-        if [[ "$item" == "$key" ]]; then
-            source="$DOTFILES_DIR/$item"
-            create_symlink "$source" "$target"
-            found=true
-            break
-        fi
-    done <<<"$SYMLINKS"
+parse_arguments() {
+    local tools=()
+    local setup_all=false
 
-    if [ "$found" = false ]; then
-        echo "❗ Invalid option: $key"
-        echo "Available options: $(echo "$SYMLINKS" | cut -d' ' -f1 | xargs)"
+    # Parse options
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -h|--help)
+                show_help
+                ;;
+            -d|--dry-run)
+                DRY_RUN=true
+                print_warning "Dry-run mode enabled - no changes will be made"
+                shift
+                ;;
+            -a|--all)
+                setup_all=true
+                shift
+                ;;
+            -*)
+                print_error "Unknown option: $1"
+                echo "Use --help for usage information"
+                exit 1
+                ;;
+            *)
+                tools+=("$1")
+                shift
+                ;;
+        esac
+    done
+
+    # Determine what to setup
+    if [ "$setup_all" = true ] || [ ${#tools[@]} -eq 0 ]; then
+        setup_all_tools
+    else
+        # Setup specific tools
+        for tool in "${tools[@]}"; do
+            echo ""
+            setup_tool "$tool"
+        done
+    fi
+}
+
+################################################################################
+# Summary Report
+################################################################################
+
+print_summary() {
+    echo ""
+    print_header "Summary"
+
+    if [ "$DRY_RUN" = true ]; then
+        print_info "Dry-run mode - no actual changes made"
+    fi
+
+    echo -e "${GREEN}Created/Updated:${NC} $CREATED_COUNT"
+    echo -e "${YELLOW}Skipped:${NC} $SKIPPED_COUNT"
+    echo -e "${RED}Errors:${NC} $ERROR_COUNT"
+
+    echo ""
+    if [ $ERROR_COUNT -eq 0 ]; then
+        print_success "All operations completed successfully!"
+    else
+        print_warning "Completed with $ERROR_COUNT error(s)"
         exit 1
     fi
 }
 
-# Main logic: if an argument is provided, process it as a single symlink; otherwise, process all.
-if [ -n "$1" ]; then
-    setup_single_symlink "$1"
-else
-    setup_all_symlinks
-fi
+################################################################################
+# Main Entry Point
+################################################################################
 
-echo "🎉 All requested symlinks have been created or updated."
+main() {
+    # Ensure running with bash
+    if [ -z "$BASH_VERSION" ]; then
+        echo "This script must be run with bash. Use: bash $0"
+        exit 1
+    fi
+
+    # Parse and execute
+    parse_arguments "$@"
+
+    # Show summary
+    print_summary
+}
+
+# Run main
+main "$@"
