@@ -1,3 +1,19 @@
 {
-    "model": "sonnet"
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "say 'Claude code is done, please check.'"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); user=$(whoami); current_dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); model=$(echo \"$input\" | jq -r '.model.display_name'); style=$(echo \"$input\" | jq -r '.output_style.name'); git_info=$(cd \"$current_dir\" 2>/dev/null && git branch --show-current 2>/dev/null | sed 's/^/ (/; s/$/)/' || echo ''); printf \"\\033[2m%s@%s:%s%s | %s | %s\\033[0m\" \"$user\" \"$(hostname -s)\" \"$(basename \"$current_dir\")\" \"$git_info\" \"$model\" \"$style\""
+  },
+  "alwaysThinkingEnabled": true
 }
