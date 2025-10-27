@@ -28,9 +28,9 @@ This repository contains my personal dotfiles and configurations for various too
 ## 📚 Documentation
 
 For comprehensive guides and references:
-- **[📋 Complete Index](INDEX.md)** - Full project documentation and setup guide
-- **[🛠️ Tool Reference](TOOLS.md)** - Commands and configuration for all tools
-- **[🧭 Navigation Guide](NAVIGATION.md)** - Find any documentation quickly
+- **[📋 Complete Index](docs/internal-docs/INDEX.md)** - Full project documentation and setup guide
+- **[🛠️ Tool Reference](docs/internal-docs/TOOLS.md)** - Commands and configuration for all tools
+- **[🧭 Navigation Guide](docs/internal-docs/NAVIGATION.md)** - Find any documentation quickly
 - **[🤖 Claude Code Guide](CLAUDE.md)** - AI integration and repository architecture
 
 ## Usage

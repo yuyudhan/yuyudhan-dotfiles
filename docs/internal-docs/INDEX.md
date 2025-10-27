@@ -107,7 +107,7 @@ nvim --version
 - **Productivity**: Flash navigation, Harpoon, auto-session
 
 #### Quick Reference
-- **Documentation**: [`nvim/CLAUDE.md`](nvim/CLAUDE.md), [`nvim/LSP.md`](nvim/LSP.md)
+- **Documentation**: [`nvim/CLAUDE.md`](../../nvim/CLAUDE.md), [`nvim/LSP.md`](../../nvim/LSP.md)
 - **Entry Point**: `nvim/init.lua`
 - **Core Config**: `nvim/lua/config/`
 - **Plugin Directory**: `nvim/lua/plugins/`
@@ -341,13 +341,13 @@ zsh -c 'zprof'
 ## 🔗 Documentation Cross-References
 
 ### Primary Documentation
-- **[Main README](README.md)** - Project overview and basic usage
-- **[Setup Guide](CLAUDE.md)** - Claude Code integration and repository architecture
+- **[Main README](../../README.md)** - Project overview and basic usage
+- **[Setup Guide](../../CLAUDE.md)** - Claude Code integration and repository architecture
 
 ### Tool-Specific Guides
-- **[Neovim Guide](nvim/CLAUDE.md)** - Complete Neovim configuration reference
-- **[LSP Reference](nvim/LSP.md)** - Language server and tooling documentation
-- **[Zsh Guide](zsh/CLAUDE.md)** - Shell configuration and modular loading system
+- **[Neovim Guide](../../nvim/CLAUDE.md)** - Complete Neovim configuration reference
+- **[LSP Reference](../../nvim/LSP.md)** - Language server and tooling documentation
+- **[Zsh Guide](../../zsh/CLAUDE.md)** - Shell configuration and modular loading system
 
 ### Integration Guides
 - **Claude Code Integration**: Comprehensive AI-assisted development setup
