@@ -26,6 +26,16 @@ vim.keymap.set("n", "<leader>zafn", "<cmd>InsertFilePathComment<CR>", {
     desc = "Add commented file path at the start", -- Inserts '-- FilePath: path/to/file' at top
 })
 
+-- File path copying - copy relative path to repository
+vim.keymap.set("n", "<leader>crp", "<cmd>CopyRelativePath<CR>", {
+    desc = "Copy relative file path to clipboard", -- Copies path relative to current working directory
+})
+
+-- File path copying - copy absolute path
+vim.keymap.set("n", "<leader>cap", "<cmd>CopyAbsolutePath<CR>", {
+    desc = "Copy absolute file path to clipboard", -- Copies full absolute path to file
+})
+
 -- File content manipulation - copy entire file to clipboard
 vim.keymap.set("n", "<leader>zcef", function()
     local cursor_pos = vim.fn.getpos(".") -- Save current cursor position

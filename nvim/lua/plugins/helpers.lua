@@ -62,6 +62,16 @@ vim.api.nvim_create_user_command("CopyRelativePath", function()
     M.copy_relative_path()
 end, { desc = "Copy relative file path to clipboard" })
 
+function M.copy_absolute_path()
+    local absolute_path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", absolute_path)
+    print("Absolute path copied to clipboard: " .. absolute_path)
+end
+
+vim.api.nvim_create_user_command("CopyAbsolutePath", function()
+    M.copy_absolute_path()
+end, { desc = "Copy absolute file path to clipboard" })
+
 function M.indent_file()
     vim.cmd("normal! gg=G")
 end
