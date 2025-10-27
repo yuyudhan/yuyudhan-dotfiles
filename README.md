@@ -14,8 +14,8 @@ This repository contains my personal dotfiles and configurations for various too
 
 ### Directories
 
-- **aerospace/**: Configuration for Aerospace window manager.
 - **btop/**: Configuration for btop system monitor.
+- **aerospace/**: Configuration files for the Aerospace window manager, including layout and keybinding settings.
 - **karabiner/**: Configuration for Karabiner-Elements keyboard customizer.
 - **nvim/**: Neovim configuration files using Lua with LazyVim.
 - **raycast/**: Raycast snippets and configurations (for import only).
@@ -29,7 +29,7 @@ This repository contains my personal dotfiles and configurations for various too
 
 For comprehensive guides and references:
 - **[📋 Complete Index](INDEX.md)** - Full project documentation and setup guide
-- **[🛠️ Tool Reference](TOOLS.md)** - Commands and configuration for all tools  
+- **[🛠️ Tool Reference](TOOLS.md)** - Commands and configuration for all tools
 - **[🧭 Navigation Guide](NAVIGATION.md)** - Find any documentation quickly
 - **[🤖 Claude Code Guide](CLAUDE.md)** - AI integration and repository architecture
 
