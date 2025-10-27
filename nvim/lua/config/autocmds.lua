@@ -8,16 +8,16 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 -- Automatic exit from insert mode after period of inactivity
-vim.o.updatetime = 1500 -- Set update time to 1.5 seconds
+vim.o.updatetime = 4500     -- Set update time to 1.5 seconds
 vim.api.nvim_create_autocmd("CursorHoldI", {
-    pattern = "*", -- Apply to all file types
+    pattern = "*",          -- Apply to all file types
     command = "stopinsert", -- Exit insert mode when cursor is idle for updatetime
 })
 
 -- End of line handling configuration
 -- Force 'noendofline' globally to prevent automatic newline at end of file
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
-    pattern = "*", -- Apply to all file types
+    pattern = "*",                -- Apply to all file types
     callback = function()
         vim.opt.endofline = false -- Disable automatic newline at end of file
     end,
@@ -25,11 +25,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
 
 -- Ensure a blank line at the end of the file for consistent formatting
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*", -- Apply to all file types
+    pattern = "*",                                                             -- Apply to all file types
     callback = function()
         local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, true)[1] or "" -- Get the last line
-        if last_line:match("^%s*$") == nil then -- If last line is not empty or whitespace-only
-            vim.api.nvim_buf_set_lines(0, -1, -1, true, { "" }) -- Add a blank line at the end
+        if last_line:match("^%s*$") == nil then                                -- If last line is not empty or whitespace-only
+            vim.api.nvim_buf_set_lines(0, -1, -1, true, { "" })                -- Add a blank line at the end
         end
     end,
 })
@@ -90,4 +90,3 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
         vim.notify("File reloaded: " .. vim.fn.expand("%"), vim.log.levels.INFO)
     end,
 })
-
