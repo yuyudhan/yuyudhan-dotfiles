@@ -15,6 +15,7 @@ readonly NC='\033[0m' # No Color
 
 # Script state
 DRY_RUN=false
+FORCE_UPDATE=false
 DOTFILES_DIR=$(cd "$(dirname "$0")" && pwd)
 
 # Counters for summary
@@ -49,7 +50,7 @@ print_header() {
 }
 
 show_help() {
-    cat << EOF
+    cat <<EOF
 ${BLUE}Dotfiles Setup Script${NC}
 
 ${YELLOW}Usage:${NC}
@@ -58,6 +59,7 @@ ${YELLOW}Usage:${NC}
 ${YELLOW}Options:${NC}
   -h, --help      Show this help message
   -d, --dry-run   Preview changes without making them
+  -f, --force     Force recreate symlinks even if already correct
   -a, --all       Setup all tools (default if no tools specified)
 
 ${YELLOW}Tools:${NC}
@@ -76,6 +78,7 @@ ${YELLOW}Examples:${NC}
   bash setup.sh nvim tmux          ${BLUE}# Setup only nvim and tmux${NC}
   bash setup.sh --dry-run zsh      ${BLUE}# Preview zsh setup${NC}
   bash setup.sh -d --all           ${BLUE}# Preview all setups${NC}
+  bash setup.sh --force claude     ${BLUE}# Force recreate claude symlinks${NC}
 
 ${YELLOW}Special Handlers:${NC}
   ${GREEN}zsh${NC}     - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
@@ -102,14 +105,14 @@ create_symlink() {
     # Validate source exists
     if [ ! -e "$source" ] && [ ! -L "$source" ]; then
         print_error "Source does not exist: $source"
-        ((ERROR_COUNT++))
+        ((ERROR_COUNT++)) || true
         return 1
     fi
 
-    # Check if symlink already correct
-    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+    # Check if symlink already correct (skip only if not forcing)
+    if [ "$FORCE_UPDATE" = false ] && [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
         print_warning "Already linked correctly: $target"
-        ((SKIPPED_COUNT++))
+        ((SKIPPED_COUNT++)) || true
         return 0
     fi
 
@@ -119,7 +122,7 @@ create_symlink() {
             print_info "[DRY-RUN] Would remove: $target"
         fi
         print_info "[DRY-RUN] Would create: $target → $source"
-        ((CREATED_COUNT++))
+        ((CREATED_COUNT++)) || true
         return 0
     fi
 
@@ -135,10 +138,10 @@ create_symlink() {
     # Create symlink
     if ln -s "$source" "$target"; then
         print_success "Created: $target → $source"
-        ((CREATED_COUNT++))
+        ((CREATED_COUNT++)) || true
     else
         print_error "Failed to create symlink: $target"
-        ((ERROR_COUNT++))
+        ((ERROR_COUNT++)) || true
         return 1
     fi
 }
@@ -173,7 +176,7 @@ setup_zsh() {
 setup_claude() {
     print_header "Setting up Claude Code"
 
-    local claude_dir="$DOTFILES_DIR/.claude"
+    local claude_dir="$DOTFILES_DIR/claude"
 
     # Symlink agents directory
     if [ -d "$claude_dir/agents" ]; then
@@ -271,27 +274,32 @@ parse_arguments() {
     # Parse options
     while [[ $# -gt 0 ]]; do
         case $1 in
-            -h|--help)
-                show_help
-                ;;
-            -d|--dry-run)
-                DRY_RUN=true
-                print_warning "Dry-run mode enabled - no changes will be made"
-                shift
-                ;;
-            -a|--all)
-                setup_all=true
-                shift
-                ;;
-            -*)
-                print_error "Unknown option: $1"
-                echo "Use --help for usage information"
-                exit 1
-                ;;
-            *)
-                tools+=("$1")
-                shift
-                ;;
+        -h | --help)
+            show_help
+            ;;
+        -d | --dry-run)
+            DRY_RUN=true
+            print_warning "Dry-run mode enabled - no changes will be made"
+            shift
+            ;;
+        -f | --force)
+            FORCE_UPDATE=true
+            print_warning "Force mode enabled - will recreate all symlinks"
+            shift
+            ;;
+        -a | --all)
+            setup_all=true
+            shift
+            ;;
+        -*)
+            print_error "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+        *)
+            tools+=("$1")
+            shift
+            ;;
         esac
     done
 
