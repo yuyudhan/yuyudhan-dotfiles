@@ -15,5 +15,5 @@
     "type": "command",
     "command": "bash /Users/ankur/.claude/statusline.sh"
   },
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": true
 }
