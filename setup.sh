@@ -83,6 +83,7 @@ ${YELLOW}Examples:${NC}
 ${YELLOW}Special Handlers:${NC}
   ${GREEN}zsh${NC}     - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
   ${GREEN}claude${NC}  - Symlinks .claude/agents/, .claude/commands/, and .claude/settings.json
+  ${GREEN}tmux${NC}    - Symlinks tmux directory and tmux-which-key config (outside plugins/)
 
 EOF
     exit 0
@@ -202,6 +203,33 @@ setup_claude() {
     print_success "Claude Code setup complete!"
 }
 
+setup_tmux() {
+    print_header "Setting up Tmux"
+
+    local tmux_dir="$DOTFILES_DIR/tmux"
+
+    # Symlink main tmux directory
+    create_symlink "$tmux_dir" "$HOME/.config/tmux" "Symlinking tmux directory"
+
+    # Create plugins/tmux-which-key directory if it doesn't exist
+    if [ "$DRY_RUN" = false ]; then
+        mkdir -p "$HOME/.config/tmux/plugins/tmux-which-key"
+    else
+        print_info "[DRY-RUN] Would create $HOME/.config/tmux/plugins/tmux-which-key directory"
+    fi
+
+    # Symlink tmux-which-key config (needs special handling since plugins/ is gitignored)
+    if [ -f "$tmux_dir/tmux-which-key-config.yaml" ]; then
+        create_symlink "$tmux_dir/tmux-which-key-config.yaml" \
+                      "$HOME/.config/tmux/plugins/tmux-which-key/config.yaml" \
+                      "Symlinking tmux-which-key config"
+    else
+        print_warning "tmux-which-key-config.yaml not found, skipping"
+    fi
+
+    print_success "Tmux setup complete!"
+}
+
 ################################################################################
 # Standard Tool Setup
 ################################################################################
@@ -211,7 +239,6 @@ SYMLINK_MAPPINGS="
 nvim:$HOME/.config/nvim
 wezterm:$HOME/.config/wezterm
 aerospace:$HOME/.config/aerospace
-tmux:$HOME/.config/tmux
 yazi:$HOME/.config/yazi
 karabiner:$HOME/.config/karabiner
 btop:$HOME/.config/btop
@@ -240,11 +267,16 @@ setup_tool() {
         return
     fi
 
+    if [ "$tool" = "tmux" ]; then
+        setup_tmux
+        return
+    fi
+
     # Standard tool setup
     local target=$(get_target_for_tool "$tool")
     if [ -z "$target" ]; then
         print_error "Unknown tool: $tool"
-        print_info "Available tools: $(get_all_tools | xargs) zsh claude"
+        print_info "Available tools: $(get_all_tools | xargs) zsh claude tmux"
         ((ERROR_COUNT++))
         return 1
     fi
@@ -261,6 +293,14 @@ setup_all_tools() {
         echo ""
         setup_tool "$tool"
     done
+
+    # Setup special handlers
+    echo ""
+    setup_zsh
+    echo ""
+    setup_claude
+    echo ""
+    setup_tmux
 }
 
 ################################################################################
