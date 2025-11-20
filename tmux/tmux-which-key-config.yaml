@@ -1,0 +1,320 @@
+# yaml-language-server: $schema=config.schema.yaml
+# Tmux Which-Key Configuration for Ctrl+O Prefix
+# This config matches the keybindings defined in tmux.conf
+
+command_alias_start_index: 200
+
+keybindings:
+  prefix_table: "?"
+
+title:
+  style: align=centre,bold
+  prefix: "tmux help"
+  prefix_style: fg=#7aa2f7,align=centre,bold
+
+position:
+  x: C
+  y: C
+
+items:
+  # === MODAL SYSTEM ===
+  - name: "+Create (a)"
+    key: a
+    menu:
+      - name: New pane (split below)
+        key: p
+        command: command-prompt -p "New pane name:" "split-window -v -c '#{pane_current_path}'; select-pane -T '%%'"
+      - name: New window
+        key: w
+        command: command-prompt -p "New window name:" "new-window -c '#{pane_current_path}' -n '%%'"
+      - name: New session
+        key: s
+        command: command-prompt -p "New session name:" "new-session -s '%%'"
+
+  - name: "+Rename (r)"
+    key: r
+    menu:
+      - name: Rename session
+        key: s
+        command: command-prompt -p "Rename session:" "rename-session '%%'"
+      - name: Rename window
+        key: w
+        command: command-prompt -p "Rename window:" "rename-window '%%'"
+      - name: Rename pane
+        key: p
+        command: command-prompt -p "Rename pane:" "select-pane -T '%%'"
+
+  - name: "+Kill (x)"
+    key: x
+    menu:
+      - name: Kill pane
+        key: p
+        command: 'confirm-before -p "Kill pane? (y/n)" kill-pane'
+      - name: Kill window
+        key: w
+        command: 'confirm-before -p "Kill window? (y/n)" kill-window'
+      - name: Kill session
+        key: s
+        command: 'confirm-before -p "Kill session? (y/n)" kill-session'
+
+  - name: "+Switch (s)"
+    key: s
+    menu:
+      - name: Choose window
+        key: w
+        command: choose-window
+      - name: Choose session
+        key: s
+        command: choose-session
+      - name: Choose tree
+        key: t
+        command: choose-tree
+
+  - name: "Fuzzy Menu (F)"
+    key: F
+    command: run-shell -b "~/.config/tmux/plugins/tmux-fzf/main.sh"
+
+  - name: "+Tmux Mode (q)"
+    key: q
+    menu:
+      - name: Detach client
+        key: D
+        command: detach-client
+      - name: Save session
+        key: S
+        command: run-shell "~/.config/tmux/plugins/tmux-resurrect/scripts/save.sh"
+      - name: Restore session
+        key: R
+        command: run-shell "~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh"
+      - name: Install plugins
+        key: I
+        command: run-shell '~/.config/tmux/plugins/tpm/bin/install_plugins'
+      - name: Reload config
+        key: C
+        command: source-file ~/.config/tmux/tmux.conf
+      - name: Popup terminal
+        key: p
+        command: display-popup -E -w80% -h80%
+
+  - separator: true
+
+  # === PANE MANAGEMENT (Direct Bindings) ===
+  - name: "Split horizontal (|)"
+    key: "|"
+    command: split-window -h -c "#{pane_current_path}"
+
+  - name: "Split vertical (-)"
+    key: "-"
+    command: split-window -v -c "#{pane_current_path}"
+
+  - name: "Smart split H 30% (C-|)"
+    key: C-|
+    command: split-window -h -p 30 -c "#{pane_current_path}"
+
+  - name: "Smart split V 30% (C--)"
+    key: C--
+    command: split-window -v -p 30 -c "#{pane_current_path}"
+
+  - name: "Resize left (H)"
+    key: H
+    command: resize-pane -L 4
+    transient: true
+
+  - name: "Resize down (J)"
+    key: J
+    command: resize-pane -D 4
+    transient: true
+
+  - name: "Resize up (K)"
+    key: K
+    command: resize-pane -U 4
+    transient: true
+
+  - name: "Resize right (L)"
+    key: L
+    command: resize-pane -R 4
+    transient: true
+
+  - name: "Toggle zoom (f)"
+    key: f
+    command: resize-pane -Z
+
+  - name: "Toggle sync (Y) 🔴"
+    key: Y
+    command: set-window-option synchronize-panes
+
+  - name: "Clear pane + history (k)"
+    key: k
+    command: send-keys -R C-l \; clear-history
+
+  - name: "Swap pane down (>)"
+    key: ">"
+    command: swap-pane -D
+
+  - name: "Swap pane up (<)"
+    key: "<"
+    command: swap-pane -U
+
+  - name: "Break to window (!)"
+    key: "!"
+    command: break-pane
+
+  - name: "Join window as pane (@)"
+    key: "@"
+    command: choose-window 'join-pane -h -s "%%"'
+
+  - name: "Rotate panes (C-o)"
+    key: C-o
+    command: rotate-window
+
+  - name: "Mark pane (m)"
+    key: m
+    command: select-pane -m
+
+  - name: "Clear mark (M)"
+    key: M
+    command: select-pane -M
+
+  - name: "Jump to marked (')"
+    key: "'"
+    command: switch-client -t'{marked}'
+
+  - separator: true
+
+  # === WINDOW MANAGEMENT (Direct Bindings) ===
+  - name: "Fuzzy window (w)"
+    key: w
+    command: display-popup -E "tmux list-windows -a -F '#{session_name}:#{window_index}:#{window_name}' | fzf --reverse | sed 's/\\(.*\\):\\(.*\\):.*/\\1:\\2/' | xargs -I{} tmux switch-client -t {}"
+
+  - name: "Cycle layouts (Space)"
+    key: Space
+    command: next-layout
+    transient: true
+
+  - name: "Move window left ({)"
+    key: "{"
+    command: swap-window -t -1
+
+  - name: "Move window right (})"
+    key: "}"
+    command: swap-window -t +1
+
+  - name: "Even horizontal (M-1)"
+    key: M-1
+    command: select-layout even-horizontal
+
+  - name: "Even vertical (M-2)"
+    key: M-2
+    command: select-layout even-vertical
+
+  - name: "Main horizontal (M-3)"
+    key: M-3
+    command: select-layout main-horizontal
+
+  - name: "Main vertical (M-4)"
+    key: M-4
+    command: select-layout main-vertical
+
+  - name: "Tiled (M-5)"
+    key: M-5
+    command: select-layout tiled
+
+  - separator: true
+
+  # === SESSION MANAGEMENT ===
+  - name: "Last session (Tab)"
+    key: Tab
+    command: switch-client -l
+
+  - name: "SessionX (O)"
+    key: O
+    command: run-shell "~/.config/tmux/plugins/tmux-sessionx/scripts/sessionx.sh"
+
+  - name: "New project (P)"
+    key: P
+    command: display-popup -E -w80% -h80% "~/.config/tmux/scripts/new-project-session.sh"
+
+  - name: "Quick save (C-s)"
+    key: C-s
+    command: run-shell "~/.config/tmux/plugins/tmux-resurrect/scripts/save.sh"
+
+  - name: "Save & detach (C-d)"
+    key: C-d
+    command: run-shell "~/.config/tmux/plugins/tmux-resurrect/scripts/save.sh" \; detach-client
+
+  - separator: true
+
+  # === COPY MODE & SEARCH ===
+  - name: "Enter copy mode ([)"
+    key: "["
+    command: copy-mode
+
+  - name: "Thumbs selection (Space)"
+    key: Space
+    command: run-shell "~/.config/tmux/plugins/tmux-thumbs/tmux-thumbs.sh"
+
+  - name: "Extract URLs (u)"
+    key: u
+    command: run-shell "~/.config/tmux/plugins/tmux-fzf-url/fzf-url.sh"
+
+  - name: "Regex search (/)"
+    key: /
+    command: copy-mode \; send-keys /
+
+  - name: "File search (C-f)"
+    key: C-f
+    command: run-shell "/Users/ankur/.config/tmux/plugins/tmux-copycat/scripts/copycat_mode_start.sh '[[:alpha:][:digit:]~_-]*/[][[:alnum:]_.#$%&+=/@-]*'"
+
+  - name: "Git files (C-g)"
+    key: C-g
+    command: run-shell "/Users/ankur/.config/tmux/plugins/tmux-copycat/scripts/copycat_mode_start.sh '\\b(add|rm|mv|diff|checkout|commit|stage|show|reset|stash|pop|status|log) [[:graph:]]+'"
+
+  - name: "URL search (C-u)"
+    key: C-u
+    command: run-shell "/Users/ankur/.config/tmux/plugins/tmux-copycat/scripts/copycat_mode_start.sh '(https?://|git@|git://|ssh://|ftp://|file:///)[[:alnum:]?=%/_.:,;~@!#$&()*+-]*'"
+
+  - name: "Digit search (C-d)"
+    key: C-d
+    command: run-shell "/Users/ankur/.config/tmux/plugins/tmux-copycat/scripts/copycat_mode_start.sh '[[:digit:]]+'"
+
+  - name: "Hash search (C-h)"
+    key: C-h
+    command: run-shell "/Users/ankur/.config/tmux/plugins/tmux-copycat/scripts/copycat_mode_start.sh '\\b(^[a-f0-9]{7,40}|[a-f0-9]{64}|[a-f0-9]{128})\\b'"
+
+  - separator: true
+
+  # === QUICK POPUPS ===
+  - name: "Git log (g)"
+    key: g
+    command: display-popup -E -w80% -h80% -d "#{pane_current_path}" "git log --oneline --graph --all --decorate"
+
+  - name: "Git status (G)"
+    key: G
+    command: display-popup -E -w80% -h80% -d "#{pane_current_path}" "git status"
+
+  - name: "Git diff (D)"
+    key: D
+    command: display-popup -E -w80% -h80% -d "#{pane_current_path}" "git diff"
+
+  - name: "Man page (M)"
+    key: M
+    command: command-prompt -p "man page:" "display-popup -E -w80% -h80% 'man %%'"
+
+  - name: "Edit config (E)"
+    key: E
+    command: new-window -n "tmux.conf" "nvim ~/.config/tmux/tmux.conf"
+
+  - separator: true
+
+  # === MISC ===
+  - name: "Show help (default)"
+    key: "?"
+    command: list-keys -N
+
+  - name: "Clock mode"
+    key: T
+    command: clock-mode
+
+  - name: "Show messages"
+    key: "~"
+    command: show-messages
