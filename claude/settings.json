@@ -15,5 +15,8 @@
     "type": "command",
     "command": "bash /Users/ankur/.claude/statusline.sh"
   },
-  "alwaysThinkingEnabled": true
+  "enabledPlugins": {
+    "prompt-improver@claude-code-marketplace": true
+  },
+  "alwaysThinkingEnabled": false
 }
