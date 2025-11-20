@@ -15,7 +15,7 @@ config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 15
 
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 10
 
 -- Catppuccin Mocha window frame
