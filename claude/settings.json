@@ -1,24 +1,24 @@
 {
-    "model": "sonnet",
-    "hooks": {
-        "Stop": [
-            {
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "say \"Claude code is done in $(basename \"$PWD\"). Please check.\""
-                    }
-                ]
-            }
+  "model": "sonnet",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "say \"Claude code is done in $(basename \"$PWD\"). Please check.\""
+          }
         ]
-    },
-    "statusLine": {
-        "type": "command",
-        "command": "bash /Users/ankur/.claude/statusline.sh"
-    },
-    "enabledPlugins": {
-        "prompt-improver@claude-code-marketplace": true,
-        "frontend-design@claude-code-plugins": true
-    },
-    "alwaysThinkingEnabled": false
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/ankur/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "prompt-improver@claude-code-marketplace": true,
+    "frontend-design@claude-code-plugins": true
+  },
+  "alwaysThinkingEnabled": false
 }
