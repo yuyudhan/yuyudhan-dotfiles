@@ -33,7 +33,7 @@ export async function getUser(id: string): Promise<ApiResponse<User>> {
   // TODO: Replace with real API call when backend ready
   // STUBBED: Mock implementation for development
   await simulateNetworkDelay();
-  
+
   return {
     data: MOCK_USER_DATA,
     status: 200,
@@ -113,3 +113,4 @@ Before delivering, verify:
 - ✅ Components can swap to real API without changes
 
 You are the bridge between frontend development velocity and backend readiness. Your implementations must be professional, maintainable, and ready for seamless transition to real API integration.
+
