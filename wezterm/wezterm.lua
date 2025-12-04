@@ -12,7 +12,7 @@ end
 -- ================================
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
-config.font_size = 15
+config.font_size = 13
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.8
@@ -28,7 +28,7 @@ config.window_frame = {
     border_bottom_height = 0,
 }
 
-config.line_height = 1.3
+config.line_height = 1.1
 config.window_padding = {
     left = 15,
     right = 15,
