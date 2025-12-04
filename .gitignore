@@ -1,50 +1,110 @@
 #  FilePath: .gitignore
 
-# Ignore plugin-related directories
-plugged/
-lazy/
-lazy-lock.json
-lazy-lock.yaml
+# ============================================================================
+# Operating System Files
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-btop.log.*
-# Ignore Neovim cache directories
-.cache/
-cache/
-
-# Ignore temporary files
+# ============================================================================
+# Editor/IDE Temporary Files
+# ============================================================================
 *.swp
 *.swo
 *.swn
 *.bak
 *.tmp
+*.backup
 *.un~
+*~
 Session.vim
 
-# Ignore log files
-*.log
+# ============================================================================
+# Neovim
+# ============================================================================
+# Plugin directories (managed by lazy.nvim)
+nvim/lazy/
+nvim/lazy-lock.json
+nvim/lazy-lock.yaml
+nvim/plugged/
 
-# Ignore OS-specific files
-.DS_Store
-Thumbs.db
+# Cache and temporary files
+nvim/.cache/
+nvim/cache/
+nvim/.repro/
+nvim/debug/
+nvim/undo/
+nvim/after/
+nvim/data/
 
-# Ignore temporary and backup directories
+# Tests and trials
+nvim/.tests
+nvim/doc/tags
+
+# ============================================================================
+# Tmux
+# ============================================================================
+# Plugin directory (managed by TPM)
+tmux/plugins/
+
+# Resurrect/continuum saved sessions (optional - uncomment if you don't want to track)
+# tmux/resurrect/
+
+# Tmux log files
+tmux-client-*.log
+tmux-server-*.log
+tmux/*.log
+
+# ============================================================================
+# Zsh
+# ============================================================================
+# History file (should not be tracked)
+zsh/.zsh_history
+zsh/.zcompdump*
+
+# Zinit cache and plugins
+zsh/.zinit/
+zsh/plugins/
+
+# Completion cache
+zsh/.zcompcache/
+
+# ============================================================================
+# Claude Code
+# ============================================================================
+# Local overrides and experiments
+.claude/*.local.md
+.claude/temp/
+.claude/.cache/
+
+# ============================================================================
+# Btop
+# ============================================================================
+btop.log.*
+btop/*.log
+
+# ============================================================================
+# Temporary & Development Files
+# ============================================================================
 /tmp/
 temp/
 automatic_backups/
-debug/
-.repro/
-
-# Ignore undo and session-related files
-undo/
-after/
-data/
-
-# Ignore specific files and extensions
+trial-files/
 tt.*
 foo.*
-.tests
-doc/tags
 
-trial-files
-tmux/plugins
+# ============================================================================
+# Log Files (General)
+# ============================================================================
+*.log
+
+# ============================================================================
+# Git Submodules & Package Managers (if any)
+# ============================================================================
+.gitmodules.local
 
