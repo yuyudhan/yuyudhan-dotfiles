@@ -1,9 +1,96 @@
 # FilePath: .editorconfig
+# EditorConfig is awesome: https://EditorConfig.org
 
-# in this repo I have the dotfiles for different types.
-#
-# Create me the editorconfig for all kinds of files for nvim and others like toml, yaml etc.
-# I want 4 spaces indentation everywhere.
-#
-#
+# Top-most EditorConfig file
+root = true
 
+# Universal defaults for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Shell scripts
+[*.{sh,bash,zsh}]
+indent_style = space
+indent_size = 4
+
+# Lua files (Neovim configuration)
+[*.lua]
+indent_style = space
+indent_size = 4
+
+# Markdown files
+[*.md]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 4
+
+# JSON files
+[*.json]
+indent_style = space
+indent_size = 4
+
+# TOML files
+[*.toml]
+indent_style = space
+indent_size = 4
+
+# Configuration files
+[*.{conf,config,ini}]
+indent_style = space
+indent_size = 4
+
+# Python files
+[*.py]
+indent_style = space
+indent_size = 4
+
+# JavaScript/TypeScript files
+[*.{js,jsx,ts,tsx}]
+indent_style = space
+indent_size = 4
+
+# CSS/SCSS files
+[*.{css,scss,sass,less}]
+indent_style = space
+indent_size = 4
+
+# HTML/XML files
+[*.{html,xml,svg}]
+indent_style = space
+indent_size = 4
+
+# Rust files
+[*.rs]
+indent_style = space
+indent_size = 4
+
+# Go files
+[*.go]
+indent_style = space
+indent_size = 4
+
+# C/C++ files
+[*.{c,cpp,h,hpp}]
+indent_style = space
+indent_size = 4
+
+# Makefiles require tabs (exception to 4-space rule)
+[Makefile]
+indent_style = tab
+
+[*.mk]
+indent_style = tab
+
+# Git commit messages
+[COMMIT_EDITMSG]
+max_line_length = 72
