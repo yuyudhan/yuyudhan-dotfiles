@@ -72,6 +72,7 @@ ${YELLOW}Tools:${NC}
   btop            Btop system monitor
   zsh             Zsh shell (special: creates ~/.zshrc + ~/.config/zsh/)
   claude          Claude Code (special: symlinks agents/commands/settings)
+  opencode        OpenCode (special: symlinks commands to ~/.config/opencode/command/)
 
 ${YELLOW}Examples:${NC}
   bash setup.sh                    ${BLUE}# Setup all tools${NC}
@@ -79,10 +80,12 @@ ${YELLOW}Examples:${NC}
   bash setup.sh --dry-run zsh      ${BLUE}# Preview zsh setup${NC}
   bash setup.sh -d --all           ${BLUE}# Preview all setups${NC}
   bash setup.sh --force claude     ${BLUE}# Force recreate claude symlinks${NC}
+  bash setup.sh opencode            ${BLUE}# Setup opencode commands${NC}
 
 ${YELLOW}Special Handlers:${NC}
   ${GREEN}zsh${NC}     - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
   ${GREEN}claude${NC}  - Symlinks .claude/agents/, .claude/commands/, and .claude/settings.json
+  ${GREEN}opencode${NC} - Symlinks commands to ~/.config/opencode/command/ for global access
   ${GREEN}tmux${NC}    - Symlinks tmux directory and tmux-which-key config (outside plugins/)
 
 EOF
@@ -230,6 +233,31 @@ setup_tmux() {
     print_success "Tmux setup complete!"
 }
 
+setup_opencode() {
+    print_header "Setting up OpenCode"
+
+    local opencode_dir="$DOTFILES_DIR/opencode"
+    local global_command_dir="$HOME/.config/opencode/command"
+
+    # Create global command directory if needed
+    if [ "$DRY_RUN" = false ]; then
+        mkdir -p "$global_command_dir"
+    else
+        print_info "[DRY-RUN] Would create $global_command_dir directory"
+    fi
+
+    # Symlink opencode commands to global config
+    if [ -d "$opencode_dir/command/yuyudhan" ]; then
+        create_symlink "$opencode_dir/command/yuyudhan" \
+                       "$global_command_dir/yuyudhan" \
+                       "Symlinking OpenCode commands to global config"
+    else
+        print_warning "opencode/command/yuyudhan directory not found, skipping"
+    fi
+
+    print_success "OpenCode setup complete!"
+}
+
 ################################################################################
 # Standard Tool Setup
 ################################################################################
@@ -272,11 +300,16 @@ setup_tool() {
         return
     fi
 
+    if [ "$tool" = "opencode" ]; then
+        setup_opencode
+        return
+    fi
+
     # Standard tool setup
     local target=$(get_target_for_tool "$tool")
     if [ -z "$target" ]; then
         print_error "Unknown tool: $tool"
-        print_info "Available tools: $(get_all_tools | xargs) zsh claude tmux"
+        print_info "Available tools: $(get_all_tools | xargs) zsh claude tmux opencode"
         ((ERROR_COUNT++))
         return 1
     fi
@@ -301,6 +334,8 @@ setup_all_tools() {
     setup_claude
     echo ""
     setup_tmux
+    echo ""
+    setup_opencode
 }
 
 ################################################################################
