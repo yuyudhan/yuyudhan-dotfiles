@@ -1,5 +1,4 @@
 {
-  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -20,5 +19,6 @@
     "prompt-improver@claude-code-marketplace": true,
     "frontend-design@claude-code-plugins": true
   },
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": true,
+  "model": "sonnet"
 }
