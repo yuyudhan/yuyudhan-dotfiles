@@ -1,3 +1,8 @@
+---
+description: Run pre-commit validation checks
+model: anthropic/claude-haiku-4-5
+---
+
 Purpose: Run pre-commit validation for the provided code context.
 
 Scope: Validate only the specific code flow, files, endpoints, or features provided in the context.

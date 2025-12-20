@@ -1,4 +1,7 @@
-Model: claude-3-5-haiku-20241022
+---
+description: Create logical git commits with emoji-prefixed messages
+model: anthropic/claude-haiku-4-5
+---
 
 Purpose: Create logical git commits with emoji-prefixed messages for changed files.
 
