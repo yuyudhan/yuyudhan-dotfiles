@@ -1,3 +1,8 @@
+---
+description: Audit Rust performance bottlenecks
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Analyze Rust codebase for performance bottlenecks and optimization opportunities.
 
 Scope: Focus analysis on the specific context, files, or modules provided when running this command.

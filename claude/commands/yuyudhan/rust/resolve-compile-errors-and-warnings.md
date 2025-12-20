@@ -1,3 +1,8 @@
+---
+description: Resolve Rust compilation errors and warnings
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Resolve Rust compilation errors and warnings in the provided code context.
 
 Scope: Focus on the specific files, endpoints, or features in the context provided when running this command.

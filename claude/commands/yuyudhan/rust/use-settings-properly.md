@@ -1,3 +1,8 @@
+---
+description: Migrate to centralized Rust settings
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Migrate hardcoded values to centralized settings configuration.
 
 Scope: Only specific files, endpoints, flows, or features in context.

@@ -1,3 +1,8 @@
+---
+description: Fix Rust anti-patterns
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Identify and fix Rust anti-patterns in the provided code context.
 
 Scope: Analyze only the specific code flow, endpoint(s), files, functions, or modules provided when running this command.

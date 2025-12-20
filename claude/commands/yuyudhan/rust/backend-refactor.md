@@ -1,3 +1,8 @@
+---
+description: Refactor Rust backend architecture
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Refactor Rust backend code for better organization, reduced duplication, proper architecture.
 
 Scope: Only the specific endpoints, modules, flows, or files in context.
