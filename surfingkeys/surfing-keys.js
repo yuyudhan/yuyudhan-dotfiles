@@ -2,6 +2,21 @@
 // Moved away from tampermonkey and script added here.
 (function() {
     'use strict';
+
+    // Excluded domains - background cleaner won't run on these sites
+    const excludedDomains = [
+        'docs.google.com',
+        'sheets.google.com'
+        // Add more domains here as needed
+    ];
+
+    // Check if current domain should be excluded
+    const currentDomain = window.location.hostname;
+    if (excludedDomains.some(domain => currentDomain.includes(domain))) {
+        console.info("INFO: Background cleaner skipped for excluded domain:", currentDomain);
+        return; // Exit early
+    }
+
     console.info("INFO: Global Background Cleaner script initialized.");
 
     // Set custom background on html/body
