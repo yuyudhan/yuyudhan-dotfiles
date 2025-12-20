@@ -1,3 +1,8 @@
+---
+description: Display OpenSpec changes or specifications
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 Display OpenSpec change proposals or source specifications.
 

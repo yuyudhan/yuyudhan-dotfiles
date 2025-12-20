@@ -1,3 +1,8 @@
+---
+description: Create new OpenSpec change proposal
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 Create a new OpenSpec change proposal with proposal.md, tasks.md, and spec deltas.
 

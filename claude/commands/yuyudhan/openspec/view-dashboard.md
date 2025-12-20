@@ -1,3 +1,8 @@
+---
+description: View OpenSpec dashboard
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 View dashboard of all OpenSpec specifications and changes.
 

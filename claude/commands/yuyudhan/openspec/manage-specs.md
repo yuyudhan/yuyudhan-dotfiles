@@ -1,3 +1,8 @@
+---
+description: View and manage OpenSpec specifications
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 View and manage OpenSpec source specifications (current truth).
 

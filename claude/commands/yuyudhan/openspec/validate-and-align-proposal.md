@@ -1,3 +1,8 @@
+---
+description: Validate and align OpenSpec proposals
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 Validate spec formatting and ensure deltas align with source specs.
 

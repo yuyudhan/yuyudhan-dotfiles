@@ -1,3 +1,8 @@
+---
+description: Archive completed OpenSpec changes
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 Archive completed OpenSpec changes (100% tasks done).
 

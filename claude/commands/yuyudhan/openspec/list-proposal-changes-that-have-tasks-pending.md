@@ -1,3 +1,8 @@
+---
+description: List OpenSpec changes with pending tasks
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 Show status of all OpenSpec changes with task completion.
 

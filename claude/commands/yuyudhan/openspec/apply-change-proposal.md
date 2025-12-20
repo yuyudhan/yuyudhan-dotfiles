@@ -1,3 +1,8 @@
+---
+description: Implement OpenSpec change proposal tasks
+model: anthropic/claude-haiku-4-5
+---
+
 ## Purpose
 Implement an OpenSpec change proposal by completing tasks sequentially.
 
