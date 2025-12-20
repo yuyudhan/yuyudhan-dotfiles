@@ -1,3 +1,8 @@
+---
+description: Improve code comment quality
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Improve comment quality—add where needed, remove noise, use language-appropriate strategy.
 
 Scope: Only specific files, flows, endpoints, or functions in context.

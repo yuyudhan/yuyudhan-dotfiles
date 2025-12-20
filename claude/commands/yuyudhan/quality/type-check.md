@@ -1,3 +1,8 @@
+---
+description: Verify type consistency between backend and frontend
+model: anthropic/claude-haiku-4-5
+---
+
 Purpose: Verify type consistency between backend and frontend.
 
 Scope: Check types only for the specific endpoints, models, or features provided in the context.

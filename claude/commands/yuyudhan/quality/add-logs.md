@@ -1,3 +1,8 @@
+---
+description: Add comprehensive logging for debugging
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Add comprehensive logging to the provided code context for debugging and production diagnosis.
 
 Scope: Add logs only to the specific files, functions, or code flow provided when running this command.
