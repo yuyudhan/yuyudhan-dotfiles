@@ -72,7 +72,7 @@ ${YELLOW}Tools:${NC}
   btop            Btop system monitor
   zsh             Zsh shell (special: creates ~/.zshrc + ~/.config/zsh/)
   claude          Claude Code (special: symlinks agents/commands/settings)
-  opencode        OpenCode (special: symlinks commands to ~/.config/opencode/command/)
+  opencode        OpenCode (special: symlinks agents & commands to ~/.config/opencode/)
 
 ${YELLOW}Examples:${NC}
   bash setup.sh                    ${BLUE}# Setup all tools${NC}
@@ -83,10 +83,10 @@ ${YELLOW}Examples:${NC}
   bash setup.sh opencode            ${BLUE}# Setup opencode commands${NC}
 
 ${YELLOW}Special Handlers:${NC}
-  ${GREEN}zsh${NC}     - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
-  ${GREEN}claude${NC}  - Symlinks .claude/agents/, .claude/commands/, and .claude/settings.json
-  ${GREEN}opencode${NC} - Symlinks commands to ~/.config/opencode/command/ for global access
-  ${GREEN}tmux${NC}    - Symlinks tmux directory and tmux-which-key config (outside plugins/)
+  ${GREEN}zsh${NC}      - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
+  ${GREEN}claude${NC}   - Symlinks .claude/agents/, .claude/commands/, and .claude/settings.json
+  ${GREEN}opencode${NC} - Symlinks opencode/agent/, opencode/command/, and opencode.json to ~/.config/opencode/
+  ${GREEN}tmux${NC}     - Symlinks tmux directory and tmux-which-key config (outside plugins/)
 
 EOF
     exit 0
@@ -237,22 +237,26 @@ setup_opencode() {
     print_header "Setting up OpenCode"
 
     local opencode_dir="$DOTFILES_DIR/opencode"
-    local global_command_dir="$HOME/.config/opencode/command"
 
-    # Create global command directory if needed
-    if [ "$DRY_RUN" = false ]; then
-        mkdir -p "$global_command_dir"
+    # Symlink agent directory
+    if [ -d "$opencode_dir/agent" ]; then
+        create_symlink "$opencode_dir/agent" "$HOME/.config/opencode/agent" "Symlinking OpenCode agents directory"
     else
-        print_info "[DRY-RUN] Would create $global_command_dir directory"
+        print_warning "opencode/agent directory not found, skipping"
     fi
 
-    # Symlink opencode commands to global config
-    if [ -d "$opencode_dir/command/yuyudhan" ]; then
-        create_symlink "$opencode_dir/command/yuyudhan" \
-                       "$global_command_dir/yuyudhan" \
-                       "Symlinking OpenCode commands to global config"
+    # Symlink command directory
+    if [ -d "$opencode_dir/command" ]; then
+        create_symlink "$opencode_dir/command" "$HOME/.config/opencode/command" "Symlinking OpenCode commands directory"
     else
-        print_warning "opencode/command/yuyudhan directory not found, skipping"
+        print_warning "opencode/command directory not found, skipping"
+    fi
+
+    # Symlink opencode.json
+    if [ -f "$opencode_dir/opencode.json" ]; then
+        create_symlink "$opencode_dir/opencode.json" "$HOME/.config/opencode/opencode.json" "Symlinking OpenCode permissions config"
+    else
+        print_warning "opencode/opencode.json file not found, skipping"
     fi
 
     print_success "OpenCode setup complete!"
