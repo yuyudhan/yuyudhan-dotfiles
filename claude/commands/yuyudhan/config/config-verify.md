@@ -1,3 +1,8 @@
+---
+description: Audit configuration compliance
+model: anthropic/claude-haiku-4-5
+---
+
 Purpose: Audit configuration compliance for the provided code context.
 
 Scope: Verify configuration only in the specific code flow, files, endpoints, or features provided. If no context given, audit entire codebase.
@@ -16,3 +21,4 @@ Output:
 - Specific fixes per violation
 - Updated .env.example if new variables found
 - Summary: total issues by severity
+
