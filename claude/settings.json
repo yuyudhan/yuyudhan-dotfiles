@@ -19,5 +19,6 @@
     "prompt-improver@claude-code-marketplace": true,
     "frontend-design@claude-code-plugins": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "model": "sonnet"
 }
