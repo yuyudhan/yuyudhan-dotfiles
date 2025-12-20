@@ -1,3 +1,5 @@
+Model: claude-3-5-haiku-20241022
+
 Purpose: Create logical git commits with emoji-prefixed messages for changed files.
 
 Scope: Commit only the specific code flow, files, endpoints, or features provided. If no specific context given, commit all staged/unstaged changes that should be committed.
