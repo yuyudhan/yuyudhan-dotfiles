@@ -1,3 +1,8 @@
+---
+description: Enhance user experience following best practices
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Enhance user experience following best practices. Balance simplicity with intelligence—don't patronize.
 
 Scope: Only specific pages, components, features, or flows in context.

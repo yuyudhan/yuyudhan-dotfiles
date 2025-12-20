@@ -1,3 +1,8 @@
+---
+description: Refactor frontend code for better architecture
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Refactor frontend code for proper architecture, reusability, and maintainability.
 
 Scope: Refactor only the specific components, pages, or features provided in the context.

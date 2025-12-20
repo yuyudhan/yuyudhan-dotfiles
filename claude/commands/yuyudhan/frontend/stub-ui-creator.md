@@ -1,3 +1,8 @@
+---
+description: Create UI with stubbed API responses
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Create frontend UI with stubbed backend responses in API integration layer only.
 
 Scope: Specific features/components provided in context.

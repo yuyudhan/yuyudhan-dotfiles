@@ -1,3 +1,8 @@
+---
+description: Enhance UI elegance with ShadCN and Tailwind
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Enhance UI for visual elegance and professional appearance using ShadCN and Tailwind.
 
 Scope: Enhance only the specific UI components, pages, or features provided in the context.

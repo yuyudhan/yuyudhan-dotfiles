@@ -1,3 +1,8 @@
+---
+description: Fix React/frontend anti-patterns
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Identify and fix React/frontend anti-patterns (React primary, fallback: Preact, Vue, Svelte).
 
 Scope: Only specific components, hooks, pages, or modules in context.

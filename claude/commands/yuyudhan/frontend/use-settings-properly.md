@@ -1,3 +1,8 @@
+---
+description: Migrate to centralized frontend configuration
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Migrate hardcoded values to centralized frontend configuration.
 
 Scope: Only specific components, pages, features, or modules in context.
