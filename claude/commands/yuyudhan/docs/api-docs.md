@@ -1,3 +1,8 @@
+---
+description: Generate and update API documentation
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Generate and update API documentation for the provided endpoints or modules.
 
 Scope: Document only the specific API endpoints, modules, or routes provided in the context.

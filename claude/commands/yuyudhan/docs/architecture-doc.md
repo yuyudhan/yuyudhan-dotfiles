@@ -1,3 +1,8 @@
+---
+description: Document architectural decisions and patterns
+model: anthropic/claude-sonnet-4-5
+---
+
 Purpose: Document architectural decisions and patterns for the provided code context.
 
 Scope: Document only the specific code flow, files, endpoints, or features provided in the context.
