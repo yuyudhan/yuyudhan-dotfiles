@@ -1,3 +1,7 @@
+---
+description: Find battery and CPU consuming processes
+model: anthropic/claude-haiku-4-5
+---
 
 Purpose: Identify processes consuming excessive CPU/battery on Mac and provide kill options with user confirmation.
 
