@@ -1,3 +1,8 @@
+---
+description: Organize markdown files into proper structure
+model: anthropic/claude-haiku-4-5
+---
+
 Purpose: Organize markdown files scattered across the repository into proper documentation structure.
 
 Scope: Find and organize markdown files in the provided context (specific directories or entire repository if not specified).

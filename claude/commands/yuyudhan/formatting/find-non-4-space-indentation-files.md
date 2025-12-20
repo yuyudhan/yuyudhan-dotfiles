@@ -1,3 +1,8 @@
+---
+description: Find files with non-4-space indentation
+model: anthropic/claude-haiku-4-5
+---
+
 Purpose: Identify all files in provided directory/context that don't use 4-space indentation.
 
 Input: Directory path or file pattern to scan (e.g., `docs/dashboard/`, `src/**/*.ts`).

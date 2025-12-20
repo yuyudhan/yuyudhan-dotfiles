@@ -1,3 +1,8 @@
+---
+description: Convert indentation to 4-space standard
+model: anthropic/claude-haiku-4-5
+---
+
 Purpose: Convert indentation in provided file(s) to 4-space standard.
 
 Input: File path(s) or code context requiring indentation standardization.
