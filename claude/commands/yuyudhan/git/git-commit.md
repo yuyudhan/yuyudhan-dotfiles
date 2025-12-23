@@ -15,6 +15,8 @@ Branch Strategy:
 - **Refactors**: `refactor/<component-name>` - Code restructuring
 - **Docs**: `docs/<topic>` - Documentation updates
 - **MANDATORY**: Create separate branches for logically distinct features
+- **Multiple branches allowed**: Create as many branches as needed per session
+- **Pattern**: Create branch → add files → commit → switch to next branch → repeat
 - Branch from `main`, merge back to `main` via PR
 - Keep branches focused (one feature/fix per branch)
 
@@ -34,11 +36,15 @@ Commit Grouping:
 - Keep focused (one logical change per commit)
 
 Workflow:
-1. Check current branch - create feature branch if needed
-2. Stage related changes together
-3. Create focused commits with emoji-prefixed messages
-4. Push to remote branch
-5. Do NOT auto-merge - user creates PR manually
+1. Analyze changes - identify logically distinct features/fixes
+2. For each logical unit:
+   - Create appropriate branch (feat/*, hotfix/*, etc.)
+   - Stage related changes for that feature
+   - Create focused commits with emoji-prefixed messages
+   - Push to remote branch
+3. Repeat for all logical units (multiple branches in one session is normal)
+4. Return to original branch or main when done
+5. Do NOT auto-merge - user creates PRs manually
 
 Message Requirements:
 - Imperative mood: "Add", "Fix", "Update", "Remove"
