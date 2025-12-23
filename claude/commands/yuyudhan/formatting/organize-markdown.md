@@ -8,7 +8,7 @@ Purpose: Organize markdown files scattered across the repository into proper doc
 Scope: Find and organize markdown files in the provided context (specific directories or entire repository if not specified).
 
 Target Structure:
-- Only README.md and CONTRIBUTING.md stay at repository root
+- Only README.md, CONTRIBUTING.md, AGENTS.md, and CLAUDE.md stay at repository root
 - All other markdown files must be organized into proper structure:
   - Documentation: docs/ directory
   - Internal/private docs: internal-docs/ directory
