@@ -1,13 +1,22 @@
 ---
-description: Create logical git commits with emoji-prefixed messages
-model: anthropic/claude-haiku-4-5
+description: Create logical git commits with emoji-prefixed messages and proper branch management
+model: anthropic/claude-sonnet-4-5
 ---
 
-Purpose: Create logical git commits with emoji-prefixed messages for changed files.
+Purpose: Create logical git commits with emoji-prefixed messages and organize work into feature-specific branches.
 
 Scope: Commit only the specific code flow, files, endpoints, or features provided. If no specific context given, commit all staged/unstaged changes that should be committed.
 
 Author: yuyudhan <ankurkumarpandey@gmail.com>
+
+Branch Strategy:
+- **Features**: `feat/<feature-name>` - New functionality, enhancements
+- **Fixes**: `hotfix/<issue-description>` - Bug fixes, critical patches
+- **Refactors**: `refactor/<component-name>` - Code restructuring
+- **Docs**: `docs/<topic>` - Documentation updates
+- **MANDATORY**: Create separate branches for logically distinct features
+- Branch from `main`, merge back to `main` via PR
+- Keep branches focused (one feature/fix per branch)
 
 Format: `<emoji> <imperative verb> <specific description>`
 
@@ -18,11 +27,18 @@ Emojis:
 - 🔧 Config  📝 Docs  🧪 Tests  🗑️ Removal
 - 💡 Experimental  🤝 Merges
 
-Grouping:
+Commit Grouping:
 - By purpose (feature/fix together)
 - By layer (frontend/backend separate)
 - By type (test with code it tests)
 - Keep focused (one logical change per commit)
+
+Workflow:
+1. Check current branch - create feature branch if needed
+2. Stage related changes together
+3. Create focused commits with emoji-prefixed messages
+4. Push to remote branch
+5. Do NOT auto-merge - user creates PR manually
 
 Message Requirements:
 - Imperative mood: "Add", "Fix", "Update", "Remove"
