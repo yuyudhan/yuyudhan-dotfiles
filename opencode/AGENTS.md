@@ -15,6 +15,12 @@ Core development guidelines for AI assistants. Project-specific rules in `docs/c
 - Never commit broken code (linters pass, tests pass, no debug statements)
 - Keep `.editorconfig`, `.gitignore`, `README.md` updated
 
+## Documentation & Libraries
+
+- Always use context7 MCP tools when you need code generation, setup steps, or library/API documentation
+- Use context7 to resolve library IDs and fetch up-to-date docs without being asked
+- For specific libraries, use the slash syntax (e.g., `/nextjs/docs`, `/supabase/supabase`) to skip resolution
+
 ## Code Quality
 
 - Use language-specific best practices
