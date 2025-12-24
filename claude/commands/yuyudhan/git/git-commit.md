@@ -5,7 +5,7 @@ model: anthropic/claude-sonnet-4-5
 
 Purpose: Create logical git commits with emoji-prefixed messages and organize work into feature-specific branches.
 
-Scope: Commit only the specific code flow, files, endpoints, or features provided. If no specific context given, commit all staged/unstaged changes that should be committed.
+Scope: Analyze all changes and group into logically distinct units. Create separate branches for unrelated features/fixes.
 
 Author: yuyudhan <ankurkumarpandey@gmail.com>
 
@@ -14,11 +14,9 @@ Branch Strategy:
 - **Fixes**: `hotfix/<issue-description>` - Bug fixes, critical patches
 - **Refactors**: `refactor/<component-name>` - Code restructuring
 - **Docs**: `docs/<topic>` - Documentation updates
-- **MANDATORY**: Create separate branches for logically distinct features
-- **Multiple branches allowed**: Create as many branches as needed per session
-- **Pattern**: Create branch → add files → commit → switch to next branch → repeat
-- Branch from `main`, merge back to `main` via PR
-- Keep branches focused (one feature/fix per branch)
+- **MANDATORY**: Separate branches for logically distinct features (multiple per session is normal)
+- **Always branch from main**: Stash if needed, switch to main, create feature branch
+- **One feature per branch**: Keep focused, merge back via PR
 
 Format: `<emoji> <imperative verb> <specific description>`
 
@@ -36,15 +34,17 @@ Commit Grouping:
 - Keep focused (one logical change per commit)
 
 Workflow:
-1. Analyze changes - identify logically distinct features/fixes
-2. For each logical unit:
-   - Create appropriate branch (feat/*, hotfix/*, etc.)
-   - Stage related changes for that feature
-   - Create focused commits with emoji-prefixed messages
-   - Push to remote branch
-3. Repeat for all logical units (multiple branches in one session is normal)
-4. Return to original branch or main when done
-5. Do NOT auto-merge - user creates PRs manually
+1. Analyze changes - identify logically distinct units (features, fixes, docs)
+2. For each unit:
+   - Stash all changes if mixed
+   - Switch to main: `git checkout main`
+   - Create branch: `git checkout -b feat/feature-name`
+   - Stage only files for this unit
+   - Commit with emoji-prefixed message
+   - Push: `git push -u origin <branch-name>`
+3. Repeat step 2 for remaining units
+4. Return to main when complete
+5. User creates PRs manually (no auto-merge)
 
 Message Requirements:
 - Imperative mood: "Add", "Fix", "Update", "Remove"
