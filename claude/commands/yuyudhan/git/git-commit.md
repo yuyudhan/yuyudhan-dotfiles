@@ -10,6 +10,7 @@ Scope: Analyze all changes and group into logically distinct units. Create separ
 Author: yuyudhan <ankurkumarpandey@gmail.com>
 
 Branch Strategy:
+- **NEVER commit to**: `main`, `master`, `develop` branches (protected branches)
 - **Features**: `feat/<feature-name>` - New functionality, enhancements
 - **Fixes**: `hotfix/<issue-description>` - Bug fixes, critical patches
 - **Refactors**: `refactor/<component-name>` - Code restructuring
@@ -34,17 +35,18 @@ Commit Grouping:
 - Keep focused (one logical change per commit)
 
 Workflow:
-1. Analyze changes - identify logically distinct units (features, fixes, docs)
-2. For each unit:
+1. Check current branch - if on main/master/develop, MUST create feature branch
+2. Analyze changes - identify logically distinct units (features, fixes, docs)
+3. For each unit:
    - Stash all changes if mixed
    - Switch to main: `git checkout main`
    - Create branch: `git checkout -b feat/feature-name`
    - Stage only files for this unit
    - Commit with emoji-prefixed message
    - Push: `git push -u origin <branch-name>`
-3. Repeat step 2 for remaining units
-4. Return to main when complete
-5. User creates PRs manually (no auto-merge)
+4. Repeat step 3 for remaining units
+5. Return to main when complete
+6. User creates PRs manually (no auto-merge)
 
 Message Requirements:
 - Imperative mood: "Add", "Fix", "Update", "Remove"
