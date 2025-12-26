@@ -16,8 +16,8 @@
         "edit": "allow",
         "bash": "allow",
         "webfetch": "allow",
-        "doom_loop": "allow",
-        "external_directory": "allow"
+        "doom_loop": "ask",
+        "external_directory": "ask"
     },
     "keybinds": {
         "leader": "ctrl+y",
