@@ -1,67 +1,107 @@
 ---
-description: Create logical git commits with emoji-prefixed messages and proper branch management
+description: Create logical git commits with emoji-prefixed messages
 model: anthropic/claude-sonnet-4-5
 ---
 
-Purpose: Create logical git commits with emoji-prefixed messages and organize work into feature-specific branches.
-
-Scope: Analyze all changes and group into logically distinct units. Create separate branches for unrelated features/fixes.
-
 Author: yuyudhan <ankurkumarpandey@gmail.com>
 
-Branch Strategy:
-- **NEVER commit to**: `main`, `master`, `develop` branches (protected branches)
-- **Features**: `feat/<feature-name>` - New functionality, enhancements
-- **Fixes**: `hotfix/<issue-description>` - Bug fixes, critical patches
-- **Refactors**: `refactor/<component-name>` - Code restructuring
-- **Docs**: `docs/<topic>` - Documentation updates
-- **MANDATORY**: Separate branches for logically distinct features (multiple per session is normal)
-- **Always branch from main**: Stash if needed, switch to main, create feature branch
-- **One feature per branch**: Keep focused, merge back via PR
+## Task
 
-Format: `<emoji> <imperative verb> <specific description>`
+Create git commits for all staged and unstaged changes, organizing them into separate feature branches by logical grouping.
 
-Emojis:
-- ✨ New features  ⚡ Performance  🎨 UI/UX  🚀 Deployment
-- 🐛 Bug fixes  🔒 Security  🔥 Remove dead code
-- ♻️ Refactor  🎯 Scope refinement  🧹 Cleanup
-- 🔧 Config  📝 Docs  🧪 Tests  🗑️ Removal
-- 💡 Experimental  🤝 Merges
+**CRITICAL**: Ensure NO changes are lost - all modifications must be committed and pushed.
 
-Commit Grouping:
-- By purpose (feature/fix together)
-- By layer (frontend/backend separate)
-- By type (test with code it tests)
-- Keep focused (one logical change per commit)
+## Step-by-Step Workflow
 
-Workflow:
-1. Check current branch - if on main/master/develop, MUST create feature branch
-2. Analyze changes - identify logically distinct units (features, fixes, docs)
-3. For each unit:
-   - Stash all changes if mixed
-   - Switch to main: `git checkout main`
-   - Create branch: `git checkout -b feat/feature-name`
-   - Stage only files for this unit
-   - Commit with emoji-prefixed message
-   - Push: `git push -u origin <branch-name>`
-4. Repeat step 3 for remaining units
-5. Return to main when complete
-6. User creates PRs manually (no auto-merge)
+### Step 1: Analyze All Changes
 
-Message Requirements:
+First, run `git status` and `git diff` to see ALL changes (staged and unstaged).
+
+Group the changes into logical units based on:
+- Feature/functionality they belong to
+- Type of change (new feature, bugfix, refactor, docs, config)
+- Related files that should be committed together
+
+**Output a plan** listing each logical group with:
+- Branch name to create
+- Files belonging to this group
+- Commit message for this group
+
+### Step 2: Store Current Branch
+
+```bash
+ORIGINAL_BRANCH=$(git branch --show-current)
+```
+
+### Step 3: For EACH Logical Group (Repeat This Entire Block)
+
+**IMPORTANT**: Complete ALL steps for one branch before moving to the next.
+
+```bash
+# 3a. Return to original branch first (to ensure clean base)
+git checkout $ORIGINAL_BRANCH
+
+# 3b. Create new feature branch
+git checkout -b feat/<descriptive-name>
+
+# 3c. Stage ONLY files for this logical group
+git add <file1> <file2> ...
+
+# 3d. Commit with emoji-prefixed message
+git commit -m "<emoji> <imperative-verb> <specific-description>"
+
+# 3e. Push branch to remote
+git push -u origin feat/<descriptive-name>
+```
+
+### Step 4: Repeat Step 3 for Each Remaining Group
+
+Go back to Step 3 for the next logical group. Each group gets its OWN branch.
+
+### Step 5: Verify No Changes Lost
+
+```bash
+git checkout $ORIGINAL_BRANCH
+git status
+```
+
+Should show no uncommitted changes. If changes remain, create another branch for them.
+
+## Branch Naming
+
+- `feat/<feature-name>` - New features
+- `fix/<issue-name>` - Bug fixes
+- `refactor/<area>` - Code refactoring
+- `docs/<topic>` - Documentation
+- `config/<tool>` - Configuration changes
+
+## Commit Message Format
+
+`<emoji> <imperative-verb> <specific-description>`
+
+### Rules
 - Imperative mood: "Add", "Fix", "Update", "Remove"
-- Specific: mention files, functions, features
-- Include impact when relevant: "Optimize query (2s → 200ms)"
-- NO vague messages: "Update files", "Changes", "WIP"
+- Be specific: mention files/functions/features
+- NO vague terms: "Update files", "Changes", "WIP"
 - NO past tense: "Added", "Fixed"
-- NEVER mention: Claude, AI, generated, assistant, automated tools
+- NO AI references: "Claude", "generated", "assistant"
 
-.gitignore:
-- Check and update .gitignore for files that shouldn't be committed (secrets, build artifacts, temp files, IDE configs)
-- Never commit: .env files (only .env.example), API keys, credentials, node_modules, build outputs
+### Examples
+- `✨ Add JWT authentication to user API`
+- `🐛 Fix null pointer in payment processor`
+- `📝 Add README for authentication module`
+- `🔧 Configure ESLint rules for TypeScript`
 
-Output:
-- List created commits with emoji, message, and files
-- Confirm author: yuyudhan <ankurkumarpandey@gmail.com>
-- Confirm no AI tool references in messages
+## Protected Branches
 
+**NEVER commit or push directly to**: `develop`, `main`, or `master`
+
+Always use feature branches and pull requests.
+
+## Final Output
+
+After completing all branches, list:
+1. Each branch created
+2. Commit message used
+3. Files included in that branch
+4. Push status (success/failure)
