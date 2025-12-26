@@ -26,7 +26,7 @@ bash setup.sh --help
 
 # Special handlers
 bash setup.sh zsh        # Creates ~/.zshrc + ~/.config/zsh/
-bash setup.sh claude     # Symlinks .claude/agents/, commands/, settings.json
+bash setup.sh opencode   # Symlinks opencode/agent/, command/, opencode.json
 ```
 
 **Key Features**:
@@ -37,7 +37,7 @@ bash setup.sh claude     # Symlinks .claude/agents/, commands/, settings.json
 - **Summary Report**: Shows created/skipped/error counts
 - **Validation**: Checks source directories exist before symlinking
 
-**Important**: The script automatically removes existing configurations before creating symlinks. Zsh and Claude have special handling for multiple symlinks.
+**Important**: The script automatically removes existing configurations before creating symlinks. Zsh and OpenCode have special handling for multiple symlinks.
 
 ### Zsh Configuration Architecture
 
@@ -102,7 +102,7 @@ The repository maintains organized documentation:
 **Tool-Specific**:
 - `nvim/CLAUDE.md`, `nvim/LSP.md` - Neovim configuration details
 - `zsh/CLAUDE.md` - Zsh shell configuration
-- `.claude/agents/`, `.claude/commands/` - Custom Claude Code extensions
+- `opencode/agent/`, `opencode/command/` - Custom OpenCode extensions
 
 ## Development Commands
 
