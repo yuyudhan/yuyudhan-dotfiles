@@ -71,7 +71,6 @@ ${YELLOW}Tools:${NC}
   karabiner       Karabiner keyboard customizer
   btop            Btop system monitor
   zsh             Zsh shell (special: creates ~/.zshrc + ~/.config/zsh/)
-  claude          Claude Code (special: symlinks agents/commands/settings)
   opencode        OpenCode (special: symlinks agents & commands to ~/.config/opencode/)
 
 ${YELLOW}Examples:${NC}
@@ -79,12 +78,10 @@ ${YELLOW}Examples:${NC}
   bash setup.sh nvim tmux          ${BLUE}# Setup only nvim and tmux${NC}
   bash setup.sh --dry-run zsh      ${BLUE}# Preview zsh setup${NC}
   bash setup.sh -d --all           ${BLUE}# Preview all setups${NC}
-  bash setup.sh --force claude     ${BLUE}# Force recreate claude symlinks${NC}
   bash setup.sh opencode            ${BLUE}# Setup opencode commands${NC}
 
 ${YELLOW}Special Handlers:${NC}
   ${GREEN}zsh${NC}      - Creates both ~/.zshrc symlink and ~/.config/zsh/ directory symlink
-  ${GREEN}claude${NC}   - Symlinks .claude/agents/, .claude/commands/, and .claude/settings.json
   ${GREEN}opencode${NC} - Symlinks opencode/agent/, opencode/command/, and opencode.json to ~/.config/opencode/
   ${GREEN}tmux${NC}     - Symlinks tmux directory and tmux-which-key config (outside plugins/)
 
@@ -177,35 +174,6 @@ setup_zsh() {
     print_success "Zsh setup complete!"
 }
 
-setup_claude() {
-    print_header "Setting up Claude Code"
-
-    local claude_dir="$DOTFILES_DIR/claude"
-
-    # Symlink agents directory
-    if [ -d "$claude_dir/agents" ]; then
-        create_symlink "$claude_dir/agents" "$HOME/.claude/agents" "Symlinking Claude agents"
-    else
-        print_warning ".claude/agents directory not found, skipping"
-    fi
-
-    # Symlink commands directory
-    if [ -d "$claude_dir/commands" ]; then
-        create_symlink "$claude_dir/commands" "$HOME/.claude/commands" "Symlinking Claude commands"
-    else
-        print_warning ".claude/commands directory not found, skipping"
-    fi
-
-    # Symlink settings.json
-    if [ -f "$claude_dir/settings.json" ]; then
-        create_symlink "$claude_dir/settings.json" "$HOME/.claude/settings.json" "Symlinking Claude settings"
-    else
-        print_warning ".claude/settings.json file not found, skipping"
-    fi
-
-    print_success "Claude Code setup complete!"
-}
-
 setup_tmux() {
     print_header "Setting up Tmux"
 
@@ -294,11 +262,6 @@ setup_tool() {
         return
     fi
 
-    if [ "$tool" = "claude" ]; then
-        setup_claude
-        return
-    fi
-
     if [ "$tool" = "tmux" ]; then
         setup_tmux
         return
@@ -313,7 +276,7 @@ setup_tool() {
     local target=$(get_target_for_tool "$tool")
     if [ -z "$target" ]; then
         print_error "Unknown tool: $tool"
-        print_info "Available tools: $(get_all_tools | xargs) zsh claude tmux opencode"
+        print_info "Available tools: $(get_all_tools | xargs) zsh tmux opencode"
         ((ERROR_COUNT++))
         return 1
     fi
@@ -334,8 +297,6 @@ setup_all_tools() {
     # Setup special handlers
     echo ""
     setup_zsh
-    echo ""
-    setup_claude
     echo ""
     setup_tmux
     echo ""
